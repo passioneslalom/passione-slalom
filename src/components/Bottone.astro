@@ -1,0 +1,29 @@
+---
+/**
+ * Link a forma di bottone: giallo con bordo rosso, si inverte in hover.
+ * È l'unico stile di bottone del sito; `grande` serve al CTA Discord in home.
+ */
+interface Props {
+  href: string;
+  /** Apre in nuova scheda con rel di sicurezza. */
+  esterno?: boolean;
+  grande?: boolean;
+  fantasma?: boolean;
+  class?: string;
+}
+
+const { href, esterno = false, grande = false, fantasma = false, class: classe } = Astro.props;
+---
+
+<a
+  href={href}
+  class:list={[
+    "bottone",
+    grande && "bottone--grande",
+    fantasma && "bottone--fantasma",
+    classe,
+  ]}
+  {...esterno ? { target: "_blank", rel: "noopener noreferrer" } : {}}
+>
+  <slot />
+</a>

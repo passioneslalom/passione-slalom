@@ -1,0 +1,267 @@
+/* =========================================================
+   Passione Slalom — stili globali
+   Palette a 4 colori: nero, rosso, giallo, avorio.
+   Ogni tono intermedio deriva da questi tramite color-mix.
+   ========================================================= */
+
+:root {
+  --color-black: #161616;
+  --color-red: #d62b1f;
+  --color-red-dark: #8c1a12;
+  --color-yellow: #f5c518;
+  --color-ivory: #f2eee4;
+
+  /* toni derivati (nessun colore nuovo, solo miscele della palette) */
+  --surface: color-mix(in srgb, var(--color-black) 88%, var(--color-ivory));
+  --surface-alta: color-mix(in srgb, var(--color-black) 78%, var(--color-ivory));
+  --bordo: color-mix(in srgb, var(--color-ivory) 18%, transparent);
+  --testo-attenuato: color-mix(in srgb, var(--color-ivory) 66%, var(--color-black));
+
+  --font-display: "Racing Sans One", "Arial Narrow", system-ui, sans-serif;
+  --font-body: "Inter Variable", "Inter", system-ui, -apple-system, sans-serif;
+
+  --larghezza-max: 72rem;
+  --padding-lato: 1.25rem;
+  --raggio: 4px;
+
+  color-scheme: dark;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+ul,
+ol,
+figure,
+blockquote {
+  margin: 0;
+  padding: 0;
+}
+
+ul[role="list"] {
+  list-style: none;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  min-height: 100vh;
+  background-color: var(--color-black);
+  color: var(--color-ivory);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+img,
+picture,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: var(--color-yellow);
+  text-decoration-color: color-mix(in srgb, var(--color-yellow) 45%, transparent);
+  text-underline-offset: 0.2em;
+}
+
+a:hover {
+  color: var(--color-red);
+  text-decoration-color: currentColor;
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-yellow);
+  outline-offset: 3px;
+}
+
+/* ---------- tipografia display ---------- */
+
+.display,
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  text-transform: uppercase;
+  line-height: 1.02;
+  letter-spacing: 0.01em;
+}
+
+h1 {
+  font-size: clamp(2.25rem, 8vw, 4.25rem);
+}
+
+h2 {
+  font-size: clamp(1.75rem, 5.5vw, 2.75rem);
+}
+
+h3 {
+  font-size: clamp(1.15rem, 3.5vw, 1.5rem);
+}
+
+/* Titolo di sezione con barretta rossa a sinistra. */
+.titolo-sezione {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--color-ivory);
+}
+
+.titolo-sezione::before {
+  content: "";
+  flex: none;
+  width: 0.5rem;
+  align-self: stretch;
+  min-height: 1.6em;
+  background-color: var(--color-red);
+}
+
+.occhiello {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-yellow);
+}
+
+.testo-lungo {
+  max-width: 62ch;
+  color: var(--testo-attenuato);
+}
+
+.testo-lungo p + p,
+.testo-lungo p + ul,
+.testo-lungo ul + p,
+.testo-lungo h3 {
+  margin-top: 1rem;
+}
+
+.testo-lungo h3 {
+  color: var(--color-ivory);
+  margin-top: 2rem;
+}
+
+.testo-lungo ul {
+  padding-left: 1.15rem;
+}
+
+.testo-lungo li::marker {
+  color: var(--color-red);
+}
+
+/* ---------- layout ---------- */
+
+.contenitore {
+  width: 100%;
+  max-width: var(--larghezza-max);
+  margin-inline: auto;
+  padding-inline: var(--padding-lato);
+}
+
+.sezione {
+  padding-block: clamp(2.5rem, 7vw, 4.5rem);
+}
+
+.griglia-card {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr));
+  list-style: none;
+  padding: 0;
+}
+
+/* ---------- bottoni ---------- */
+
+.bottone {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.7rem 1.4rem;
+  border: 3px solid var(--color-red);
+  border-radius: var(--raggio);
+  background-color: var(--color-yellow);
+  color: var(--color-black);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background-color 0.16s ease,
+    color 0.16s ease,
+    transform 0.16s ease;
+}
+
+.bottone:hover,
+.bottone:focus-visible {
+  background-color: var(--color-red);
+  color: var(--color-yellow);
+  transform: translateY(-2px);
+}
+
+.bottone--grande {
+  padding: 1rem 2rem;
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  box-shadow: 0 6px 0 var(--color-red-dark);
+}
+
+.bottone--grande:hover,
+.bottone--grande:focus-visible {
+  box-shadow: 0 4px 0 var(--color-red-dark);
+}
+
+.bottone--fantasma {
+  background-color: transparent;
+  color: var(--color-yellow);
+}
+
+.bottone--fantasma:hover,
+.bottone--fantasma:focus-visible {
+  background-color: var(--color-red);
+  color: var(--color-yellow);
+}
+
+/* ---------- badge ---------- */
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.2rem 0.55rem;
+  border: 1px solid var(--color-red);
+  border-radius: var(--raggio);
+  background-color: color-mix(in srgb, var(--color-red) 18%, transparent);
+  color: var(--color-yellow);
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}

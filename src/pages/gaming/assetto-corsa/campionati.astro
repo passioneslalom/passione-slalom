@@ -1,0 +1,51 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import IntestazionePagina from "../../../components/IntestazionePagina.astro";
+import CheckeredDivider from "../../../components/CheckeredDivider.astro";
+---
+
+<BaseLayout
+  titolo="Campionati Assetto Corsa"
+  descrizione="Format, calendario e regolamento sportivo dei campionati slalom di Passione Slalom su Assetto Corsa."
+>
+  <IntestazionePagina
+    occhiello="Assetto Corsa"
+    titolo="Campionati"
+    intro="Come sono organizzate le nostre stagioni su Assetto Corsa: format di gara, calendario e regole in pista."
+  />
+
+  <section class="sezione">
+    <div class="contenitore testo-lungo">
+      <h3>Format di gara</h3>
+      <p>
+        Ogni tappa si corre su un singolo tracciato slalom. La serata è divisa in una sessione di
+        prove libere aperta a tutti e in tre manche cronometrate: vale la somma dei due tempi
+        migliori. Chi salta una manche mantiene il tempo delle altre, senza penalità.
+      </p>
+
+      <h3>Penalità</h3>
+      <ul>
+        <li>Birillo abbattuto o spostato: +3 secondi sulla manche.</li>
+        <li>Postazione saltata: manche annullata.</li>
+        <li>Partenza anticipata: ripetizione della manche a fine turno.</li>
+        <li>Uscita dal percorso con rientro irregolare: manche annullata.</li>
+      </ul>
+
+      <h3>Calendario</h3>
+      <p>
+        Il calendario della stagione viene pubblicato sul Discord all'inizio di ogni ciclo, con
+        una tappa ogni due settimane. Le date e i tracciati vengono confermati almeno sette giorni
+        prima della gara nel canale annunci.
+      </p>
+
+      <h3>Iscrizioni</h3>
+      <p>
+        L'iscrizione è gratuita e si apre sul Discord qualche giorno prima di ogni tappa. Non
+        serve partecipare a tutte le gare per essere in classifica: i punti si accumulano tappa
+        dopo tappa.
+      </p>
+    </div>
+  </section>
+
+  <CheckeredDivider sottile />
+</BaseLayout>

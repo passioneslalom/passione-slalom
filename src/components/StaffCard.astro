@@ -1,0 +1,64 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  membro: CollectionEntry<"staff">;
+}
+
+const { nome, ruolo, foto } = Astro.props.membro.data;
+---
+
+<article class="card">
+  <div class="card__foto">
+    <img src={foto} alt={nome} width="480" height="480" loading="lazy" decoding="async" />
+  </div>
+  <div class="card__corpo">
+    <h3 class="card__nome">{nome}</h3>
+    <p class="card__ruolo">{ruolo}</p>
+  </div>
+</article>
+
+<style>
+  .card {
+    height: 100%;
+    border: 2px solid var(--bordo);
+    border-radius: var(--raggio);
+    background-color: var(--surface);
+    overflow: hidden;
+    transition: border-color 0.16s ease;
+  }
+
+  .card:hover {
+    border-color: var(--color-red);
+  }
+
+  .card__foto {
+    aspect-ratio: 1;
+    background-color: var(--surface-alta);
+    border-bottom: 2px solid var(--color-red);
+  }
+
+  .card__foto img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .card__corpo {
+    padding: 1rem;
+  }
+
+  .card__nome {
+    font-size: 1.25rem;
+    color: var(--color-ivory);
+  }
+
+  .card__ruolo {
+    margin-top: 0.15rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-yellow);
+  }
+</style>

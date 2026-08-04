@@ -1,0 +1,29 @@
+---
+import { PERCORSI_SOCIAL, type Social } from "../lib/social-icons";
+
+interface Props {
+  social: Social;
+  class?: string;
+}
+
+const { social, class: classe } = Astro.props;
+const { path } = PERCORSI_SOCIAL[social];
+---
+
+<svg
+  class:list={["icona-social", classe]}
+  viewBox="0 0 24 24"
+  fill="currentColor"
+  aria-hidden="true"
+  focusable="false"
+>
+  <path d={path}></path>
+</svg>
+
+<style>
+  .icona-social {
+    width: 1.5rem;
+    height: 1.5rem;
+    flex: none;
+  }
+</style>

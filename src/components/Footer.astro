@@ -1,0 +1,88 @@
+---
+import IconaSocial from "./IconaSocial.astro";
+import { PERCORSI_SOCIAL } from "../lib/social-icons";
+import { SOCIAL, NOME_SITO } from "../lib/site";
+
+const anno = new Date().getFullYear();
+---
+
+<footer class="pie">
+  <div class="contenitore pie__contenuto">
+    <p class="pie__marchio">{NOME_SITO}</p>
+
+    <ul class="pie__social" role="list">
+      {
+        SOCIAL.map(({ social, url }) => (
+          <li>
+            <a href={url} target="_blank" rel="noopener noreferrer" title={PERCORSI_SOCIAL[social].nome}>
+              <IconaSocial social={social} />
+              <span class="visually-hidden">{PERCORSI_SOCIAL[social].nome}</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
+    <p class="pie__nota">
+      © {anno} {NOME_SITO} — community italiana di slalom virtuale. Sito non affiliato a Kunos
+      Simulazioni, Studio 397 o agli sviluppatori di TrackDay R.
+    </p>
+  </div>
+</footer>
+
+<style>
+  .pie {
+    border-top: 3px solid var(--color-red);
+    background-color: var(--surface);
+  }
+
+  .pie__contenuto {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding-block: 2rem;
+    text-align: center;
+  }
+
+  .pie__marchio {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    color: var(--color-ivory);
+  }
+
+  .pie__social {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.1rem;
+    list-style: none;
+  }
+
+  .pie__social a {
+    display: block;
+    color: var(--color-ivory);
+    transition: color 0.16s ease;
+  }
+
+  .pie__social a:hover {
+    color: var(--color-red);
+  }
+
+  .pie__nota {
+    max-width: 46ch;
+    font-size: 0.78rem;
+    line-height: 1.6;
+    color: var(--testo-attenuato);
+  }
+
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+</style>

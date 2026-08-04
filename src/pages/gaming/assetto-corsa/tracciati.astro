@@ -1,0 +1,39 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import IntestazionePagina from "../../../components/IntestazionePagina.astro";
+import TracciatoCard from "../../../components/TracciatoCard.astro";
+import { getTracciati } from "../../../lib/tracciati";
+import { GIOCHI } from "../../../lib/giochi";
+
+const gioco = GIOCHI["assetto-corsa"];
+const tracciati = await getTracciati(gioco.slug);
+---
+
+<BaseLayout
+  titolo={`Tracciati ${gioco.nome}`}
+  descrizione={`I tracciati slalom della community Passione Slalom su ${gioco.nome}.`}
+>
+  <IntestazionePagina
+    occhiello={gioco.nome}
+    titolo="Tracciati"
+    intro="I percorsi che usiamo nelle gare e negli allenamenti. Ogni tracciato ha un video onboard di riferimento."
+  />
+
+  <section class="sezione">
+    <div class="contenitore">
+      {
+        tracciati.length > 0 ? (
+          <ul class="griglia-card" role="list">
+            {tracciati.map((tracciato) => (
+              <li>
+                <TracciatoCard tracciato={tracciato} />
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p class="testo-lungo">Nessun tracciato pubblicato per il momento.</p>
+        )
+      }
+    </div>
+  </section>
+</BaseLayout>

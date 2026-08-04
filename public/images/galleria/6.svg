@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 640" width="960" height="640" role="img" aria-label="FOTO 6">
+  <rect width="960" height="640" fill="#161616"/>
+  <pattern id="sc-top" width="72" height="72" patternUnits="userSpaceOnUse">
+    <rect width="72" height="72" fill="#F2EEE4"/>
+    <rect width="36" height="36" fill="#D62B1F"/>
+    <rect x="36" y="36" width="36" height="36" fill="#D62B1F"/>
+  </pattern>
+  <rect x="0" y="0" width="960" height="72" fill="url(#sc-top)"/>
+  <pattern id="sc-bot" width="72" height="72" patternUnits="userSpaceOnUse">
+    <rect width="72" height="72" fill="#F2EEE4"/>
+    <rect width="36" height="36" fill="#D62B1F"/>
+    <rect x="36" y="36" width="36" height="36" fill="#D62B1F"/>
+  </pattern>
+  <rect x="0" y="568" width="960" height="72" fill="url(#sc-bot)"/>
+  <rect x="36" y="108" width="888" height="424" fill="none" stroke="#8C1A12" stroke-width="9"/>
+  <text x="480" y="320" fill="#F5C518" font-family="Arial Narrow, Arial, sans-serif" font-weight="700" font-size="80" letter-spacing="2" text-anchor="middle" dominant-baseline="middle">FOTO 6</text>
+  <text x="480" y="411" fill="#F2EEE4" font-family="Arial, sans-serif" font-size="36" letter-spacing="3" text-anchor="middle" dominant-baseline="middle">PODIO DI TAPPA</text>
+</svg>

@@ -1,0 +1,84 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import IntestazionePagina from "../components/IntestazionePagina.astro";
+import CheckeredDivider from "../components/CheckeredDivider.astro";
+import Bottone from "../components/Bottone.astro";
+import { DISCORD_URL } from "../lib/site";
+---
+
+<BaseLayout
+  titolo="Chi Siamo"
+  descrizione="Nascita, mission e obiettivi di Passione Slalom, la community italiana dello slalom virtuale."
+>
+  <IntestazionePagina
+    occhiello="Il progetto"
+    titolo="Chi Siamo"
+    intro="Passione Slalom è una community italiana di appassionati di slalom su simulatore. Nessuna gara a pagamento, nessuna iscrizione: solo persone che corrono tra i birilli."
+  />
+
+  <section class="sezione">
+    <div class="contenitore testo-lungo">
+      <h3>Come è nato il progetto</h3>
+      <p>
+        Passione Slalom nasce da un gruppo di piloti virtuali che condividevano tempi e assetti in
+        una chat privata. Lo slalom è una disciplina poco rappresentata nel simracing: pochi
+        tracciati pronti, poche gare organizzate e materiale sparso ovunque. Da lì l'idea di
+        mettere tutto in un posto solo.
+      </p>
+      <p>
+        Il gruppo è cresciuto attorno al Discord, dove si organizzano le serate di gara e si
+        scambiano setup. Questo sito è la parte pubblica di quel lavoro: serve a trovare in fretta
+        un tracciato, capire come funziona un campionato o sapere a chi rivolgersi.
+      </p>
+
+      <h3>Cosa facciamo</h3>
+      <ul>
+        <li>Raccogliamo e cataloghiamo tracciati slalom per Assetto Corsa, rFactor e TrackDay R.</li>
+        <li>Organizziamo campionati e serate di gara con un regolamento chiaro e condiviso.</li>
+        <li>Registriamo video onboard di riferimento per ogni percorso.</li>
+        <li>Diamo una mano a chi comincia, senza pretendere esperienza pregressa.</li>
+      </ul>
+
+      <h3>Obiettivi</h3>
+      <p>
+        Vogliamo che chi cerca lo slalom virtuale in italiano trovi materiale ordinato e
+        aggiornato. Nel concreto: coprire tutti e tre i giochi con un catalogo completo di
+        tracciati e auto, mantenere un calendario di gare regolare e documentare i regolamenti in
+        modo che siano leggibili anche da chi arriva oggi.
+      </p>
+
+      <h3>La community</h3>
+      <p>
+        Tutto passa dal Discord: iscrizioni alle gare, risultati, assetti, richieste di aiuto. Si
+        entra liberamente, si guarda, si chiede. Le uniche regole sono il rispetto tra piloti e il
+        rispetto del regolamento in pista.
+      </p>
+    </div>
+  </section>
+
+  <CheckeredDivider />
+
+  <section class="sezione">
+    <div class="contenitore invito">
+      <p class="invito__testo">Il resto succede sul Discord.</p>
+      <Bottone href={DISCORD_URL} esterno grande>Entra nel nostro Discord</Bottone>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .invito {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+    text-align: center;
+  }
+
+  .invito__testo {
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 5vw, 2.25rem);
+    text-transform: uppercase;
+    color: var(--color-ivory);
+  }
+</style>

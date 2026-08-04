@@ -1,0 +1,35 @@
+---
+/**
+ * Divisore a cordolo rosso/avorio: una singola fascia con blocchi alternati,
+ * come i cordoli dei tracciati e l'ovale del logo.
+ * Segna la fine di un blocco informativo e l'inizio del successivo.
+ */
+interface Props {
+  /** Versione ridotta, per separare blocchi dentro la stessa pagina. */
+  sottile?: boolean;
+}
+
+const { sottile = false } = Astro.props;
+---
+
+<div class:list={["cordolo", sottile && "cordolo--sottile"]} role="presentation"></div>
+
+<style>
+  .cordolo {
+    --lato: 2rem;
+    height: 1.4rem;
+    border-block: 2px solid var(--color-red-dark);
+    background-color: var(--color-ivory);
+    background-image: repeating-linear-gradient(
+      90deg,
+      var(--color-red) 0 var(--lato),
+      var(--color-ivory) var(--lato) calc(var(--lato) * 2)
+    );
+  }
+
+  .cordolo--sottile {
+    --lato: 1.1rem;
+    height: 0.8rem;
+    border-block-width: 1px;
+  }
+</style>

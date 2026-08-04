@@ -1,0 +1,234 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import CheckeredDivider from "../components/CheckeredDivider.astro";
+import Bottone from "../components/Bottone.astro";
+import IconaSocial from "../components/IconaSocial.astro";
+import { PERCORSI_SOCIAL } from "../lib/social-icons";
+import { SOCIAL, DISCORD_URL, NOME_SITO } from "../lib/site";
+
+const GALLERIA = [
+  { src: "/images/galleria/1.svg", alt: "Auto in azione tra i birilli allo slalom di Chiusdino" },
+  { src: "/images/galleria/2.svg", alt: "Griglia di partenza prima di una manche" },
+  { src: "/images/galleria/3.svg", alt: "Passaggio in salita al Trofeo Monte Erice" },
+  { src: "/images/galleria/4.svg", alt: "Messa a punto dell'assetto nel paddock virtuale" },
+  { src: "/images/galleria/5.svg", alt: "Ingresso in una postazione di birilli" },
+  { src: "/images/galleria/6.svg", alt: "Premiazione di fine tappa" },
+];
+
+const SPONSOR = [1, 2, 3, 4, 5].map((n) => ({
+  src: `/images/sponsor/${n}.svg`,
+  nome: `Sponsor ${n}`,
+}));
+---
+
+<BaseLayout titolo={NOME_SITO}>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="contenitore hero__contenuto">
+      <img class="hero__logo" src="/images/logo.svg" alt={NOME_SITO} width="360" height="112" />
+      <p class="hero__claim">
+        La community italiana dello slalom virtuale. Tracciati, auto e campionati per Assetto
+        Corsa, rFactor e TrackDay R.
+      </p>
+      <Bottone href={DISCORD_URL} esterno grande>Entra nel nostro Discord</Bottone>
+    </div>
+  </section>
+
+  <CheckeredDivider />
+
+  <!-- Galleria -->
+  <section class="sezione">
+    <div class="contenitore">
+      <p class="occhiello">Dai nostri eventi</p>
+      <h2 class="titolo-sezione">In pista con noi</h2>
+      <ul class="galleria" role="list">
+        {
+          GALLERIA.map((foto) => (
+            <li class="galleria__cella">
+              <img src={foto.src} alt={foto.alt} width="960" height="640" loading="lazy" decoding="async" />
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <CheckeredDivider />
+
+  <!-- Social -->
+  <section class="sezione">
+    <div class="contenitore">
+      <p class="occhiello">Seguici</p>
+      <h2 class="titolo-sezione">Dove ci trovi</h2>
+      <ul class="social" role="list">
+        {
+          SOCIAL.map(({ social, url }) => (
+            <li>
+              <a class="social__link" href={url} target="_blank" rel="noopener noreferrer">
+                <IconaSocial social={social} />
+                <span>{PERCORSI_SOCIAL[social].nome}</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <CheckeredDivider />
+
+  <!-- Sponsor -->
+  <section class="sezione">
+    <div class="contenitore">
+      <p class="occhiello">Con il supporto di</p>
+      <h2 class="titolo-sezione">Sponsor</h2>
+      <ul class="sponsor" role="list">
+        {
+          SPONSOR.map((s) => (
+            <li class="sponsor__cella">
+              <img src={s.src} alt={s.nome} width="400" height="200" loading="lazy" decoding="async" />
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* ---------- hero ---------- */
+
+  .hero {
+    padding-block: clamp(2.5rem, 9vw, 5.5rem);
+    background-color: var(--surface);
+    border-bottom: 1px solid var(--bordo);
+  }
+
+  .hero__contenuto {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.75rem;
+    text-align: center;
+  }
+
+  .hero__logo {
+    width: min(100%, 26rem);
+    height: auto;
+  }
+
+  .hero__claim {
+    max-width: 44ch;
+    font-size: clamp(1rem, 2.6vw, 1.2rem);
+    color: var(--testo-attenuato);
+  }
+
+  /* ---------- galleria ---------- */
+
+  .galleria {
+    display: grid;
+    gap: 0.75rem;
+    grid-template-columns: repeat(2, 1fr);
+    margin-top: 1.75rem;
+    list-style: none;
+    padding: 0;
+  }
+
+  .galleria__cella {
+    overflow: hidden;
+    border: 2px solid var(--bordo);
+    border-radius: var(--raggio);
+    aspect-ratio: 3 / 2;
+  }
+
+  .galleria__cella img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition:
+      transform 0.3s ease,
+      filter 0.3s ease;
+  }
+
+  .galleria__cella:hover img {
+    transform: scale(1.06);
+    filter: saturate(1.25);
+  }
+
+  /* Ritmo alternato: la prima e la sesta foto occupano due colonne. */
+  @media (min-width: 45rem) {
+    .galleria {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+
+    .galleria__cella:first-child,
+    .galleria__cella:last-child {
+      grid-column: span 2;
+    }
+  }
+
+  /* ---------- social ---------- */
+
+  .social {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1.75rem;
+    list-style: none;
+    padding: 0;
+  }
+
+  .social__link {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.75rem 1.1rem;
+    border: 2px solid var(--bordo);
+    border-radius: var(--raggio);
+    color: var(--color-ivory);
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition:
+      background-color 0.16s ease,
+      border-color 0.16s ease,
+      color 0.16s ease;
+  }
+
+  .social__link:hover,
+  .social__link:focus-visible {
+    background-color: var(--color-red);
+    border-color: var(--color-red);
+    color: var(--color-yellow);
+  }
+
+  /* ---------- sponsor ---------- */
+
+  .sponsor {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 10rem), 1fr));
+    margin-top: 1.75rem;
+    list-style: none;
+    padding: 0;
+    align-items: center;
+  }
+
+  .sponsor__cella {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem;
+    border: 2px solid var(--bordo);
+    border-radius: var(--raggio);
+    background-color: var(--surface);
+  }
+
+  .sponsor__cella img {
+    width: 100%;
+    height: auto;
+  }
+</style>

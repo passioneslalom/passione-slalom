@@ -1,0 +1,309 @@
+---
+import { ELENCO_GIOCHI, GIOCHI } from "../lib/giochi";
+import { NOME_SITO } from "../lib/site";
+
+/** Sotto-sezioni di Assetto Corsa: è l'unico gioco con più di una pagina. */
+const SOTTOSEZIONI_AC = [
+  { nome: "Campionati", href: "/gaming/assetto-corsa/campionati/" },
+  { nome: "Punti & Crediti", href: "/gaming/assetto-corsa/punti-crediti/" },
+  { nome: "Tracciati", href: "/gaming/assetto-corsa/tracciati/" },
+  { nome: "Auto", href: "/gaming/assetto-corsa/auto/" },
+];
+
+// Normalizza lo slash finale così il confronto funziona con qualsiasi trailingSlash.
+const percorso = Astro.url.pathname.replace(/\/?$/, "/");
+/** Pagina esattamente aperta: unica voce che riceve aria-current. */
+const corrente = (href: string) => (percorso === href ? "page" : undefined);
+/** Sezione che contiene la pagina aperta: serve solo all'evidenziazione visiva. */
+const nellaSezione = (href: string) => percorso.startsWith(href) || undefined;
+---
+
+<header class="testata">
+  <div class="contenitore testata__barra">
+    <a class="marchio" href="/">
+      <img src="/images/logo.svg" alt={NOME_SITO} width="180" height="56" />
+    </a>
+
+    <button
+      class="hamburger"
+      type="button"
+      aria-expanded="false"
+      aria-controls="menu-principale"
+      data-menu-toggle
+    >
+      <span class="hamburger__linee" aria-hidden="true"></span>
+      <span class="hamburger__testo">Menu</span>
+    </button>
+
+    <nav class="nav" id="menu-principale" aria-label="Navigazione principale" data-menu>
+      <ul class="nav__lista" role="list">
+        <li>
+          <a class="nav__link" href="/" aria-current={corrente("/")}>Home</a>
+        </li>
+
+        <li class="nav__voce-con-sub">
+          <a
+            class="nav__link"
+            href={GIOCHI["assetto-corsa"].href}
+            aria-current={corrente(GIOCHI["assetto-corsa"].href)}
+            data-sezione-attiva={nellaSezione("/gaming/assetto-corsa/")}
+          >
+            {GIOCHI["assetto-corsa"].nome}
+          </a>
+          <ul class="sub" role="list">
+            {
+              SOTTOSEZIONI_AC.map((voce) => (
+                <li>
+                  <a class="nav__link nav__link--sub" href={voce.href} aria-current={corrente(voce.href)}>
+                    {voce.nome}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </li>
+
+        {
+          ELENCO_GIOCHI.filter((g) => g.slug !== "assetto-corsa").map((gioco) => (
+            <li>
+              <a
+                class="nav__link"
+                href={gioco.href}
+                aria-current={corrente(gioco.href)}
+                data-sezione-attiva={nellaSezione(`/gaming/${gioco.slug}/`)}
+              >
+                {gioco.nome}
+              </a>
+            </li>
+          ))
+        }
+
+        <li>
+          <a class="nav__link" href="/staff/" aria-current={corrente("/staff/")}>Staff</a>
+        </li>
+        <li>
+          <a class="nav__link" href="/chi-siamo/" aria-current={corrente("/chi-siamo/")}>Chi Siamo</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>("[data-menu-toggle]");
+  const menu = document.querySelector<HTMLElement>("[data-menu]");
+
+  toggle?.addEventListener("click", () => {
+    const aperto = toggle.getAttribute("aria-expanded") === "true";
+    toggle.setAttribute("aria-expanded", String(!aperto));
+    menu?.toggleAttribute("data-aperto", !aperto);
+  });
+</script>
+
+<style>
+  .testata {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background-color: var(--color-black);
+    border-bottom: 3px solid var(--color-red);
+  }
+
+  .testata__barra {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+    padding-block: 0.75rem;
+  }
+
+  .marchio {
+    display: block;
+    line-height: 0;
+  }
+
+  .marchio img {
+    height: 2.75rem;
+    width: auto;
+  }
+
+  /* ---------- hamburger (solo mobile) ---------- */
+
+  .hamburger {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.8rem;
+    border: 2px solid var(--color-red);
+    border-radius: var(--raggio);
+    background-color: transparent;
+    color: var(--color-yellow);
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+
+  .hamburger:hover {
+    background-color: var(--color-red);
+  }
+
+  .hamburger__linee,
+  .hamburger__linee::before,
+  .hamburger__linee::after {
+    display: block;
+    width: 1.15rem;
+    height: 2px;
+    background-color: currentColor;
+  }
+
+  .hamburger__linee {
+    position: relative;
+  }
+
+  .hamburger__linee::before,
+  .hamburger__linee::after {
+    content: "";
+    position: absolute;
+    left: 0;
+  }
+
+  .hamburger__linee::before {
+    top: -6px;
+  }
+
+  .hamburger__linee::after {
+    top: 6px;
+  }
+
+  /* ---------- navigazione ---------- */
+
+  .nav {
+    display: none;
+    width: 100%;
+  }
+
+  .nav[data-aperto] {
+    display: block;
+    /* La testata è sticky: su schermi bassi il menu deve poter scorrere da solo. */
+    max-height: calc(100vh - 6rem);
+    overflow-y: auto;
+  }
+
+  .nav__lista {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+    padding: 0.5rem 0 0.75rem;
+    list-style: none;
+  }
+
+  .nav__link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 0.5rem;
+    border-left: 3px solid transparent;
+    color: var(--color-ivory);
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+
+  .nav__link:hover,
+  .nav__link[aria-current="page"],
+  .nav__link[data-sezione-attiva] {
+    border-left-color: var(--color-red);
+    color: var(--color-yellow);
+  }
+
+  .nav__link--sub {
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    color: var(--testo-attenuato);
+  }
+
+  .sub {
+    list-style: none;
+    padding-left: 1.6rem;
+  }
+
+  @media (min-width: 62rem) {
+    .hamburger {
+      display: none;
+    }
+
+    .nav,
+    .nav[data-aperto] {
+      display: block;
+      width: auto;
+      max-height: none;
+      overflow: visible;
+    }
+
+    .nav__lista {
+      flex-direction: row;
+      align-items: center;
+      gap: 0.25rem;
+      padding: 0;
+    }
+
+    .nav__link {
+      padding: 0.5rem 0.7rem;
+      border-left: none;
+      border-bottom: 3px solid transparent;
+    }
+
+    .nav__link:hover,
+    .nav__link[aria-current="page"],
+    .nav__link[data-sezione-attiva] {
+      border-left-color: transparent;
+      border-bottom-color: var(--color-red);
+    }
+
+    /* Sottomenu a tendina: apertura in hover e in focus da tastiera. */
+    .nav__voce-con-sub {
+      position: relative;
+    }
+
+    .sub {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      min-width: 13rem;
+      padding: 0.35rem 0;
+      border: 2px solid var(--color-red);
+      border-radius: var(--raggio);
+      background-color: var(--color-black);
+      visibility: hidden;
+      opacity: 0;
+      transition:
+        opacity 0.12s ease,
+        visibility 0.12s ease;
+    }
+
+    .nav__voce-con-sub:hover .sub,
+    .nav__voce-con-sub:focus-within .sub {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    .nav__link--sub {
+      border-bottom: none;
+      border-left: 3px solid transparent;
+      white-space: nowrap;
+    }
+
+    .nav__link--sub:hover,
+    .nav__link--sub[aria-current="page"] {
+      border-bottom-color: transparent;
+      border-left-color: var(--color-red);
+    }
+  }
+</style>

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200" width="400" height="200" role="img" aria-label="SPONSOR 5">
+  <rect width="400" height="200" fill="#161616"/>
+  <pattern id="sc-top" width="22" height="22" patternUnits="userSpaceOnUse">
+    <rect width="22" height="22" fill="#F2EEE4"/>
+    <rect width="11" height="11" fill="#D62B1F"/>
+    <rect x="11" y="11" width="11" height="11" fill="#D62B1F"/>
+  </pattern>
+  <rect x="0" y="0" width="400" height="22" fill="url(#sc-top)"/>
+  <pattern id="sc-bot" width="22" height="22" patternUnits="userSpaceOnUse">
+    <rect width="22" height="22" fill="#F2EEE4"/>
+    <rect width="11" height="11" fill="#D62B1F"/>
+    <rect x="11" y="11" width="11" height="11" fill="#D62B1F"/>
+  </pattern>
+  <rect x="0" y="178" width="400" height="22" fill="url(#sc-bot)"/>
+  <rect x="11" y="33" width="378" height="134" fill="none" stroke="#8C1A12" stroke-width="2.75"/>
+  <text x="200" y="100" fill="#F5C518" font-family="Arial Narrow, Arial, sans-serif" font-weight="700" font-size="25" letter-spacing="2" text-anchor="middle" dominant-baseline="middle">SPONSOR 5</text>
+  
+</svg>

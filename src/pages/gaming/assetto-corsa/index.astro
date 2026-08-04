@@ -1,0 +1,118 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import IntestazionePagina from "../../../components/IntestazionePagina.astro";
+import CheckeredDivider from "../../../components/CheckeredDivider.astro";
+import { GIOCHI } from "../../../lib/giochi";
+
+const gioco = GIOCHI["assetto-corsa"];
+
+const SEZIONI = [
+  {
+    nome: "Tracciati",
+    href: "/gaming/assetto-corsa/tracciati/",
+    descrizione: "Tutti i percorsi della community, con foto e video onboard.",
+  },
+  {
+    nome: "Auto",
+    href: "/gaming/assetto-corsa/auto/",
+    descrizione: "Le vetture utilizzate nelle nostre gare, divise per categoria.",
+  },
+  {
+    nome: "Campionati",
+    href: "/gaming/assetto-corsa/campionati/",
+    descrizione: "Calendario, format delle gare e regolamento sportivo.",
+  },
+  {
+    nome: "Punti & Crediti",
+    href: "/gaming/assetto-corsa/punti-crediti/",
+    descrizione: "Come si assegnano i punti in classifica e come funzionano i crediti.",
+  },
+];
+---
+
+<BaseLayout
+  titolo={gioco.nome}
+  descrizione="Tracciati, auto, campionati e regolamento punti di Passione Slalom su Assetto Corsa."
+>
+  <IntestazionePagina
+    occhiello="Gaming"
+    titolo={gioco.nome}
+    intro="Il gioco su cui gira la maggior parte della nostra attività. Da qui accedi a tracciati, vetture, campionati e regolamento."
+  />
+
+  <section class="sezione">
+    <div class="contenitore">
+      <ul class="sezioni" role="list">
+        {
+          SEZIONI.map((sezione) => (
+            <li>
+              <a class="sezione-card" href={sezione.href}>
+                <h2 class="sezione-card__titolo">{sezione.nome}</h2>
+                <p class="sezione-card__testo">{sezione.descrizione}</p>
+                <span class="sezione-card__vai" aria-hidden="true">
+                  Vai alla sezione →
+                </span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <CheckeredDivider sottile />
+</BaseLayout>
+
+<style>
+  .sezioni {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 18rem), 1fr));
+    list-style: none;
+    padding: 0;
+  }
+
+  .sezione-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    height: 100%;
+    padding: 1.25rem;
+    border: 2px solid var(--bordo);
+    border-radius: var(--raggio);
+    background-color: var(--surface);
+    text-decoration: none;
+    transition:
+      border-color 0.16s ease,
+      transform 0.16s ease;
+  }
+
+  .sezione-card:hover,
+  .sezione-card:focus-visible {
+    border-color: var(--color-red);
+    transform: translateY(-3px);
+  }
+
+  .sezione-card__titolo {
+    font-size: 1.5rem;
+    color: var(--color-ivory);
+  }
+
+  .sezione-card__testo {
+    flex: 1;
+    font-size: 0.92rem;
+    color: var(--testo-attenuato);
+  }
+
+  .sezione-card__vai {
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-yellow);
+  }
+
+  .sezione-card:hover .sezione-card__vai {
+    color: var(--color-red);
+  }
+</style>

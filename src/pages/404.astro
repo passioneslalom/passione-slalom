@@ -1,0 +1,19 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import IntestazionePagina from "../components/IntestazionePagina.astro";
+import Bottone from "../components/Bottone.astro";
+---
+
+<BaseLayout titolo="Pagina non trovata" descrizione="La pagina cercata non esiste.">
+  <IntestazionePagina
+    occhiello="Errore 404"
+    titolo="Fuori percorso"
+    intro="La pagina che cercavi non esiste o è stata spostata."
+  />
+
+  <section class="sezione">
+    <div class="contenitore">
+      <Bottone href="/">Torna alla home</Bottone>
+    </div>
+  </section>
+</BaseLayout>

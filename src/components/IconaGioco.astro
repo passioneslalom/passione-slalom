@@ -1,0 +1,65 @@
+---
+import type { Gioco } from "../lib/giochi";
+import { GIOCHI } from "../lib/giochi";
+
+/**
+ * Pittogramma che distingue i tre giochi.
+ * I giochi non hanno colori dedicati: la differenza è solo l'icona.
+ */
+interface Props {
+  gioco: Gioco;
+  class?: string;
+}
+
+const { gioco, class: classe } = Astro.props;
+const { pittogramma } = GIOCHI[gioco];
+---
+
+<svg
+  class:list={["icona", classe]}
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+  focusable="false"
+>
+  {
+    pittogramma === "cono" && (
+      <>
+        <path d="M12 3 5 19h14L12 3Z" />
+        <path d="M9.4 11h5.2M8 15h8" />
+        <path d="M3 21h18" />
+      </>
+    )
+  }
+  {
+    pittogramma === "bandiera" && (
+      <>
+        <path d="M5 21V4" />
+        <path d="M5 4h14v10H5z" />
+        <path d="M5 4h4.66v5H5zm4.66 5h4.67v5H9.66zm4.67-5H19v5h-4.67z" fill="currentColor" stroke="none" />
+      </>
+    )
+  }
+  {
+    pittogramma === "cronometro" && (
+      <>
+        <circle cx="12" cy="13" r="8" />
+        <path d="M12 9v4l2.5 2.5" />
+        <path d="M9.5 2h5M12 2v3" />
+        <path d="m18.8 6.6 1.6-1.6" />
+      </>
+    )
+  }
+</svg>
+
+<style>
+  .icona {
+    width: 1.15em;
+    height: 1.15em;
+    flex: none;
+  }
+</style>
