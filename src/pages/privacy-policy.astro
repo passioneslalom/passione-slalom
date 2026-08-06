@@ -1,0 +1,107 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import IntestazionePagina from "../components/IntestazionePagina.astro";
+import { NOME_SITO, EMAIL_CONTATTO } from "../lib/site";
+
+const AGGIORNAMENTO = "6 agosto 2026";
+---
+
+<BaseLayout
+  titolo="Privacy Policy"
+  descrizione="Come Passione Slalom tratta i dati personali: nessuna raccolta tramite il sito, nessuna profilazione."
+>
+  <IntestazionePagina
+    occhiello="Informazioni legali"
+    titolo="Privacy Policy"
+    intro="In breve: il sito non ti chiede dati, non ha moduli di contatto e non raccoglie informazioni su di te."
+  />
+
+  <section class="sezione">
+    <div class="contenitore">
+      <div class="testo-lungo">
+        <h3>Titolare del trattamento</h3>
+        <p>
+          Il titolare del trattamento è {NOME_SITO}, raggiungibile all'indirizzo <a
+            href={`mailto:${EMAIL_CONTATTO}`}>{EMAIL_CONTATTO}</a
+          > per qualsiasi richiesta relativa ai tuoi dati personali.
+        </p>
+
+        <h3>Quali dati raccogliamo</h3>
+        <p>
+          Nessuno conferito da te. Il sito è statico e non contiene moduli di contatto, iscrizioni
+          alla newsletter, aree riservate o sistemi di registrazione: non ti viene chiesto alcun
+          dato e non ne raccogliamo tramite queste pagine.
+        </p>
+
+        <h3>Dati raccolti automaticamente dal server</h3>
+        <p>
+          Come accade per qualsiasi sito web, il fornitore che ospita queste pagine può registrare
+          nei propri file di log alcune informazioni tecniche trasmesse automaticamente dal browser:
+          indirizzo IP, data e ora della richiesta, pagina richiesta, tipo di browser e sistema
+          operativo.
+        </p>
+        <p>
+          Questi dati servono esclusivamente a garantire il funzionamento e la sicurezza del
+          servizio e a diagnosticare eventuali malfunzionamenti. La base giuridica è il legittimo
+          interesse (art. 6, par. 1, lett. f del Regolamento UE 2016/679). Non li utilizziamo per
+          identificare le persone che visitano il sito, non li incrociamo con altre informazioni e
+          non ne ricaviamo statistiche di navigazione.
+        </p>
+
+        <h3>Cookie e archiviazione locale</h3>
+        <p>
+          Il sito non utilizza cookie di profilazione, analitici o pubblicitari. L'unico dato salvato
+          sul tuo dispositivo è la preferenza che chiude l'avviso informativo, descritta in dettaglio
+          nella <a href="/cookie-policy/">Cookie Policy</a>.
+        </p>
+
+        <h3>Collegamenti a piattaforme esterne</h3>
+        <p>
+          Il sito contiene link a YouTube, Instagram, Facebook, TikTok, Twitch e Discord, oltre ai
+          video dei tracciati ospitati su YouTube. Sono semplici collegamenti: nessun contenuto di
+          quelle piattaforme è incorporato nelle nostre pagine, quindi finché non li apri non viene
+          trasmessa loro alcuna informazione. Una volta aperti, il trattamento dei tuoi dati è
+          regolato dall'informativa privacy di ciascun servizio, sulla quale non abbiamo alcun
+          controllo.
+        </p>
+
+        <h3>Comunicazione e diffusione</h3>
+        <p>
+          Non comunichiamo dati personali a terzi, non li cediamo e non li diffondiamo. L'unico
+          soggetto che tratta dati per nostro conto è il fornitore di hosting, nella misura descritta
+          sopra, in qualità di responsabile del trattamento.
+        </p>
+
+        <h3>Fotografie pubblicate</h3>
+        <p>
+          Le immagini nella galleria ritraggono momenti dei nostri eventi. Se compari in una
+          fotografia e desideri che venga rimossa, scrivici a <a href={`mailto:${EMAIL_CONTATTO}`}
+            >{EMAIL_CONTATTO}</a
+          > e provvederemo senza che tu debba motivare la richiesta.
+        </p>
+
+        <h3>I tuoi diritti</h3>
+        <p>
+          Puoi esercitare in ogni momento i diritti previsti dagli articoli 15-22 del Regolamento UE
+          2016/679: accesso ai dati, rettifica, cancellazione, limitazione del trattamento,
+          opposizione e portabilità. Per farlo è sufficiente scrivere all'indirizzo indicato sopra.
+        </p>
+        <p>
+          Se ritieni che il trattamento dei tuoi dati violi la normativa, puoi presentare reclamo al
+          Garante per la protezione dei dati personali (<a
+            href="https://www.garanteprivacy.it"
+            target="_blank"
+            rel="noopener noreferrer">garanteprivacy.it</a
+          >).
+        </p>
+
+        <h3>Aggiornamenti</h3>
+        <p>
+          Questa informativa verrà aggiornata se cambieranno le modalità di trattamento, per esempio
+          con l'introduzione di moduli di contatto o strumenti di statistica. Ultimo aggiornamento:
+          {AGGIORNAMENTO}.
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,6 +1,6 @@
 ---
 titolo: Slalom di Chiusdino
-foto: /images/tracciati/slalom-chiusdino.svg
+foto: ../../assets/tracciati/slalom-chiusdino.svg
 video: https://www.youtube.com/watch?v=dQw4w9WgXcQ
 gioco: assetto-corsa
 ordine: 2

@@ -1,6 +1,6 @@
 ---
 titolo: Slalom Costa Viola
-foto: /images/tracciati/slalom-costa-viola.svg
+foto: ../../assets/tracciati/slalom-costa-viola.svg
 video: https://www.youtube.com/watch?v=dQw4w9WgXcQ
 gioco: trackday-r
 ordine: 2

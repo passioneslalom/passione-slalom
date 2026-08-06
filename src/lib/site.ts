@@ -13,5 +13,9 @@ export const SOCIAL: { social: Social; url: string }[] = [
 ];
 
 export const NOME_SITO = "Passione Slalom";
+
+/** Recapito pubblicato nelle informative legali. DA SOSTITUIRE con quello reale. */
+export const EMAIL_CONTATTO = "passioneslalom2021@gmail.com";
+/** Claim del sito: hero della homepage e meta description predefinita. */
 export const DESCRIZIONE_SITO =
-  "La community italiana dello slalom virtuale: tracciati, auto, campionati e staff per Assetto Corsa, rFactor e TrackDay R.";
+  "La community italiana di slalom. Tracciati, auto e campionati per Assetto Corsa, rFactor e TrackDay R.";

@@ -1,0 +1,90 @@
+---
+/**
+ * Avviso puramente informativo: il sito non installa cookie di profilazione,
+ * quindi non c'è alcun consenso da raccogliere e non esiste un pulsante "rifiuta".
+ * La chiusura viene ricordata in localStorage, non in un cookie.
+ */
+---
+
+<aside class="avviso" data-avviso-cookie aria-label="Informativa cookie" hidden>
+  <p class="avviso__testo">
+    Questo sito utilizza solo cookie tecnici necessari al funzionamento: nessuna profilazione,
+    nessun tracciamento pubblicitario. <a href="/cookie-policy/">Leggi la Cookie Policy</a>.
+  </p>
+  <button class="avviso__ok" type="button" data-avviso-chiudi>Ho capito</button>
+</aside>
+
+<script>
+  const CHIAVE = "avviso-cookie-letto";
+  const avviso = document.querySelector<HTMLElement>("[data-avviso-cookie]");
+
+  // In navigazione privata o con lo storage bloccato l'accesso può sollevare
+  // un'eccezione: in quel caso l'avviso si limita a ricomparire.
+  const letto = () => {
+    try {
+      return localStorage.getItem(CHIAVE) === "1";
+    } catch {
+      return false;
+    }
+  };
+
+  if (avviso && !letto()) avviso.hidden = false;
+
+  avviso?.querySelector("[data-avviso-chiudi]")?.addEventListener("click", () => {
+    try {
+      localStorage.setItem(CHIAVE, "1");
+    } catch {
+      /* niente da fare: si chiude comunque per questa visita */
+    }
+    avviso.hidden = true;
+  });
+</script>
+
+<style>
+  .avviso {
+    position: fixed;
+    inset: auto 0 0;
+    z-index: 30;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem 1.25rem;
+    padding: 0.9rem 1.25rem;
+    border-top: 3px solid var(--color-red);
+    background-color: var(--color-black);
+  }
+
+  /* Il display:flex qui sopra vincerebbe sull'attributo hidden. */
+  .avviso[hidden] {
+    display: none;
+  }
+
+  .avviso__testo {
+    max-width: 70ch;
+    font-size: 0.82rem;
+    line-height: 1.6;
+    color: var(--testo-attenuato);
+  }
+
+  .avviso__ok {
+    flex: none;
+    padding: 0.5rem 1.1rem;
+    border: 2px solid var(--color-red);
+    border-radius: var(--raggio);
+    background-color: transparent;
+    color: var(--color-ivory);
+    font-family: inherit;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+
+  @media (hover: hover) {
+    .avviso__ok:hover {
+      background-color: var(--color-red);
+    }
+  }
+</style>

@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
 
 interface Props {
@@ -10,7 +11,23 @@ const { nome, ruolo, foto } = Astro.props.membro.data;
 
 <article class="card">
   <div class="card__foto">
-    <img src={foto} alt={nome} width="480" height="480" loading="lazy" decoding="async" />
+    {/*
+      Il riquadro è quadrato e la card misura ~335-357px in ogni viewport, quindi
+      conviene un ritaglio quadrato fatto in build: con `widths` verrebbe generata
+      solo la larghezza giusta, e sulle foto più larghe che alte il browser
+      dovrebbe ingrandire per coprire il lato corto.
+    */}
+    <Image
+      src={foto}
+      alt={nome}
+      width={360}
+      height={360}
+      fit="cover"
+      densities={[1, 2]}
+      quality={82}
+      loading="lazy"
+      decoding="async"
+    />
   </div>
   <div class="card__corpo">
     <h3 class="card__nome">{nome}</h3>
@@ -35,7 +52,6 @@ const { nome, ruolo, foto } = Astro.props.membro.data;
   .card__foto {
     aspect-ratio: 1;
     background-color: var(--surface-alta);
-    border-bottom: 2px solid var(--color-red);
   }
 
   .card__foto img {

@@ -1,32 +1,96 @@
 ---
 import IconaSocial from "./IconaSocial.astro";
 import { PERCORSI_SOCIAL } from "../lib/social-icons";
-import { SOCIAL, NOME_SITO } from "../lib/site";
+import { ELENCO_GIOCHI } from "../lib/giochi";
+import { SOCIAL, NOME_SITO, DESCRIZIONE_SITO } from "../lib/site";
 
 const anno = new Date().getFullYear();
+
+// Stesse destinazioni della testata: i giochi arrivano da ELENCO_GIOCHI, così
+// aggiungerne uno aggiorna insieme menu e piè di pagina.
+const LINK_RAPIDI = [
+  { nome: "Home", href: "/" },
+  ...ELENCO_GIOCHI.map((gioco) => ({ nome: gioco.nome, href: gioco.href })),
+  { nome: "Galleria", href: "/galleria/" },
+  { nome: "Staff", href: "/staff/" },
+  { nome: "Chi Siamo", href: "/chi-siamo/" },
+];
+
+const LINK_LEGALI = [
+  { nome: "Cookie Policy", href: "/cookie-policy/" },
+  { nome: "Privacy Policy", href: "/privacy-policy/" },
+];
 ---
 
 <footer class="pie">
-  <div class="contenitore pie__contenuto">
-    <p class="pie__marchio">{NOME_SITO}</p>
+  <div class="contenitore">
+    <div class="pie__colonne">
+      <div class="pie__colonna">
+        <p class="pie__marchio">{NOME_SITO}</p>
 
-    <ul class="pie__social" role="list">
-      {
-        SOCIAL.map(({ social, url }) => (
-          <li>
-            <a href={url} target="_blank" rel="noopener noreferrer" title={PERCORSI_SOCIAL[social].nome}>
-              <IconaSocial social={social} />
-              <span class="visually-hidden">{PERCORSI_SOCIAL[social].nome}</span>
-            </a>
-          </li>
-        ))
-      }
-    </ul>
+        <ul class="pie__social" role="list">
+          {
+            SOCIAL.map(({ social, url }) => (
+              <li>
+                <a
+                  href={url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title={PERCORSI_SOCIAL[social].nome}
+                >
+                  <IconaSocial social={social} />
+                  <span class="visually-hidden">{PERCORSI_SOCIAL[social].nome}</span>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
 
-    <p class="pie__nota">
-      © {anno} {NOME_SITO} — community italiana di slalom virtuale. Sito non affiliato a Kunos
-      Simulazioni, Studio 397 o agli sviluppatori di TrackDay R.
-    </p>
+        <p class="pie__nota">{DESCRIZIONE_SITO}</p>
+      </div>
+
+      <nav class="pie__colonna" aria-label="Link rapidi">
+        <h2 class="pie__titolo">Link rapidi</h2>
+        <ul class="pie__lista" role="list">
+          {
+            LINK_RAPIDI.map((link) => (
+              <li>
+                <a class="pie__link" href={link.href}>
+                  {link.nome}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+
+      <nav class="pie__colonna" aria-label="Informazioni legali">
+        <h2 class="pie__titolo">Legale</h2>
+        <ul class="pie__lista" role="list">
+          {
+            LINK_LEGALI.map((link) => (
+              <li>
+                <a class="pie__link" href={link.href}>
+                  {link.nome}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+    </div>
+
+    <div class="pie__basso">
+      <p>© {anno} {NOME_SITO}. Tutti i diritti riservati.</p>
+      <p>
+        Made with ❤️ by <a
+          class="pie__link"
+          href="https://davidesoldatini.it"
+          target="_blank"
+          rel="noopener noreferrer">Davide Soldatini</a
+        >
+      </p>
+    </div>
   </div>
 </footer>
 
@@ -36,13 +100,18 @@ const anno = new Date().getFullYear();
     background-color: var(--surface);
   }
 
-  .pie__contenuto {
+  .pie__colonne {
+    display: grid;
+    gap: 2rem;
+    padding-block: 2.5rem 2rem;
+    text-align: center;
+  }
+
+  .pie__colonna {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1rem;
-    padding-block: 2rem;
-    text-align: center;
+    gap: 0.9rem;
   }
 
   .pie__marchio {
@@ -58,6 +127,7 @@ const anno = new Date().getFullYear();
     justify-content: center;
     gap: 1.1rem;
     list-style: none;
+    padding: 0;
   }
 
   .pie__social a {
@@ -66,15 +136,77 @@ const anno = new Date().getFullYear();
     transition: color 0.16s ease;
   }
 
-  .pie__social a:hover {
-    color: var(--color-red);
-  }
-
   .pie__nota {
     max-width: 46ch;
     font-size: 0.78rem;
     line-height: 1.6;
     color: var(--testo-attenuato);
+  }
+
+  .pie__titolo {
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-ivory);
+  }
+
+  .pie__lista {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    list-style: none;
+    padding: 0;
+  }
+
+  .pie__link {
+    font-size: 0.88rem;
+    color: var(--testo-attenuato);
+    text-decoration: none;
+    transition: color 0.16s ease;
+  }
+
+  .pie__basso {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding-block: 1.1rem;
+    border-top: 1px solid var(--bordo);
+    font-size: 0.78rem;
+    color: var(--testo-attenuato);
+    text-align: center;
+  }
+
+  /* Su touch :hover resta attaccato dopo il tocco: lo diamo solo a chi ha un puntatore. */
+  @media (hover: hover) {
+    .pie__social a:hover,
+    .pie__link:hover {
+      color: var(--color-red);
+    }
+  }
+
+  /* Tre colonne solo da tablet in su: sotto resta la colonna unica di prima. */
+  @media (min-width: 45rem) {
+    .pie__colonne {
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 2.5rem;
+      text-align: left;
+    }
+
+    .pie__colonna {
+      align-items: flex-start;
+    }
+
+    .pie__social {
+      justify-content: flex-start;
+    }
+
+    .pie__basso {
+      flex-direction: row;
+      justify-content: space-between;
+      text-align: left;
+    }
   }
 
   .visually-hidden {

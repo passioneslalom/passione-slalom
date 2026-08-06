@@ -1,0 +1,35 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import IntestazionePagina from "../../../components/IntestazionePagina.astro";
+import SezioniGioco, { type Sezione } from "../../../components/SezioniGioco.astro";
+import { GIOCHI } from "../../../lib/giochi";
+
+const gioco = GIOCHI["rfactor"];
+
+// Per ora l'unica sezione attiva: la pagina esiste comunque, così la struttura
+// del menu è la stessa per tutti i giochi e c'è dove aggiungere le prossime.
+const SEZIONI: Sezione[] = [
+  {
+    nome: "Tracciati",
+    href: "/gaming/rfactor/tracciati/",
+    descrizione: "Tutti i percorsi della community, con foto e video onboard.",
+  },
+];
+---
+
+<BaseLayout
+  titolo={gioco.nome}
+  descrizione={`I tracciati slalom della community Passione Slalom su ${gioco.nome}.`}
+>
+  <IntestazionePagina
+    occhiello="Gaming"
+    titolo={gioco.nome}
+    intro="Quello che pubblichiamo su rFactor. Al momento trovi i tracciati; le altre sezioni si aggiungeranno qui."
+  />
+
+  <section class="sezione">
+    <div class="contenitore">
+      <SezioniGioco sezioni={SEZIONI} />
+    </div>
+  </section>
+</BaseLayout>

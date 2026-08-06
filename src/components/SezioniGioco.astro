@@ -1,0 +1,84 @@
+---
+/** Griglia di accesso alle sezioni di un gioco, usata dalle pagine /gaming/<gioco>/. */
+export interface Sezione {
+  nome: string;
+  href: string;
+  descrizione: string;
+}
+
+interface Props {
+  sezioni: Sezione[];
+}
+
+const { sezioni } = Astro.props;
+---
+
+<ul class="sezioni" role="list">
+  {
+    sezioni.map((sezione) => (
+      <li>
+        <a class="sezione-card" href={sezione.href}>
+          <h2 class="sezione-card__titolo">{sezione.nome}</h2>
+          <p class="sezione-card__testo">{sezione.descrizione}</p>
+          <span class="sezione-card__vai" aria-hidden="true">
+            Vai alla sezione →
+          </span>
+        </a>
+      </li>
+    ))
+  }
+</ul>
+
+<style>
+  .sezioni {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 18rem), 1fr));
+    list-style: none;
+    padding: 0;
+  }
+
+  .sezione-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    height: 100%;
+    padding: 1.25rem;
+    border: 2px solid var(--bordo);
+    border-radius: var(--raggio);
+    background-color: var(--surface);
+    text-decoration: none;
+    transition:
+      border-color 0.16s ease,
+      transform 0.16s ease;
+  }
+
+  .sezione-card:hover,
+  .sezione-card:focus-visible {
+    border-color: var(--color-red);
+    transform: translateY(-3px);
+  }
+
+  .sezione-card__titolo {
+    font-size: 1.5rem;
+    color: var(--color-ivory);
+  }
+
+  .sezione-card__testo {
+    flex: 1;
+    font-size: 0.92rem;
+    color: var(--testo-attenuato);
+  }
+
+  .sezione-card__vai {
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-yellow);
+  }
+
+  .sezione-card:hover .sezione-card__vai {
+    color: var(--color-red);
+  }
+</style>

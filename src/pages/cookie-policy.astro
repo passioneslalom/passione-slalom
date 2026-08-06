@@ -1,0 +1,76 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import IntestazionePagina from "../components/IntestazionePagina.astro";
+import { NOME_SITO } from "../lib/site";
+
+const AGGIORNAMENTO = "6 agosto 2026";
+---
+
+<BaseLayout
+  titolo="Cookie Policy"
+  descrizione="Quali cookie utilizza il sito di Passione Slalom: solo tecnici, nessun tracciamento."
+>
+  <IntestazionePagina
+    occhiello="Informazioni legali"
+    titolo="Cookie Policy"
+    intro="In breve: questo sito non ti traccia, non ti profila e non condivide nulla con inserzionisti."
+  />
+
+  <section class="sezione">
+    <div class="contenitore">
+      <div class="testo-lungo">
+        <h3>Cosa sono i cookie</h3>
+        <p>
+          I cookie sono piccoli file che un sito salva nel browser di chi lo visita. Si distinguono
+          in cookie <strong>tecnici</strong>, necessari al funzionamento del sito, e cookie di
+          <strong>profilazione</strong>, usati per seguire il comportamento delle persone e mostrare
+          pubblicità mirata. Solo i secondi richiedono un consenso preventivo.
+        </p>
+
+        <h3>Quali cookie usa questo sito</h3>
+        <p>
+          Nessuno. {NOME_SITO} è un sito statico: non installa cookie propri né di terze parti. In
+          particolare non utilizziamo strumenti di statistica come Google Analytics, non ci sono
+          pixel pubblicitari, i caratteri tipografici sono ospitati sul nostro dominio e non
+          richiamano servizi esterni, e non ci sono video, mappe o widget incorporati nelle pagine.
+        </p>
+
+        <h3>L'unica informazione salvata sul tuo dispositivo</h3>
+        <p>
+          Quando chiudi l'avviso che compare in fondo alla pagina, il sito registra questa scelta per
+          non riproporti lo stesso messaggio a ogni visita. Tecnicamente non si tratta di un cookie
+          ma di una voce di <em>localStorage</em> chiamata <code>avviso-cookie-letto</code>, che
+          rimane nel browser finché non cancelli i dati del sito.
+        </p>
+        <p>
+          Non contiene dati personali, non permette di identificarti e non viene mai inviata a un
+          server: resta soltanto sul tuo dispositivo. Se non chiudi l'avviso, non viene salvato
+          nulla.
+        </p>
+
+        <h3>Cookie di terze parti</h3>
+        <p>
+          Non ce ne sono. I collegamenti a YouTube, Instagram, Facebook, TikTok, Twitch e Discord
+          sono semplici link: nessun contenuto di quelle piattaforme viene caricato dentro le nostre
+          pagine, quindi finché non li apri quei servizi non ricevono alcuna informazione su di te.
+          Aprendoli si applicano le rispettive informative.
+        </p>
+
+        <h3>Come cancellare i dati salvati</h3>
+        <p>
+          Puoi eliminare cookie e archiviazione locale in qualsiasi momento dalle impostazioni del
+          browser, alla voce dedicata ai dati dei siti web. Trattandosi di soli dati tecnici, la
+          cancellazione non pregiudica la consultazione del sito: tornerà semplicemente a comparire
+          l'avviso informativo.
+        </p>
+
+        <h3>Aggiornamenti</h3>
+        <p>
+          Se in futuro il sito dovesse introdurre strumenti che installano cookie, questa pagina
+          verrà aggiornata prima della loro attivazione e l'avviso verrà sostituito da una richiesta
+          di consenso. Ultimo aggiornamento: {AGGIORNAMENTO}.
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

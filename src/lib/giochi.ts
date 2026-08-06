@@ -27,14 +27,13 @@ export const GIOCHI: Record<Gioco, DatiGioco> = {
     slug: "rfactor",
     nome: "rFactor",
     pittogramma: "bandiera",
-    // rFactor ha solo i tracciati: dal menu si va dritti alla lista.
-    href: "/gaming/rfactor/tracciati/",
+    href: "/gaming/rfactor/",
   },
   "trackday-r": {
     slug: "trackday-r",
     nome: "TrackDay R",
     pittogramma: "cronometro",
-    href: "/gaming/trackday-r/tracciati/",
+    href: "/gaming/trackday-r/",
   },
 };
 

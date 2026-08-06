@@ -1,6 +1,6 @@
 ---
 titolo: Slalom Monte Erice
-foto: /images/tracciati/slalom-monte-erice.svg
+foto: ../../assets/tracciati/slalom-monte-erice.svg
 video: https://www.youtube.com/watch?v=dQw4w9WgXcQ
 gioco: assetto-corsa
 ordine: 1

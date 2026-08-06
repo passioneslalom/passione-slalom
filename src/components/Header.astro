@@ -19,12 +19,12 @@ const nellaSezione = (href: string) => percorso.startsWith(href) || undefined;
     <button
       class="hamburger"
       type="button"
+      aria-label="Menu"
       aria-expanded="false"
       aria-controls="menu-principale"
       data-menu-toggle
     >
       <span class="hamburger__linee" aria-hidden="true"></span>
-      <span class="hamburger__testo">Menu</span>
     </button>
 
     <nav class="nav" id="menu-principale" aria-label="Navigazione principale" data-menu>
@@ -150,31 +150,27 @@ const nellaSezione = (href: string) => percorso.startsWith(href) || undefined;
   .hamburger {
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
-    padding: 0.5rem 0.8rem;
-    border: 2px solid var(--color-red);
-    border-radius: var(--raggio);
+    justify-content: center;
+    /* Nessun bordo né etichetta: il quadrato serve solo come area di tocco. */
+    width: 2.75rem;
+    height: 2.75rem;
+    padding: 0;
+    border: 0;
     background-color: transparent;
-    color: var(--color-yellow);
-    font-family: var(--font-body);
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
+    color: var(--color-ivory);
     cursor: pointer;
-  }
-
-  .hamburger:hover {
-    background-color: var(--color-red);
   }
 
   .hamburger__linee,
   .hamburger__linee::before,
   .hamburger__linee::after {
     display: block;
-    width: 1.15rem;
+    width: 1.35rem;
     height: 2px;
     background-color: currentColor;
+    transition:
+      transform 0.25s ease,
+      background-color 0.2s ease;
   }
 
   .hamburger__linee {
@@ -194,6 +190,27 @@ const nellaSezione = (href: string) => percorso.startsWith(href) || undefined;
 
   .hamburger__linee::after {
     top: 6px;
+  }
+
+  /* Aperto: la linea centrale svanisce, le altre due convergono e si incrociano. */
+  .hamburger[aria-expanded="true"] .hamburger__linee {
+    background-color: transparent;
+  }
+
+  .hamburger[aria-expanded="true"] .hamburger__linee::before {
+    transform: translateY(6px) rotate(45deg);
+  }
+
+  .hamburger[aria-expanded="true"] .hamburger__linee::after {
+    transform: translateY(-6px) rotate(-45deg);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hamburger__linee,
+    .hamburger__linee::before,
+    .hamburger__linee::after {
+      transition: none;
+    }
   }
 
   /* ---------- navigazione ---------- */

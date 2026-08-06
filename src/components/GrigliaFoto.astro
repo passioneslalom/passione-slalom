@@ -193,9 +193,11 @@ const VISORE = { widths: [800, 1400], sizes: "100vw", qualita: 65 };
       filter 0.3s ease;
   }
 
-  .galleria__cella:hover img {
-    transform: scale(1.06);
-    filter: saturate(1.25);
+  @media (hover: hover) {
+    .galleria__cella:hover img {
+      transform: scale(1.06);
+      filter: saturate(1.25);
+    }
   }
 
   @media (min-width: 45rem) {
@@ -296,9 +298,12 @@ const VISORE = { widths: [800, 1400], sizes: "100vw", qualita: 65 };
     cursor: pointer;
   }
 
-  .visore__chiudi:hover,
-  .visore__nav:hover {
-    background-color: var(--color-red);
+  /* Su touch :hover resta attaccato dopo il tocco: lo diamo solo a chi ha un puntatore. */
+  @media (hover: hover) {
+    .visore__chiudi:hover,
+    .visore__nav:hover {
+      background-color: var(--color-red);
+    }
   }
 
   .visore__nav {

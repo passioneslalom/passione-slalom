@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
 import IconaGioco from "./IconaGioco.astro";
 import { GIOCHI } from "../lib/giochi";
@@ -15,7 +16,20 @@ const { titolo, foto, video, gioco } = tracciato.data;
 
 <article class="card">
   <div class="card__foto">
-    <img src={foto} alt={`Tracciato ${titolo}`} width="640" height="360" loading="lazy" decoding="async" />
+    {/* Ritaglio 16:9 in build, come per le card staff: il riquadro ha un rapporto
+        fisso, e generare solo la larghezza lascerebbe al browser un ingrandimento
+        su tutte le foto più larghe del riquadro. */}
+    <Image
+      src={foto}
+      alt={`Tracciato ${titolo}`}
+      width={360}
+      height={203}
+      fit="cover"
+      densities={[1, 2]}
+      quality={82}
+      loading="lazy"
+      decoding="async"
+    />
   </div>
 
   <div class="card__corpo">
