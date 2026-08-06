@@ -1,14 +1,6 @@
 ---
-import { ELENCO_GIOCHI, GIOCHI } from "../lib/giochi";
-import { NOME_SITO } from "../lib/site";
-
-/** Sotto-sezioni di Assetto Corsa: è l'unico gioco con più di una pagina. */
-const SOTTOSEZIONI_AC = [
-  { nome: "Campionati", href: "/gaming/assetto-corsa/campionati/" },
-  { nome: "Punti & Crediti", href: "/gaming/assetto-corsa/punti-crediti/" },
-  { nome: "Tracciati", href: "/gaming/assetto-corsa/tracciati/" },
-  { nome: "Auto", href: "/gaming/assetto-corsa/auto/" },
-];
+import Logo from "./Logo.astro";
+import { ELENCO_GIOCHI } from "../lib/giochi";
 
 // Normalizza lo slash finale così il confronto funziona con qualsiasi trailingSlash.
 const percorso = Astro.url.pathname.replace(/\/?$/, "/");
@@ -21,7 +13,7 @@ const nellaSezione = (href: string) => percorso.startsWith(href) || undefined;
 <header class="testata">
   <div class="contenitore testata__barra">
     <a class="marchio" href="/">
-      <img src="/images/logo.svg" alt={NOME_SITO} width="180" height="56" />
+      <Logo variante="header" />
     </a>
 
     <button
@@ -41,21 +33,38 @@ const nellaSezione = (href: string) => percorso.startsWith(href) || undefined;
           <a class="nav__link" href="/" aria-current={corrente("/")}>Home</a>
         </li>
 
-        <li class="nav__voce-con-sub">
-          <a
-            class="nav__link"
-            href={GIOCHI["assetto-corsa"].href}
-            aria-current={corrente(GIOCHI["assetto-corsa"].href)}
-            data-sezione-attiva={nellaSezione("/gaming/assetto-corsa/")}
+        <li class="nav__voce-con-sub" data-sub>
+          <button
+            class="nav__link nav__link--tendina"
+            type="button"
+            aria-expanded="false"
+            aria-controls="menu-gaming"
+            data-sezione-attiva={nellaSezione("/gaming/")}
+            data-sub-toggle
           >
-            {GIOCHI["assetto-corsa"].nome}
-          </a>
-          <ul class="sub" role="list">
+            Gaming
+            <svg
+              class="nav__freccia"
+              viewBox="0 0 12 8"
+              width="12"
+              height="8"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path d="M1 1.5 6 6.5l5-5" fill="none" stroke="currentColor" stroke-width="2" />
+            </svg>
+          </button>
+          <ul class="sub" id="menu-gaming" role="list">
             {
-              SOTTOSEZIONI_AC.map((voce) => (
+              ELENCO_GIOCHI.map((gioco) => (
                 <li>
-                  <a class="nav__link nav__link--sub" href={voce.href} aria-current={corrente(voce.href)}>
-                    {voce.nome}
+                  <a
+                    class="nav__link nav__link--sub"
+                    href={gioco.href}
+                    aria-current={corrente(gioco.href)}
+                    data-sezione-attiva={nellaSezione(`/gaming/${gioco.slug}/`)}
+                  >
+                    {gioco.nome}
                   </a>
                 </li>
               ))
@@ -63,21 +72,9 @@ const nellaSezione = (href: string) => percorso.startsWith(href) || undefined;
           </ul>
         </li>
 
-        {
-          ELENCO_GIOCHI.filter((g) => g.slug !== "assetto-corsa").map((gioco) => (
-            <li>
-              <a
-                class="nav__link"
-                href={gioco.href}
-                aria-current={corrente(gioco.href)}
-                data-sezione-attiva={nellaSezione(`/gaming/${gioco.slug}/`)}
-              >
-                {gioco.nome}
-              </a>
-            </li>
-          ))
-        }
-
+        <li>
+          <a class="nav__link" href="/galleria/" aria-current={corrente("/galleria/")}>Galleria</a>
+        </li>
         <li>
           <a class="nav__link" href="/staff/" aria-current={corrente("/staff/")}>Staff</a>
         </li>
@@ -97,6 +94,31 @@ const nellaSezione = (href: string) => percorso.startsWith(href) || undefined;
     const aperto = toggle.getAttribute("aria-expanded") === "true";
     toggle.setAttribute("aria-expanded", String(!aperto));
     menu?.toggleAttribute("data-aperto", !aperto);
+  });
+
+  // Tendina "Gaming": su desktop si apre anche in hover/focus (CSS), qui gestiamo il click.
+  const voceSub = document.querySelector<HTMLElement>("[data-sub]");
+  const subToggle = voceSub?.querySelector<HTMLButtonElement>("[data-sub-toggle]");
+
+  const chiudiSub = () => {
+    subToggle?.setAttribute("aria-expanded", "false");
+    voceSub?.removeAttribute("data-aperto");
+  };
+
+  subToggle?.addEventListener("click", () => {
+    const aperto = subToggle.getAttribute("aria-expanded") === "true";
+    subToggle.setAttribute("aria-expanded", String(!aperto));
+    voceSub?.toggleAttribute("data-aperto", !aperto);
+  });
+
+  document.addEventListener("click", (evento) => {
+    if (voceSub && !voceSub.contains(evento.target as Node)) chiudiSub();
+  });
+
+  document.addEventListener("keydown", (evento) => {
+    if (evento.key !== "Escape") return;
+    if (voceSub?.contains(document.activeElement)) subToggle?.focus();
+    chiudiSub();
   });
 </script>
 
@@ -121,11 +143,6 @@ const nellaSezione = (href: string) => percorso.startsWith(href) || undefined;
   .marchio {
     display: block;
     line-height: 0;
-  }
-
-  .marchio img {
-    height: 2.75rem;
-    width: auto;
   }
 
   /* ---------- hamburger (solo mobile) ---------- */
@@ -206,6 +223,7 @@ const nellaSezione = (href: string) => percorso.startsWith(href) || undefined;
     align-items: center;
     gap: 0.5rem;
     padding: 0.6rem 0.5rem;
+    border: 0;
     border-left: 3px solid transparent;
     color: var(--color-ivory);
     font-size: 0.9rem;
@@ -229,9 +247,33 @@ const nellaSezione = (href: string) => percorso.startsWith(href) || undefined;
     color: var(--testo-attenuato);
   }
 
+  /* Voce che apre la tendina: è un <button>, va riportato all'aspetto dei link. */
+  .nav__link--tendina {
+    width: 100%;
+    background-color: transparent;
+    font-family: inherit;
+    text-align: left;
+    cursor: pointer;
+  }
+
+  .nav__freccia {
+    flex: none;
+    margin-left: auto;
+    transition: transform 0.15s ease;
+  }
+
+  .nav__voce-con-sub[data-aperto] .nav__freccia {
+    transform: rotate(180deg);
+  }
+
   .sub {
+    display: none;
     list-style: none;
     padding-left: 1.6rem;
+  }
+
+  .nav__voce-con-sub[data-aperto] .sub {
+    display: block;
   }
 
   @media (min-width: 62rem) {
@@ -272,7 +314,17 @@ const nellaSezione = (href: string) => percorso.startsWith(href) || undefined;
       position: relative;
     }
 
-    .sub {
+    .nav__link--tendina {
+      width: auto;
+    }
+
+    .nav__freccia {
+      margin-left: 0;
+    }
+
+    .sub,
+    .nav__voce-con-sub[data-aperto] .sub {
+      display: block;
       position: absolute;
       top: 100%;
       left: 0;
@@ -289,9 +341,15 @@ const nellaSezione = (href: string) => percorso.startsWith(href) || undefined;
     }
 
     .nav__voce-con-sub:hover .sub,
-    .nav__voce-con-sub:focus-within .sub {
+    .nav__voce-con-sub:focus-within .sub,
+    .nav__voce-con-sub[data-aperto] .sub {
       visibility: visible;
       opacity: 1;
+    }
+
+    .nav__voce-con-sub:hover .nav__freccia,
+    .nav__voce-con-sub:focus-within .nav__freccia {
+      transform: rotate(180deg);
     }
 
     .nav__link--sub {

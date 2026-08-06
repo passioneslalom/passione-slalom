@@ -1,0 +1,29 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import IntestazionePagina from "../components/IntestazionePagina.astro";
+import GrigliaFoto from "../components/GrigliaFoto.astro";
+import { FOTO } from "../lib/galleria";
+---
+
+<BaseLayout
+  titolo="Galleria"
+  descrizione="Le foto delle gare, dei paddock e delle premiazioni di Passione Slalom."
+>
+  <IntestazionePagina
+    occhiello="Dai nostri eventi"
+    titolo="Galleria"
+    intro={`${FOTO.length} scatti tra birilli, griglie di partenza e premiazioni.`}
+  />
+
+  <section class="sezione">
+    <div class="contenitore">
+      {
+        FOTO.length > 0 ? (
+          <GrigliaFoto foto={FOTO} />
+        ) : (
+          <p class="testo-lungo">Nessuna foto pubblicata al momento.</p>
+        )
+      }
+    </div>
+  </section>
+</BaseLayout>

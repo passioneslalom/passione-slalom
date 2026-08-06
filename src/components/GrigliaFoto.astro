@@ -1,0 +1,323 @@
+---
+import { Image } from "astro:assets";
+import type { Foto } from "../lib/galleria";
+
+interface Props {
+  foto: Foto[];
+  /** Ritmo alternato: prima e ultima cella su due colonne. Usato in homepage. */
+  ritmo?: boolean;
+}
+
+const { foto, ritmo = false } = Astro.props;
+
+// Le celle larghe vengono rese al doppio delle altre (736px contro 360px al
+// massimo della griglia): senza varianti dedicate scaricherebbero un file
+// tarato su 360px e lo stirerebbero.
+const NORMALE = {
+  widths: [360, 720],
+  sizes: "(min-width: 72rem) 360px, (min-width: 45rem) 33vw, 50vw",
+};
+const LARGA = {
+  widths: [736, 1472],
+  sizes: "(min-width: 72rem) 736px, (min-width: 45rem) 67vw, 50vw",
+};
+
+const misure = (indice: number) =>
+  ritmo && (indice === 0 || indice === foto.length - 1) ? LARGA : NORMALE;
+
+// Senza un width esplicito Astro usa la risoluzione originale come fallback di
+// `src`: una variante da centinaia di kB, generata e deployata per nulla.
+const fallback = (m: typeof NORMALE) => m.widths[m.widths.length - 1];
+
+// Nel visore la foto occupa tutto lo schermo. 1400px a qualità 65 è il massimo
+// che resta sotto i 250 kB per file; 800px serve ai telefoni, che altrimenti
+// scaricherebbero il triplo del necessario.
+const VISORE = { widths: [800, 1400], sizes: "100vw", qualita: 65 };
+---
+
+<div class="blocco-galleria" data-galleria>
+  <ul class:list={["galleria", ritmo && "galleria--ritmo"]} role="list">
+    {
+      foto.map((f, indice) => (
+        <li class="galleria__cella">
+          <button
+            class="galleria__apri"
+            type="button"
+            data-apri={indice}
+            aria-label={`Ingrandisci: ${f.alt}`}
+          >
+            <Image
+              src={f.immagine}
+              alt={f.alt}
+              width={fallback(misure(indice))}
+              widths={misure(indice).widths}
+              sizes={misure(indice).sizes}
+              quality={75}
+              loading="lazy"
+              decoding="async"
+            />
+          </button>
+        </li>
+      ))
+    }
+  </ul>
+
+  <dialog class="visore" data-visore aria-label="Visore fotografico">
+    <div class="visore__barra">
+      <p class="visore__conta"><span data-conta>1</span> / {foto.length}</p>
+      <button class="visore__chiudi" type="button" data-chiudi aria-label="Chiudi il visore">
+        <svg viewBox="0 0 20 20" width="20" height="20" aria-hidden="true" focusable="false">
+          <path d="M4 4l12 12M16 4L4 16" fill="none" stroke="currentColor" stroke-width="2.5" />
+        </svg>
+      </button>
+    </div>
+
+    {/* Lo scorrimento è CSS puro (scroll-snap): su mobile lo swipe funziona
+        senza una riga di JavaScript, con l'inerzia nativa del sistema. */}
+    <div class="visore__pista" data-pista>
+      {
+        foto.map((f) => (
+          <figure class="visore__slide">
+            <Image
+              src={f.immagine}
+              alt={f.alt}
+              width={VISORE.widths[VISORE.widths.length - 1]}
+              widths={VISORE.widths}
+              sizes={VISORE.sizes}
+              quality={VISORE.qualita}
+              loading="lazy"
+              decoding="async"
+            />
+          </figure>
+        ))
+      }
+    </div>
+
+    <button class="visore__nav visore__nav--prec" type="button" data-passo="-1" aria-label="Foto precedente">
+      <svg viewBox="0 0 12 20" width="12" height="20" aria-hidden="true" focusable="false">
+        <path d="M10 1L2 10l8 9" fill="none" stroke="currentColor" stroke-width="2.5" />
+      </svg>
+    </button>
+    <button class="visore__nav visore__nav--succ" type="button" data-passo="1" aria-label="Foto successiva">
+      <svg viewBox="0 0 12 20" width="12" height="20" aria-hidden="true" focusable="false">
+        <path d="M2 1l8 9-8 9" fill="none" stroke="currentColor" stroke-width="2.5" />
+      </svg>
+    </button>
+  </dialog>
+</div>
+
+<script>
+  // Un blocco per istanza: la homepage ne ha uno con sei foto, /galleria/ con tutte.
+  document.querySelectorAll<HTMLElement>("[data-galleria]").forEach((blocco) => {
+    const visore = blocco.querySelector<HTMLDialogElement>("[data-visore]");
+    const pista = blocco.querySelector<HTMLElement>("[data-pista]");
+    const conta = blocco.querySelector<HTMLElement>("[data-conta]");
+    if (!visore || !pista) return;
+
+    const indiceCorrente = () => Math.round(pista.scrollLeft / pista.clientWidth);
+
+    const vaiA = (indice: number, comportamento: ScrollBehavior = "instant") =>
+      pista.scrollTo({ left: indice * pista.clientWidth, behavior: comportamento });
+
+    blocco.querySelectorAll<HTMLButtonElement>("[data-apri]").forEach((apri) => {
+      apri.addEventListener("click", () => {
+        visore.showModal();
+        // showModal è sincrono: la pista ha già un layout, quindi clientWidth è valido.
+        vaiA(Number(apri.dataset.apri));
+      });
+    });
+
+    blocco.querySelectorAll<HTMLButtonElement>("[data-passo]").forEach((passo) => {
+      passo.addEventListener("click", () =>
+        vaiA(indiceCorrente() + Number(passo.dataset.passo), "smooth"),
+      );
+    });
+
+    blocco.querySelector("[data-chiudi]")?.addEventListener("click", () => visore.close());
+
+    // Un tocco sulla fascia nera attorno alla foto chiude, come ci si aspetta
+    // da un visore a schermo intero; sull'immagine no, per non chiudere per sbaglio.
+    pista.addEventListener("click", (evento) => {
+      if (!(evento.target instanceof HTMLImageElement)) visore.close();
+    });
+
+    visore.addEventListener("keydown", (evento) => {
+      if (evento.key === "ArrowRight") vaiA(indiceCorrente() + 1, "smooth");
+      if (evento.key === "ArrowLeft") vaiA(indiceCorrente() - 1, "smooth");
+    });
+
+    pista.addEventListener(
+      "scroll",
+      () => {
+        if (conta) conta.textContent = String(indiceCorrente() + 1);
+      },
+      { passive: true },
+    );
+  });
+</script>
+
+<style>
+  .galleria {
+    display: grid;
+    gap: 0.75rem;
+    grid-template-columns: repeat(2, 1fr);
+    margin-top: 1.75rem;
+    list-style: none;
+    padding: 0;
+  }
+
+  .galleria__cella {
+    overflow: hidden;
+    border: 2px solid var(--bordo);
+    border-radius: var(--raggio);
+    aspect-ratio: 3 / 2;
+  }
+
+  /* Il bottone è solo il bersaglio del clic: non deve avere aspetto proprio. */
+  .galleria__apri {
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: zoom-in;
+  }
+
+  .galleria__cella img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition:
+      transform 0.3s ease,
+      filter 0.3s ease;
+  }
+
+  .galleria__cella:hover img {
+    transform: scale(1.06);
+    filter: saturate(1.25);
+  }
+
+  @media (min-width: 45rem) {
+    .galleria {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+
+    .galleria--ritmo .galleria__cella:first-child,
+    .galleria--ritmo .galleria__cella:last-child {
+      grid-column: span 2;
+    }
+  }
+
+  /* ---------- visore a schermo intero ---------- */
+
+  .visore {
+    width: 100%;
+    max-width: 100%;
+    height: 100%;
+    max-height: 100%;
+    padding: 0;
+    border: 0;
+    background-color: transparent;
+    color: var(--color-ivory);
+    overflow: hidden;
+  }
+
+  .visore::backdrop {
+    background-color: rgb(0 0 0 / 0.94);
+  }
+
+  /* Il dialog nativo non blocca lo scorrimento della pagina sottostante. */
+  :global(body:has(.visore[open])) {
+    overflow: hidden;
+  }
+
+  .visore__pista {
+    display: flex;
+    height: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    overscroll-behavior: contain;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+
+  .visore__pista::-webkit-scrollbar {
+    display: none;
+  }
+
+  .visore__slide {
+    flex: 0 0 100%;
+    scroll-snap-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 3.5rem 0.75rem 1.5rem;
+  }
+
+  .visore__slide img {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+
+  .visore__barra {
+    position: absolute;
+    inset: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.75rem 1rem;
+  }
+
+  .visore__conta {
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--color-yellow);
+  }
+
+  .visore__chiudi,
+  .visore__nav {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border: 2px solid var(--color-red);
+    border-radius: 50%;
+    background-color: rgb(0 0 0 / 0.55);
+    color: var(--color-ivory);
+    cursor: pointer;
+  }
+
+  .visore__chiudi:hover,
+  .visore__nav:hover {
+    background-color: var(--color-red);
+  }
+
+  .visore__nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .visore__nav--prec {
+    left: 0.5rem;
+  }
+
+  .visore__nav--succ {
+    right: 0.5rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .galleria__cella:hover img {
+      transform: none;
+    }
+  }
+</style>

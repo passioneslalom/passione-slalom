@@ -1,0 +1,48 @@
+---
+import { Image } from "astro:assets";
+import logo from "../assets/logo.png";
+import { NOME_SITO } from "../lib/site";
+
+interface Props {
+  /** header: marchio nella barra di navigazione. hero: marchio grande in homepage. */
+  variante: "header" | "hero";
+}
+
+const { variante } = Astro.props;
+
+/** Larghezza di resa in CSS px: deve combaciare con il CSS in fondo al file. */
+const LARGHEZZE = { header: 87, hero: 416 } as const;
+
+const larghezza = LARGHEZZE[variante];
+const altezza = Math.round((larghezza * logo.height) / logo.width);
+
+// Il 2x si genera solo se il sorgente lo regge davvero: senza questo controllo
+// Astro produrrebbe un upscale, più pesante da scaricare e non più nitido.
+const densita = logo.width >= larghezza * 2 ? [1, 2] : [1];
+---
+
+<Image
+  src={logo}
+  alt={NOME_SITO}
+  width={larghezza}
+  height={altezza}
+  densities={densita}
+  class:list={[`logo--${variante}`]}
+  loading="eager"
+  fetchpriority={variante === "hero" ? "high" : "auto"}
+/>
+
+<style>
+  /* Il logo è sempre above-the-fold: le misure stanno qui accanto alle
+     larghezze usate per generare le varianti, così restano allineate. */
+
+  .logo--header {
+    height: 2.75rem;
+    width: auto;
+  }
+
+  .logo--hero {
+    width: min(100%, 26rem);
+    height: auto;
+  }
+</style>
