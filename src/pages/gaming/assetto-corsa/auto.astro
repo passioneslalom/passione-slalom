@@ -1,56 +1,40 @@
 ---
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import IntestazionePagina from "../../../components/IntestazionePagina.astro";
-import Bottone from "../../../components/Bottone.astro";
-import { DISCORD_URL } from "../../../lib/site";
+import SchedaMedia from "../../../components/SchedaMedia.astro";
+import { getAuto } from "../../../lib/contenuti-gioco";
+import { GIOCHI } from "../../../lib/giochi";
 
-// Sezione in arrivo: quando ci saranno i contenuti diventerà una collection
-// analoga a `tracciati` (vedi src/content.config.ts) con la sua card dedicata.
+const gioco = GIOCHI["assetto-corsa"];
+const auto = await getAuto(gioco.slug);
 ---
 
 <BaseLayout
-  titolo="Auto Assetto Corsa"
-  descrizione="Le vetture usate nelle gare slalom di Passione Slalom su Assetto Corsa. Sezione in arrivo."
+  titolo={`Auto ${gioco.nome}`}
+  descrizione={`Le vetture usate nelle gare slalom della community Passione Slalom su ${gioco.nome}.`}
 >
-  <IntestazionePagina occhiello="Assetto Corsa" titolo="Auto" />
+  <IntestazionePagina
+    occhiello={gioco.nome}
+    occhielloHref={gioco.href}
+    titolo="Auto"
+    intro="Le vetture che usiamo nelle gare e negli allenamenti. Ogni auto ha un video di riferimento."
+  />
 
   <section class="sezione">
     <div class="contenitore">
-      <div class="avviso">
-        <p class="avviso__titolo">Sezione in arrivo</p>
-        <p class="avviso__testo">
-          Stiamo raccogliendo la lista completa delle vetture con setup di riferimento e
-          categoria di appartenenza. Nel frattempo trovi tutto sul Discord, nel canale dedicato
-          agli assetti.
-        </p>
-        <Bottone href={DISCORD_URL} esterno>Chiedi sul Discord</Bottone>
-      </div>
+      {
+        auto.length > 0 ? (
+          <ul class="griglia-card" role="list">
+            {auto.map((vettura) => (
+              <li>
+                <SchedaMedia voce={vettura} />
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p class="testo-lungo">Nessuna auto pubblicata per il momento.</p>
+        )
+      }
     </div>
   </section>
 </BaseLayout>
-
-<style>
-  .avviso {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1rem;
-    max-width: 46rem;
-    padding: clamp(1.25rem, 4vw, 2rem);
-    border: 2px dashed var(--color-red);
-    border-radius: var(--raggio);
-    background-color: var(--surface);
-  }
-
-  .avviso__titolo {
-    font-family: var(--font-display);
-    font-size: clamp(1.35rem, 4vw, 1.85rem);
-    text-transform: uppercase;
-    color: var(--color-yellow);
-  }
-
-  .avviso__testo {
-    max-width: 58ch;
-    color: var(--testo-attenuato);
-  }
-</style>

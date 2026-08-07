@@ -2,16 +2,48 @@
 /** Testata comune a tutte le pagine interne: occhiello, titolo e riga di contesto. */
 interface Props {
   occhiello?: string;
+  /**
+   * Da valorizzare solo quando l'occhiello nomina una pagina che esiste davvero:
+   * lì diventa il ritorno al livello superiore. Negli altri casi l'occhiello è
+   * un'etichetta ("Informazioni legali", "La squadra") e resta testo inerte.
+   */
+  occhielloHref?: string;
   titolo: string;
   intro?: string;
 }
 
-const { occhiello, titolo, intro } = Astro.props;
+const { occhiello, occhielloHref, titolo, intro } = Astro.props;
 ---
 
 <div class="intestazione">
   <div class="contenitore">
-    {occhiello && <p class="occhiello">{occhiello}</p>}
+    {
+      occhiello &&
+        (occhielloHref ? (
+          <a class="occhiello occhiello--indietro" href={occhielloHref}>
+            <svg
+              class="occhiello__freccia"
+              viewBox="0 0 16 12"
+              width="16"
+              height="12"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                d="M15 6H2m5-5L2 6l5 5"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+            {occhiello}
+          </a>
+        ) : (
+          <p class="occhiello">{occhiello}</p>
+        ))
+    }
     <h1>{titolo}</h1>
     {intro && <p class="intestazione__intro">{intro}</p>}
   </div>
@@ -21,11 +53,43 @@ const { occhiello, titolo, intro } = Astro.props;
   .intestazione {
     padding-block: clamp(2rem, 6vw, 3.5rem);
     background-color: var(--surface);
+    background-image: var(--fascia-vignettata);
     border-bottom: 1px solid var(--bordo);
   }
 
   .intestazione h1 {
     margin-top: 0.35rem;
+  }
+
+  /* L'occhiello è 0.8rem: la sua riga misura ~21px (line-height 1.65), troppo
+     poco per un bersaglio di tocco. Il padding la porta a ~45px e il margine
+     negativo speculare lo riassorbe: i due si annullano per costruzione, quindi
+     l'area cliccabile cresce senza spostare di un pixel testo e titolo. */
+  .occhiello--indietro {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin: -0.75rem -0.6rem;
+    padding: 0.75rem 0.6rem;
+    text-decoration: none;
+  }
+
+  .occhiello__freccia {
+    flex: none;
+    transition: transform 0.16s ease;
+  }
+
+  /* In hover basta il rosso di `a:hover` in global.css. */
+  @media (hover: hover) {
+    .occhiello--indietro:hover .occhiello__freccia {
+      transform: translateX(-3px);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .occhiello__freccia {
+      transition: none;
+    }
   }
 
   .intestazione__intro {

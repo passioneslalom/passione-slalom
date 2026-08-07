@@ -4,28 +4,53 @@ import type { CollectionEntry } from "astro:content";
 import IconaGioco from "./IconaGioco.astro";
 import { GIOCHI } from "../lib/giochi";
 
+/**
+ * Card foto + titolo + link al video, usata sia dai tracciati che dalle auto:
+ * le due collection hanno gli stessi campi e devono restare identiche a vedersi.
+ */
 interface Props {
-  tracciato: CollectionEntry<"tracciati">;
+  voce: CollectionEntry<"tracciati" | "auto">;
   /** Mostra il badge del gioco: serve solo fuori dalle pagine dedicate a un gioco. */
   mostraGioco?: boolean;
 }
 
-const { tracciato, mostraGioco = false } = Astro.props;
-const { titolo, foto, video, gioco } = tracciato.data;
+/** L'alt non può essere il solo titolo: dice anche di che tipo di foto si tratta. */
+const PREFISSO_ALT = {
+  tracciati: "Tracciato",
+  auto: "Auto",
+} as const;
+
+const { voce, mostraGioco = false } = Astro.props;
+const { titolo, foto, video, gioco } = voce.data;
+const alt = `${PREFISSO_ALT[voce.collection]} ${titolo}`;
+
+// La card segue le colonne di `.griglia-card` (contenitore 72rem, padding 1.25rem,
+// gap 1.25rem, colonne da almeno 17rem): 3 colonne sopra 56rem, 2 sopra 38rem,
+// altrimenti una sola larga quanto il contenitore. La colonna singola arriva a
+// ~564px, quindi molto più dei 368px del desktop: senza `sizes` il browser non
+// saprebbe che sotto le 38rem serve un file più grande, non più piccolo.
+const SIZES = [
+  "(min-width: 72rem) 368px",
+  "(min-width: 56rem) calc((100vw - 5rem) / 3)",
+  "(min-width: 38rem) calc((100vw - 3.75rem) / 2)",
+  "calc(100vw - 2.5rem)",
+].join(", ");
 ---
 
 <article class="card">
   <div class="card__foto">
-    {/* Ritaglio 16:9 in build, come per le card staff: il riquadro ha un rapporto
-        fisso, e generare solo la larghezza lascerebbe al browser un ingrandimento
-        su tutte le foto più larghe del riquadro. */}
+    {/* Le foto hanno rapporti diversi (16:9, 3:2, 21:9), quindi il ritaglio 16:9
+        resta fatto in build: `width`/`height` fissano il rapporto e Astro lo
+        riporta su ogni variante di `widths`, così il browser non deve mai
+        ingrandire per coprire il riquadro. */}
     <Image
       src={foto}
-      alt={`Tracciato ${titolo}`}
-      width={360}
-      height={203}
+      alt={alt}
+      width={368}
+      height={207}
       fit="cover"
-      densities={[1, 2]}
+      widths={[368, 560, 736, 1120]}
+      sizes={SIZES}
       quality={82}
       loading="lazy"
       decoding="async"
@@ -76,7 +101,6 @@ const { titolo, foto, video, gioco } = tracciato.data;
   .card__foto {
     aspect-ratio: 16 / 9;
     background-color: var(--surface-alta);
-    border-bottom: 2px solid var(--color-red);
   }
 
   .card__foto img {

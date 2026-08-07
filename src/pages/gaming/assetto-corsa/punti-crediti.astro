@@ -1,6 +1,9 @@
 ---
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import IntestazionePagina from "../../../components/IntestazionePagina.astro";
+import { GIOCHI } from "../../../lib/giochi";
+
+const gioco = GIOCHI["assetto-corsa"];
 
 const PUNTI = [
   { posizione: "1º", punti: 25 },
@@ -21,7 +24,8 @@ const PUNTI = [
   descrizione="Come funzionano punteggi di campionato e crediti nelle gare slalom di Passione Slalom su Assetto Corsa."
 >
   <IntestazionePagina
-    occhiello="Assetto Corsa"
+    occhiello={gioco.nome}
+    occhielloHref={gioco.href}
     titolo="Punti & Crediti"
     intro="Il regolamento con cui assegniamo i punti in classifica e i crediti spendibili nella community."
   />

@@ -1,8 +1,8 @@
 ---
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import IntestazionePagina from "../../../components/IntestazionePagina.astro";
-import TracciatoCard from "../../../components/TracciatoCard.astro";
-import { getTracciati } from "../../../lib/tracciati";
+import SchedaMedia from "../../../components/SchedaMedia.astro";
+import { getTracciati } from "../../../lib/contenuti-gioco";
 import { GIOCHI } from "../../../lib/giochi";
 
 const gioco = GIOCHI["assetto-corsa"];
@@ -15,6 +15,7 @@ const tracciati = await getTracciati(gioco.slug);
 >
   <IntestazionePagina
     occhiello={gioco.nome}
+    occhielloHref={gioco.href}
     titolo="Tracciati"
     intro="I percorsi che usiamo nelle gare e negli allenamenti. Ogni tracciato ha un video onboard di riferimento."
   />
@@ -26,7 +27,7 @@ const tracciati = await getTracciati(gioco.slug);
           <ul class="griglia-card" role="list">
             {tracciati.map((tracciato) => (
               <li>
-                <TracciatoCard tracciato={tracciato} />
+                <SchedaMedia voce={tracciato} />
               </li>
             ))}
           </ul>

@@ -1,6 +1,9 @@
 ---
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import IntestazionePagina from "../../../components/IntestazionePagina.astro";
+import { GIOCHI } from "../../../lib/giochi";
+
+const gioco = GIOCHI["assetto-corsa"];
 ---
 
 <BaseLayout
@@ -8,7 +11,8 @@ import IntestazionePagina from "../../../components/IntestazionePagina.astro";
   descrizione="Format, calendario e regolamento sportivo dei campionati slalom di Passione Slalom su Assetto Corsa."
 >
   <IntestazionePagina
-    occhiello="Assetto Corsa"
+    occhiello={gioco.nome}
+    occhielloHref={gioco.href}
     titolo="Campionati"
     intro="Come sono organizzate le nostre stagioni su Assetto Corsa: format di gara, calendario e regole in pista."
   />

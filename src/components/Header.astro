@@ -28,60 +28,66 @@ const nellaSezione = (href: string) => percorso.startsWith(href) || undefined;
     </button>
 
     <nav class="nav" id="menu-principale" aria-label="Navigazione principale" data-menu>
-      <ul class="nav__lista" role="list">
-        <li>
-          <a class="nav__link" href="/" aria-current={corrente("/")}>Home</a>
-        </li>
+      {/* Involucro senza padding: è lui l'elemento della griglia che si comprime
+          a zero, perché un elemento con padding non può scendere sotto di esso. */}
+      <div class="nav__involucro">
+        <ul class="nav__lista" role="list">
+          <li>
+            <a class="nav__link" href="/" aria-current={corrente("/")}>Home</a>
+          </li>
 
-        <li class="nav__voce-con-sub" data-sub>
-          <button
-            class="nav__link nav__link--tendina"
-            type="button"
-            aria-expanded="false"
-            aria-controls="menu-gaming"
-            data-sezione-attiva={nellaSezione("/gaming/")}
-            data-sub-toggle
-          >
-            Gaming
-            <svg
-              class="nav__freccia"
-              viewBox="0 0 12 8"
-              width="12"
-              height="8"
-              aria-hidden="true"
-              focusable="false"
+          <li class="nav__voce-con-sub" data-sub>
+            <button
+              class="nav__link nav__link--tendina"
+              type="button"
+              aria-expanded="false"
+              aria-controls="menu-gaming"
+              data-sezione-attiva={nellaSezione("/gaming/")}
+              data-sub-toggle
             >
-              <path d="M1 1.5 6 6.5l5-5" fill="none" stroke="currentColor" stroke-width="2" />
-            </svg>
-          </button>
-          <ul class="sub" id="menu-gaming" role="list">
-            {
-              ELENCO_GIOCHI.map((gioco) => (
-                <li>
-                  <a
-                    class="nav__link nav__link--sub"
-                    href={gioco.href}
-                    aria-current={corrente(gioco.href)}
-                    data-sezione-attiva={nellaSezione(`/gaming/${gioco.slug}/`)}
-                  >
-                    {gioco.nome}
-                  </a>
-                </li>
-              ))
-            }
-          </ul>
-        </li>
+              Gaming
+              <svg
+                class="nav__freccia"
+                viewBox="0 0 12 8"
+                width="12"
+                height="8"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <path d="M1 1.5 6 6.5l5-5" fill="none" stroke="currentColor" stroke-width="2" />
+              </svg>
+            </button>
+            <ul class="sub" id="menu-gaming" role="list">
+              {
+                ELENCO_GIOCHI.map((gioco) => (
+                  <li>
+                    <a
+                      class="nav__link nav__link--sub"
+                      href={gioco.href}
+                      aria-current={corrente(gioco.href)}
+                      data-sezione-attiva={nellaSezione(`/gaming/${gioco.slug}/`)}
+                    >
+                      {gioco.nome}
+                    </a>
+                  </li>
+                ))
+              }
+            </ul>
+          </li>
 
-        <li>
-          <a class="nav__link" href="/galleria/" aria-current={corrente("/galleria/")}>Galleria</a>
-        </li>
-        <li>
-          <a class="nav__link" href="/staff/" aria-current={corrente("/staff/")}>Staff</a>
-        </li>
-        <li>
-          <a class="nav__link" href="/chi-siamo/" aria-current={corrente("/chi-siamo/")}>Chi Siamo</a>
-        </li>
-      </ul>
+          <li>
+            <a class="nav__link" href="/galleria/" aria-current={corrente("/galleria/")}>Galleria</a>
+          </li>
+          <li>
+            <a class="nav__link" href="/staff/" aria-current={corrente("/staff/")}>Staff</a>
+          </li>
+          <li>
+            <a class="nav__link" href="/chi-siamo/" aria-current={corrente("/chi-siamo/")}>
+              Chi Siamo
+            </a>
+          </li>
+        </ul>
+      </div>
     </nav>
   </div>
 </header>
@@ -135,7 +141,11 @@ const nellaSezione = (href: string) => percorso.startsWith(href) || undefined;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 1rem;
+    /* Su mobile il menu va a capo come riga della barra: a menu chiuso ha altezza
+       zero, quindi un row-gap lascerebbe un vuoto sotto la testata. Lo spazio
+       sopra la prima voce lo mette il padding di .nav__lista. */
+    column-gap: 1rem;
+    row-gap: 0;
     flex-wrap: wrap;
     padding-block: 0.75rem;
   }
@@ -215,15 +225,38 @@ const nellaSezione = (href: string) => percorso.startsWith(href) || undefined;
 
   /* ---------- navigazione ---------- */
 
+  /* Apertura animata senza JS: `display` non è interpolabile, la riga della
+     griglia sì. Da 0fr a 1fr l'altezza di arrivo è quella vera del contenuto,
+     senza un max-height indovinato che spezzerebbe l'andamento dell'easing.
+     `visibility` sostituisce il vecchio `display: none`: toglie il menu chiuso
+     dall'ordine di tabulazione, e transitandola resta visibile finché la riga
+     non ha finito di richiudersi. */
   .nav {
-    display: none;
+    display: grid;
+    grid-template-rows: 0fr;
     width: 100%;
+    visibility: hidden;
+    /* La testata è sticky: su schermi bassi il menu deve poter scorrere da solo. */
+    max-height: calc(100vh - 6rem);
+    transition:
+      grid-template-rows 0.28s ease,
+      visibility 0.28s;
   }
 
   .nav[data-aperto] {
-    display: block;
-    /* La testata è sticky: su schermi bassi il menu deve poter scorrere da solo. */
-    max-height: calc(100vh - 6rem);
+    grid-template-rows: 1fr;
+    visibility: visible;
+  }
+
+  /* Elemento della griglia: deve essere nudo. Con `box-sizing: border-box`
+     l'altezza usata non scende mai sotto padding e bordo, quindi il padding
+     della lista qui impedirebbe alla riga di richiudersi fino a zero. */
+  .nav__involucro {
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .nav[data-aperto] .nav__involucro {
     overflow-y: auto;
   }
 
@@ -231,8 +264,15 @@ const nellaSezione = (href: string) => percorso.startsWith(href) || undefined;
     display: flex;
     flex-direction: column;
     gap: 0.1rem;
-    padding: 0.5rem 0 0.75rem;
+    /* 1.5rem in cima: 0.5rem suoi più il rem che prima veniva dal gap della barra. */
+    padding: 1.5rem 0 0.75rem;
     list-style: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .nav {
+      transition: none;
+    }
   }
 
   .nav__link {
@@ -303,6 +343,13 @@ const nellaSezione = (href: string) => percorso.startsWith(href) || undefined;
       display: block;
       width: auto;
       max-height: none;
+      overflow: visible;
+      visibility: visible;
+      transition: none;
+    }
+
+    /* Il sottomenu è in position:absolute: qui non va ritagliato. */
+    .nav__involucro {
       overflow: visible;
     }
 

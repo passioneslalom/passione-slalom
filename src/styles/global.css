@@ -17,6 +17,17 @@
   --bordo: color-mix(in srgb, var(--color-ivory) 18%, transparent);
   --testo-attenuato: color-mix(in srgb, var(--color-ivory) 66%, var(--color-black));
 
+  /* Vignettatura delle fasce piene (hero e testate di pagina): il centro resta
+     --surface, i bordi scendono verso il nero, così lo spazio laterale vuoto
+     arretra su desktop e la fascia si raccorda con l'header nero.
+     I raggi sono in percentuale: la resa è identica su fasce di qualsiasi altezza.
+     Sta qui perché la usano più componenti e deve restare la stessa ovunque. */
+  --fascia-vignettata: radial-gradient(
+    ellipse 70% 120% at 50% 40%,
+    var(--surface) 35%,
+    color-mix(in srgb, var(--color-black) 70%, var(--surface)) 100%
+  );
+
   --font-display: "Racing Sans One", "Arial Narrow", system-ui, sans-serif;
   --font-body: "Inter Variable", "Inter", system-ui, -apple-system, sans-serif;
 
