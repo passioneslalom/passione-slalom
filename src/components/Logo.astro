@@ -1,6 +1,6 @@
 ---
 import { Image } from "astro:assets";
-import logo from "../assets/logo.png";
+import logo from "../assets/logo.webp";
 import { NOME_SITO } from "../lib/site";
 
 interface Props {
@@ -10,8 +10,10 @@ interface Props {
 
 const { variante } = Astro.props;
 
-/** Larghezza di resa in CSS px: deve combaciare con il CSS in fondo al file. */
-const LARGHEZZE = { header: 87, hero: 416 } as const;
+/** Larghezza di resa in CSS px: deve combaciare con il CSS in fondo al file.
+    header: il CSS fissa l'altezza (2.75rem = 44px), quindi la larghezza scende
+    dal rapporto del file — 44 × 1254/665 ≈ 83. hero: la fissa il CSS a 26rem. */
+const LARGHEZZE = { header: 83, hero: 416 } as const;
 
 const larghezza = LARGHEZZE[variante];
 const altezza = Math.round((larghezza * logo.height) / logo.width);
@@ -44,5 +46,12 @@ const densita = logo.width >= larghezza * 2 ? [1, 2] : [1];
   .logo--hero {
     width: min(100%, 26rem);
     height: auto;
+    /* drop-shadow e non box-shadow: segue il canale alfa, quindi l'ombra prende
+       la sagoma del marchio e non il rettangolo dell'immagine. Due passaggi:
+       il primo, corto, tiene il logo agganciato allo sfondo; il secondo, largo
+       e diffuso, gli dà lo stacco. Il disegno ha già un contorno nero suo, per
+       questo il primo resta molto tenue. */
+    filter: drop-shadow(0 1px 2px color-mix(in srgb, var(--color-black) 40%, transparent))
+      drop-shadow(0 10px 18px color-mix(in srgb, var(--color-black) 50%, transparent));
   }
 </style>
