@@ -1,0 +1,247 @@
+# Configurazione di PagesCMS (https://pagescms.org/docs/configuration/).
+#
+# Le immagini stanno in src/assets/ e non in public/: è la cartella che Astro
+# ottimizza in build (ridimensiona, converte, taglia sotto i 250 kB per variante).
+# Per questo `output` ricalca `input` con lo slash iniziale: nel frontmatter
+# finisce "/src/assets/...", cioè un percorso dalla radice del progetto, la forma
+# che `image()` risolve nelle content collection (vedi src/content.config.ts).
+# Una cartella `media` per sezione, così la finestra di scelta si apre già al
+# posto giusto e le foto non si mescolano tra galleria, tracciati e staff.
+
+media:
+  - name: galleria
+    label: Foto della galleria
+    input: src/assets/galleria
+    output: /src/assets/galleria
+    extensions: [jpg, jpeg, JPG, png, webp, avif]
+    rename: safe
+  - name: tracciati
+    label: Foto dei tracciati
+    input: src/assets/tracciati
+    output: /src/assets/tracciati
+    extensions: [jpg, jpeg, png, webp, avif]
+    rename: safe
+  - name: auto
+    label: Foto delle auto
+    input: src/assets/auto
+    output: /src/assets/auto
+    extensions: [jpg, jpeg, png, webp, avif]
+    rename: safe
+  - name: staff
+    label: Foto dello staff
+    input: src/assets/staff
+    output: /src/assets/staff
+    extensions: [jpg, jpeg, png, webp, avif]
+    rename: safe
+  - name: sponsor
+    label: Loghi degli sponsor
+    input: src/assets/sponsor
+    output: /src/assets/sponsor
+    extensions: [svg, png, jpg, jpeg, webp]
+    rename: safe
+
+content:
+  # ---------- galleria ----------
+  # Un file solo con una lista: l'ordine delle righe è l'ordine della pagina
+  # /galleria/, e le prime sei righe sono anche le foto della homepage.
+  - name: galleria
+    label: Galleria
+    type: file
+    path: src/content/galleria/galleria.md
+    format: yaml-frontmatter
+    fields:
+      - name: foto
+        label: Foto
+        type: object
+        description: >-
+          Trascina le righe per cambiare l'ordine. Le prime sei foto sono quelle
+          mostrate anche in homepage: la prima e la sesta occupano due colonne,
+          quindi conviene metterci gli scatti più larghi.
+        list:
+          min: 6
+          collapsible:
+            collapsed: false
+            summary: "{index}. {fields.descrizione}"
+        fields:
+          - name: file
+            label: Immagine
+            type: image
+            required: true
+            options:
+              media: galleria
+          - name: descrizione
+            label: Descrizione
+            type: text
+            description: >-
+              Mostrata sotto la foto quando si apre a schermo intero. Fa anche da
+              testo alternativo per chi naviga con uno screen reader: meglio
+              descrivere cosa si vede ("Fiat 500 tra i birilli a Sant'Agata")
+              che ripetere il nome dell'evento.
+
+  # ---------- sponsor ----------
+  - name: sponsor
+    label: Sponsor
+    type: file
+    path: src/content/sponsor/sponsor.md
+    format: yaml-frontmatter
+    fields:
+      - name: sponsor
+        label: Sponsor
+        type: object
+        description: L'ordine delle righe è l'ordine della fascia in homepage.
+        list:
+          collapsible:
+            collapsed: false
+            summary: "{fields.nome}"
+        fields:
+          - name: nome
+            label: Nome
+            type: string
+            required: true
+            description: Ragione sociale. Fa anche da testo alternativo del logo.
+          - name: logo
+            label: Logo
+            type: image
+            required: true
+            options:
+              media: sponsor
+
+  # ---------- tracciati ----------
+  # Qui un file per voce: sono tante e crescono, quindi l'elenco tabellare con
+  # ricerca e filtri è più comodo di una lista unica. L'ordine è il campo `ordine`.
+  - name: tracciati
+    label: Tracciati
+    type: collection
+    path: src/content/tracciati
+    format: yaml-frontmatter
+    # Lo stesso tracciato può esistere su più giochi: senza il gioco nel nome
+    # file, la seconda voce sovrascriverebbe la prima.
+    filename: "{fields.titolo}-{fields.gioco}.md"
+    view:
+      primary: titolo
+      fields: [titolo, gioco, ordine]
+      sort: [ordine, titolo, gioco]
+      search: [titolo]
+      default:
+        sort: ordine
+        order: asc
+    fields:
+      - name: titolo
+        label: Titolo
+        type: string
+        required: true
+      - name: foto
+        label: Foto
+        type: image
+        required: true
+        options:
+          media: tracciati
+      - name: video
+        label: Video
+        type: string
+        required: true
+        description: Link al video onboard, su YouTube o Facebook. Si apre in una nuova scheda.
+      - name: gioco
+        label: Gioco
+        type: select
+        required: true
+        options:
+          values:
+            - { value: assetto-corsa, label: Assetto Corsa }
+            - { value: rfactor, label: rFactor }
+            - { value: trackday-r, label: TrackDay R }
+      - name: ordine
+        label: Ordine
+        type: number
+        description: >-
+          Numero di posizione dentro il proprio gioco, dal più basso al più alto.
+          Le voci senza numero finiscono in fondo, in ordine alfabetico.
+
+  # ---------- auto ----------
+  # Stessi campi dei tracciati: le due sezioni usano la stessa card sul sito e
+  # devono restare identiche a vedersi.
+  - name: auto
+    label: Auto
+    type: collection
+    path: src/content/auto
+    format: yaml-frontmatter
+    filename: "{fields.titolo}-{fields.gioco}.md"
+    view:
+      primary: titolo
+      fields: [titolo, gioco, ordine]
+      sort: [ordine, titolo, gioco]
+      search: [titolo]
+      default:
+        sort: ordine
+        order: asc
+    fields:
+      - name: titolo
+        label: Titolo
+        type: string
+        required: true
+      - name: foto
+        label: Foto
+        type: image
+        required: true
+        options:
+          media: auto
+      - name: video
+        label: Video
+        type: string
+        required: true
+        description: Link al video di riferimento della vettura. Si apre in una nuova scheda.
+      - name: gioco
+        label: Gioco
+        type: select
+        required: true
+        options:
+          values:
+            - { value: assetto-corsa, label: Assetto Corsa }
+            - { value: rfactor, label: rFactor }
+            - { value: trackday-r, label: TrackDay R }
+      - name: ordine
+        label: Ordine
+        type: number
+        description: >-
+          Numero di posizione dentro il proprio gioco, dal più basso al più alto.
+          Le voci senza numero finiscono in fondo, in ordine alfabetico.
+
+  # ---------- staff ----------
+  - name: staff
+    label: Staff
+    type: collection
+    path: src/content/staff
+    format: yaml-frontmatter
+    filename: "{fields.nome}.md"
+    view:
+      primary: nome
+      fields: [nome, ruolo, ordine]
+      sort: [ordine, nome]
+      search: [nome, ruolo]
+      default:
+        sort: ordine
+        order: asc
+    fields:
+      - name: nome
+        label: Nome
+        type: string
+        required: true
+        description: Fa anche da testo alternativo della foto.
+      - name: ruolo
+        label: Ruolo
+        type: string
+        required: true
+        description: Mostrato in maiuscolo sotto il nome, per esempio "Fondatore".
+      - name: foto
+        label: Foto
+        type: image
+        required: true
+        description: "Viene tagliata quadrata: meglio una foto con il viso al centro."
+        options:
+          media: staff
+      - name: ordine
+        label: Ordine
+        type: number
+        description: >-
+          Numero di posizione nella pagina, dal più basso al più alto.
+          Le voci senza numero finiscono in fondo, in ordine alfabetico.

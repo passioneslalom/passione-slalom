@@ -1,38 +1,16 @@
+import { getEntry } from "astro:content";
 import type { ImageMetadata } from "astro";
 
 export interface Sponsor {
-  /** Nome del file senza estensione: è la chiave usata da NOMI. */
-  id: string;
-  logo: ImageMetadata;
+  /** Ragione sociale: fa anche da testo alternativo del logo. */
   nome: string;
+  logo: ImageMetadata;
 }
 
-// Il glob accetta anche l'estensione, così sostituire un segnaposto .svg con il
-// logo definitivo .png non richiede di toccare una riga di codice.
-const moduli = import.meta.glob<{ default: ImageMetadata }>(
-  "../assets/sponsor/*.{svg,png,PNG,jpg,jpeg,webp}",
-  { eager: true },
-);
-
-/** Ragione sociale, dove il nome del file non basta: sigle e maiuscole irregolari. */
-const NOMI: Record<string, string> = {
-  "3-gd-modding": "GD Modding",
-  "4-dd-ph": "DD PH",
-  "6-mgg-modding": "MGG Modding",
-};
-
-/** "1-central-parking-sorrento" → "Central Parking Sorrento". */
-const daNomeFile = (id: string) =>
-  id
-    .replace(/^\d+-/, "")
-    .split("-")
-    .map((parola) => parola.charAt(0).toUpperCase() + parola.slice(1))
-    .join(" ");
-
-export const SPONSOR: Sponsor[] = Object.entries(moduli)
-  .map(([percorso, modulo]) => {
-    const id = percorso.split("/").pop()!.replace(/\.[^.]+$/, "");
-    return { id, logo: modulo.default, nome: NOMI[id] ?? daNomeFile(id) };
-  })
-  // Il prefisso numerico nel nome file decide l'ordine di comparsa.
-  .sort((a, b) => a.id.localeCompare(b.id, "it", { numeric: true }));
+/** L'ordine è quello della lista in src/content/sponsor/sponsor.md. */
+export async function getSponsor(): Promise<Sponsor[]> {
+  const voce = await getEntry("sponsor", "sponsor");
+  // Meglio fermare la build che pubblicare la homepage senza la fascia sponsor.
+  if (!voce) throw new Error("Manca src/content/sponsor/sponsor.md");
+  return voce.data.sponsor;
+}

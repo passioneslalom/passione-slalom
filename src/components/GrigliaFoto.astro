@@ -78,16 +78,22 @@ const VISORE = { widths: [800, 1400], sizes: "100vw", qualita: 65 };
       {
         foto.map((f) => (
           <figure class="visore__slide">
-            <Image
-              src={f.immagine}
-              alt={f.alt}
-              width={VISORE.widths[VISORE.widths.length - 1]}
-              widths={VISORE.widths}
-              sizes={VISORE.sizes}
-              quality={VISORE.qualita}
-              loading="lazy"
-              decoding="async"
-            />
+            {/* La cornice assorbe lo spazio che avanza attorno alla foto: così il
+                clic sul nero continua a chiudere il visore (vedi lo handler sotto,
+                che ignora solo i clic sull'immagine). */}
+            <div class="visore__cornice">
+              <Image
+                src={f.immagine}
+                alt={f.alt}
+                width={VISORE.widths[VISORE.widths.length - 1]}
+                widths={VISORE.widths}
+                sizes={VISORE.sizes}
+                quality={VISORE.qualita}
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+            {f.descrizione && <figcaption class="visore__didascalia">{f.descrizione}</figcaption>}
           </figure>
         ))
       }
@@ -135,10 +141,14 @@ const VISORE = { widths: [800, 1400], sizes: "100vw", qualita: 65 };
 
     blocco.querySelector("[data-chiudi]")?.addEventListener("click", () => visore.close());
 
-    // Un tocco sulla fascia nera attorno alla foto chiude, come ci si aspetta
-    // da un visore a schermo intero; sull'immagine no, per non chiudere per sbaglio.
+    // Un tocco sulla fascia nera attorno alla foto chiude, come ci si aspetta da un
+    // visore a schermo intero; sull'immagine no, per non chiudere per sbaglio, e
+    // nemmeno sulla didascalia, altrimenti selezionarne il testo chiuderebbe tutto.
     pista.addEventListener("click", (evento) => {
-      if (!(evento.target instanceof HTMLImageElement)) visore.close();
+      const bersaglio = evento.target as Element;
+      if (bersaglio instanceof HTMLImageElement) return;
+      if (bersaglio.closest?.(".visore__didascalia")) return;
+      visore.close();
     });
 
     visore.addEventListener("keydown", (evento) => {
@@ -249,14 +259,27 @@ const VISORE = { widths: [800, 1400], sizes: "100vw", qualita: 65 };
     display: none;
   }
 
+  /* La foto prende l'altezza che avanza, la didascalia solo quella che le serve:
+     `minmax(0, 1fr)` è ciò che permette alla riga di rimpicciolirsi sotto il
+     contenuto, altrimenti gli scatti verticali sborderebbero dal riquadro.
+     La seconda riga resta implicita: sulle foto ancora senza descrizione non
+     c'è figcaption, e così non avanza nemmeno lo spazio del `gap`. */
   .visore__slide {
     flex: 0 0 100%;
     scroll-snap-align: center;
+    display: grid;
+    grid-template-rows: minmax(0, 1fr);
+    grid-auto-rows: auto;
+    gap: 0.75rem;
+    margin: 0;
+    padding: 3.5rem 0.75rem 1.5rem;
+  }
+
+  .visore__cornice {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0;
-    padding: 3.5rem 0.75rem 1.5rem;
+    min-height: 0;
   }
 
   .visore__slide img {
@@ -265,6 +288,17 @@ const VISORE = { widths: [800, 1400], sizes: "100vw", qualita: 65 };
     max-width: 100%;
     max-height: 100%;
     object-fit: contain;
+  }
+
+  .visore__didascalia {
+    max-width: 70ch;
+    margin-inline: auto;
+    text-align: center;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    /* Il visore vive sopra un fondo nero, non sulle superfici del sito. */
+    color: rgb(255 255 255 / 0.82);
+    text-wrap: pretty;
   }
 
   .visore__barra {

@@ -7,9 +7,12 @@ import Bottone from "../components/Bottone.astro";
 import GrigliaFoto from "../components/GrigliaFoto.astro";
 import IconaSocial from "../components/IconaSocial.astro";
 import { PERCORSI_SOCIAL } from "../lib/social-icons";
-import { FOTO_IN_EVIDENZA } from "../lib/galleria";
-import { SPONSOR } from "../lib/sponsor";
+import { getFotoInEvidenza } from "../lib/galleria";
+import { getSponsor } from "../lib/sponsor";
 import { SOCIAL, DISCORD_URL, NOME_SITO, DESCRIZIONE_SITO } from "../lib/site";
+
+const fotoInEvidenza = await getFotoInEvidenza();
+const sponsor = await getSponsor();
 ---
 
 <BaseLayout titolo={NOME_SITO}>
@@ -29,7 +32,7 @@ import { SOCIAL, DISCORD_URL, NOME_SITO, DESCRIZIONE_SITO } from "../lib/site";
     <div class="contenitore">
       <p class="occhiello">Dai nostri eventi</p>
       <h2 class="titolo-sezione">In pista con noi</h2>
-      <GrigliaFoto foto={FOTO_IN_EVIDENZA} ritmo />
+      <GrigliaFoto foto={fotoInEvidenza} ritmo />
       <p class="azione-sezione">
         <Bottone href="/galleria/">Esplora la galleria</Bottone>
       </p>
@@ -67,7 +70,7 @@ import { SOCIAL, DISCORD_URL, NOME_SITO, DESCRIZIONE_SITO } from "../lib/site";
       <h2 class="titolo-sezione">Sponsor</h2>
       <ul class="sponsor" role="list">
         {
-          SPONSOR.map((s) => (
+          sponsor.map((s) => (
             <li class="sponsor__cella">
               <Image
                 src={s.logo}

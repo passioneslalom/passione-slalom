@@ -1,6 +1,6 @@
 ---
 nome: Da
 ruolo: Fondatore
-foto: ../../assets/staff/da.webp
+foto: /src/assets/staff/da.webp
 ordine: 1
 ---
