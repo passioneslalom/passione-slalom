@@ -48,9 +48,9 @@ foto:
     descrizione: ""
   - file: /src/assets/galleria/21102018-DSC_5634.jpg
     descrizione: ""
-  - file: /src/assets/galleria/DSC_0363.JPG
+  - file: /src/assets/galleria/DSC_0363.jpg
     descrizione: ""
-  - file: /src/assets/galleria/DSC_6412.JPG
+  - file: /src/assets/galleria/DSC_6412.jpg
     descrizione: ""
   - file: /src/assets/galleria/DSC07397.jpg
     descrizione: ""

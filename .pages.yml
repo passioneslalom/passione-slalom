@@ -13,7 +13,7 @@ media:
     label: Foto della galleria
     input: src/assets/galleria
     output: /src/assets/galleria
-    extensions: [jpg, jpeg, JPG, png, webp, avif]
+    extensions: [jpg, jpeg, png, webp, avif]
     rename: safe
   - name: tracciati
     label: Foto dei tracciati
@@ -53,15 +53,7 @@ content:
       - name: foto
         label: Foto
         type: object
-        description: >-
-          Trascina le righe per cambiare l'ordine. Le prime sei foto sono quelle
-          mostrate anche in homepage: la prima e la sesta occupano due colonne,
-          quindi conviene metterci gli scatti più larghi.
-        list:
-          min: 6
-          collapsible:
-            collapsed: false
-            summary: "{index}. {fields.descrizione}"
+        list: true
         fields:
           - name: file
             label: Immagine
@@ -72,11 +64,6 @@ content:
           - name: descrizione
             label: Descrizione
             type: text
-            description: >-
-              Mostrata sotto la foto quando si apre a schermo intero. Fa anche da
-              testo alternativo per chi naviga con uno screen reader: meglio
-              descrivere cosa si vede ("Fiat 500 tra i birilli a Sant'Agata")
-              che ripetere il nome dell'evento.
 
   # ---------- sponsor ----------
   - name: sponsor
@@ -88,17 +75,12 @@ content:
       - name: sponsor
         label: Sponsor
         type: object
-        description: L'ordine delle righe è l'ordine della fascia in homepage.
-        list:
-          collapsible:
-            collapsed: false
-            summary: "{fields.nome}"
+        list: true
         fields:
           - name: nome
             label: Nome
             type: string
             required: true
-            description: Ragione sociale. Fa anche da testo alternativo del logo.
           - name: logo
             label: Logo
             type: image
