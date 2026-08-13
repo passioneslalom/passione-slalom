@@ -191,39 +191,29 @@ content:
   # ---------- staff ----------
   - name: staff
     label: Staff
-    type: collection
-    path: src/content/staff
+    type: file
+    path: src/content/staff/staff.md
     format: yaml-frontmatter
-    filename: "{fields.nome}.md"
-    view:
-      primary: nome
-      fields: [nome, ruolo, ordine]
-      sort: [ordine, nome]
-      search: [nome, ruolo]
-      default:
-        sort: ordine
-        order: asc
     fields:
-      - name: nome
-        label: Nome
-        type: string
-        required: true
-        description: Fa anche da testo alternativo della foto.
-      - name: ruolo
-        label: Ruolo
-        type: string
-        required: true
-        description: Mostrato in maiuscolo sotto il nome, per esempio "Fondatore".
-      - name: foto
-        label: Foto
-        type: image
-        required: true
-        description: "Viene tagliata quadrata: meglio una foto con il viso al centro."
-        options:
-          media: staff
-      - name: ordine
-        label: Ordine
-        type: number
-        description: >-
-          Numero di posizione nella pagina, dal più basso al più alto.
-          Le voci senza numero finiscono in fondo, in ordine alfabetico.
+      - name: staff
+        label: Staff
+        type: object
+        list: true
+        fields:
+          - name: nome
+            label: Nome
+            type: string
+            required: true
+            description: Fa anche da testo alternativo della foto.
+          - name: ruolo
+            label: Ruolo
+            type: string
+            required: true
+            description: Mostrato in maiuscolo sotto il nome, per esempio "Fondatore".
+          - name: foto
+            label: Foto
+            type: image
+            required: true
+            description: "Viene tagliata quadrata: meglio una foto con il viso al centro."
+            options:
+              media: staff

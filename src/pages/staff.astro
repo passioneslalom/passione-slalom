@@ -1,15 +1,10 @@
 ---
-import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import IntestazionePagina from "../components/IntestazionePagina.astro";
 import StaffCard from "../components/StaffCard.astro";
+import { getStaff } from "../lib/staff";
 
-const staff = (await getCollection("staff")).sort((a, b) => {
-  const ordineA = a.data.ordine ?? Number.MAX_SAFE_INTEGER;
-  const ordineB = b.data.ordine ?? Number.MAX_SAFE_INTEGER;
-  if (ordineA !== ordineB) return ordineA - ordineB;
-  return a.data.nome.localeCompare(b.data.nome, "it");
-});
+const staff = await getStaff();
 ---
 
 <BaseLayout

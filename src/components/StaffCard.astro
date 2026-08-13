@@ -1,12 +1,12 @@
 ---
 import { Image } from "astro:assets";
-import type { CollectionEntry } from "astro:content";
+import type { Membro } from "../lib/staff";
 
 interface Props {
-  membro: CollectionEntry<"staff">;
+  membro: Membro;
 }
 
-const { nome, ruolo, foto } = Astro.props.membro.data;
+const { nome, ruolo, foto } = Astro.props.membro;
 ---
 
 <article class="card">

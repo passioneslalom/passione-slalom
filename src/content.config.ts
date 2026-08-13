@@ -29,20 +29,24 @@ const auto = defineCollection({
   schema: schemaContenutoGioco,
 });
 
+// Staff, galleria e sponsor sono un file solo con una lista dentro il frontmatter,
+// non una voce per elemento: così in PagesCMS l'ordine si cambia trascinando le
+// righe, mentre con un file per voce servirebbe riscrivere a mano dei campi `ordine`.
 const staff = defineCollection({
   loader: glob({ pattern: "**/*.md", base: "./src/content/staff" }),
   schema: ({ image }) =>
     z.object({
-      nome: z.string(),
-      ruolo: z.string(),
-      foto: image(),
-      ordine: z.number().optional(),
+      staff: z.array(
+        z.object({
+          // Fa anche da testo alternativo della foto.
+          nome: z.string(),
+          ruolo: z.string(),
+          foto: image(),
+        }),
+      ),
     }),
 });
 
-// Galleria e sponsor sono un file solo con una lista dentro il frontmatter, non
-// una voce per elemento: così in PagesCMS l'ordine si cambia trascinando le righe,
-// mentre con un file per foto servirebbe riscrivere a mano dei campi `ordine`.
 const galleria = defineCollection({
   loader: glob({ pattern: "**/*.md", base: "./src/content/galleria" }),
   schema: ({ image }) =>

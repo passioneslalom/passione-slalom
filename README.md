@@ -34,14 +34,16 @@ viene mostrato nelle liste.
 
 ## Aggiungere un membro dello staff
 
-Stessa procedura in `src/content/staff/`, con foto in `public/images/staff/`:
+Lo staff è un file solo, `src/content/staff/staff.md`: si aggiunge una voce alla lista, con la
+foto in `src/assets/staff/`. L'ordine delle voci è l'ordine della pagina, quindi non serve un
+campo `ordine` (in PagesCMS si trascinano le righe).
 
 ```yaml
 ---
-nome: Nome Cognome
-ruolo: Direzione gara
-foto: /images/staff/nome-cognome.svg
-ordine: 4
+staff:
+  - nome: Nome Cognome
+    ruolo: Direzione gara
+    foto: /src/assets/staff/nome-cognome.webp
 ---
 ```
 
