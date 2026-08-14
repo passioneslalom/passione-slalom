@@ -1,52 +1,101 @@
 ---
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import IntestazionePagina from "../../../components/IntestazionePagina.astro";
+import Bottone from "../../../components/Bottone.astro";
 import { GIOCHI } from "../../../lib/giochi";
+import { DISCORD_URL } from "../../../lib/site";
 
 const gioco = GIOCHI["assetto-corsa"];
+
+// I campionati non si gestiscono da qui: calendario, iscrizioni e regolamento
+// vivono sul Discord. La pagina serve solo ad arrivarci, quindi niente regole
+// duplicate che poi resterebbero indietro rispetto al server.
+const PASSI = [
+  {
+    titolo: "Entra nel Discord",
+    testo: "È il punto di ritrovo della community: mod esclusive per gli iscritti e server sempre aperti.",
+  },
+  {
+    titolo: "Apri il canale annunci",
+    testo: "Lì vengono pubblicate le tappe in programma e le iscrizioni aperte.",
+  },
+  {
+    titolo: "Scendi in pista",
+    testo: "Si corre nelle serate in calendario, con le live e i premi in palio.",
+  },
+];
 ---
 
 <BaseLayout
   titolo="Campionati Assetto Corsa"
-  descrizione="Format, calendario e regolamento sportivo dei campionati slalom di Passione Slalom su Assetto Corsa."
+  descrizione="Mod esclusive, premi in palio, live e server sempre aperti: i campionati slalom di Passione Slalom su Assetto Corsa si organizzano sul Discord."
 >
   <IntestazionePagina
     occhiello={gioco.nome}
     occhielloHref={gioco.href}
     titolo="Campionati"
-    intro="Come sono organizzate le nostre stagioni su Assetto Corsa: format di gara, calendario e regole in pista."
+    intro="Mod esclusive per gli iscritti ai campionati, premi in palio, live, server sempre aperti."
   />
 
   <section class="sezione">
-    <div class="contenitore testo-lungo">
-      <h3>Format di gara</h3>
-      <p>
-        Ogni tappa si corre su un singolo tracciato slalom. La serata è divisa in una sessione di
-        prove libere aperta a tutti e in tre manche cronometrate: vale la somma dei due tempi
-        migliori. Chi salta una manche mantiene il tempo delle altre, senza penalità.
-      </p>
+    <div class="contenitore">
+      <ol class="passi" role="list">
+        {
+          PASSI.map((passo, indice) => (
+            <li class="passo">
+              <span class="passo__numero" aria-hidden="true">
+                {indice + 1}
+              </span>
+              <h2 class="passo__titolo">{passo.titolo}</h2>
+              <p class="passo__testo">{passo.testo}</p>
+            </li>
+          ))
+        }
+      </ol>
 
-      <h3>Penalità</h3>
-      <ul>
-        <li>Birillo abbattuto o spostato: +3 secondi sulla manche.</li>
-        <li>Postazione saltata: manche annullata.</li>
-        <li>Partenza anticipata: ripetizione della manche a fine turno.</li>
-        <li>Uscita dal percorso con rientro irregolare: manche annullata.</li>
-      </ul>
-
-      <h3>Calendario</h3>
-      <p>
-        Il calendario della stagione viene pubblicato sul Discord all'inizio di ogni ciclo, con
-        una tappa ogni due settimane. Le date e i tracciati vengono confermati almeno sette giorni
-        prima della gara nel canale annunci.
-      </p>
-
-      <h3>Iscrizioni</h3>
-      <p>
-        L'iscrizione è gratuita e si apre sul Discord qualche giorno prima di ogni tappa. Non
-        serve partecipare a tutte le gare per essere in classifica: i punti si accumulano tappa
-        dopo tappa.
+      <p class="azione">
+        <Bottone href={DISCORD_URL} esterno grande>Entra nel nostro Discord</Bottone>
       </p>
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  .passi {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+    list-style: none;
+    padding: 0;
+  }
+
+  .passo {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .passo__numero {
+    font-family: var(--font-display);
+    font-size: 2.75rem;
+    line-height: 1;
+    color: var(--color-red);
+  }
+
+  .passo__titolo {
+    font-size: 1.25rem;
+    color: var(--color-ivory);
+  }
+
+  .passo__testo {
+    font-size: 0.95rem;
+    color: var(--testo-attenuato);
+  }
+
+  /* Stacco più largo del passo fra le colonne: il bottone chiude la pagina e
+     non deve sembrare la quarta voce dell'elenco. */
+  .azione {
+    margin-top: clamp(2.25rem, 6vw, 3.25rem);
+    text-align: center;
+  }
+</style>

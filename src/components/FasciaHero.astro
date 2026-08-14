@@ -1,0 +1,44 @@
+---
+/**
+ * Fascia d'apertura a tutta larghezza: marchio, claim e bottone incolonnati al
+ * centro. La usano la homepage e /gaming/assetto-corsa/campionati/, che cambiano
+ * solo il marchio e il testo. Sta in un componente perché le due restino uguali
+ * da sole: erano nate come copie e sarebbero divergite al primo ritocco.
+ */
+interface Props {
+  claim: string;
+}
+
+const { claim } = Astro.props;
+---
+
+<section class="hero">
+  <div class="contenitore hero__contenuto">
+    <slot name="marchio" />
+    <p class="hero__claim">{claim}</p>
+    <slot name="azione" />
+  </div>
+</section>
+
+<style>
+  .hero {
+    padding-block: clamp(2.5rem, 9vw, 5.5rem);
+    background-color: var(--surface);
+    background-image: var(--fascia-vignettata);
+    border-bottom: 1px solid var(--bordo);
+  }
+
+  .hero__contenuto {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.75rem;
+    text-align: center;
+  }
+
+  .hero__claim {
+    max-width: 44ch;
+    font-size: clamp(1rem, 2.6vw, 1.2rem);
+    color: var(--testo-attenuato);
+  }
+</style>

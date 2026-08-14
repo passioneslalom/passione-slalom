@@ -1,0 +1,328 @@
+---
+import { Image } from "astro:assets";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import IntestazionePagina from "../../../components/IntestazionePagina.astro";
+import banner from "../../../assets/carriera-passione-slalom.webp";
+import { getCarriera } from "../../../lib/carriera";
+import { GIOCHI } from "../../../lib/giochi";
+
+const gioco = GIOCHI["assetto-corsa"];
+const { aggiornato, piloti } = await getCarriera(gioco.slug);
+---
+
+<BaseLayout
+  titolo="Crediti Carriera Assetto Corsa"
+  descrizione="La classifica dei crediti carriera dei piloti di Passione Slalom su Assetto Corsa: pilota, auto e crediti accumulati nei campionati."
+>
+  <IntestazionePagina
+    occhiello={gioco.nome}
+    occhielloHref={gioco.href}
+    titolo="Crediti Carriera Passione Slalom"
+    intro="Accedi ad auto di categorie sempre più alte ed esclusivi campionati."
+  />
+
+  <section class="sezione">
+    <div class="contenitore">
+      {/* Il banner ripete il titolo della pagina: alt vuoto, altrimenti chi usa
+          un lettore di schermo si sente leggere due volte la stessa cosa.
+          Larghezza massima 1244: è quanto misura il file, oltre si sgranerebbe. */}
+      <Image
+        class="banner"
+        src={banner}
+        alt=""
+        widths={[640, 960, 1244]}
+        sizes="(min-width: 74.5rem) 1112px, calc(100vw - 2.5rem)"
+        quality={80}
+        loading="eager"
+        fetchpriority="high"
+      />
+
+      {
+        aggiornato && (
+          <p class="aggiornata">
+            Classifica aggiornata al <strong>{aggiornato}</strong>
+          </p>
+        )
+      }
+
+      {/* Nasconde e mostra righe già presenti nella pagina, quindi senza
+          JavaScript non serve a niente: parte nascosto e lo accende lo script,
+          così chi non lo esegue non si trova un campo morto. */}
+      {
+        piloti.length > 0 && (
+          <div class="cerca" data-cerca hidden>
+            {/* Il campo si spiega col placeholder, ma un'etichetta deve esserci
+                comunque: i lettori di schermo non leggono il placeholder come
+                nome del campo, e sparisce appena si inizia a digitare. */}
+            <label class="visually-hidden" for="cerca-pilota">
+              Cerca nella classifica
+            </label>
+            <input
+              class="cerca__campo"
+              id="cerca-pilota"
+              type="search"
+              placeholder="Ricerca nome pilota o auto"
+              autocomplete="off"
+              data-cerca-campo
+            />
+            <p class="cerca__esito" role="status" data-cerca-esito />
+          </div>
+        )
+      }
+
+      {
+        piloti.length > 0 ? (
+          /* La tabella non sta in 320px: il contenitore scorre in orizzontale ed
+             è raggiungibile da tastiera, che senza tabindex resterebbe bloccata. */
+          <div
+            class="tabella-scorrevole"
+            role="region"
+            aria-label="Classifica crediti carriera"
+            tabindex="0"
+          >
+            <table class="tabella">
+              <thead>
+                <tr>
+                  <th scope="col" class="colonna-stretta">
+                    #
+                  </th>
+                  <th scope="col">Pilota</th>
+                  <th scope="col">Auto</th>
+                  <th scope="col" class="colonna-crediti">
+                    Crediti
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {piloti.map((pilota, indice) => (
+                  /* Il testo su cui cerca lo script: nome e auto, non la
+                     posizione né i crediti, che sono numeri e darebbero
+                     risultati a caso digitando una cifra. */
+                  <tr data-cerca-testo={`${pilota.nome} ${pilota.auto ?? ""}`}>
+                    <td class="colonna-stretta">{indice + 1}</td>
+                    <th scope="row">{pilota.nome}</th>
+                    <td>{pilota.auto || "—"}</td>
+                    {/* Cifre nude, senza separatore delle migliaia: il punto si
+                        leggerebbe come virgola decimale. */}
+                    <td class="colonna-crediti">{pilota.crediti}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        ) : (
+          <p class="testo-lungo vuoto">La classifica non è ancora stata pubblicata.</p>
+        )
+      }
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  const contenitore = document.querySelector<HTMLElement>("[data-cerca]");
+  const campo = document.querySelector<HTMLInputElement>("[data-cerca-campo]");
+  const esito = document.querySelector<HTMLElement>("[data-cerca-esito]");
+  const righe = [...document.querySelectorAll<HTMLTableRowElement>("[data-cerca-testo]")];
+
+  if (contenitore && campo && esito && righe.length > 0) {
+    contenitore.hidden = false;
+
+    /** Minuscole e senza accenti, così "ottina" trova "Ottinà". */
+    const normalizza = (testo: string) =>
+      testo
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/\p{Diacritic}/gu, "");
+
+    // Il testo normalizzato una volta sola: a ogni tasto si confrontano stringhe
+    // già pronte invece di rinormalizzare settantaquattro righe.
+    const indice = righe.map((riga) => ({
+      riga,
+      testo: normalizza(riga.dataset.cercaTesto ?? ""),
+    }));
+
+    const filtra = () => {
+      const cercato = normalizza(campo.value.trim());
+      let trovati = 0;
+      // L'ultima riga rimasta a vista: senza, il suo bordo inferiore andrebbe a
+      // raddoppiarsi con quello della tabella.
+      let ultima: HTMLTableRowElement | null = null;
+
+      for (const { riga, testo } of indice) {
+        const combacia = testo.includes(cercato);
+        riga.hidden = !combacia;
+        riga.classList.remove("ultima-visibile");
+        if (combacia) {
+          trovati += 1;
+          ultima = riga;
+        }
+      }
+      ultima?.classList.add("ultima-visibile");
+
+      // A campo vuoto la tabella è tutta lì: non c'è niente da annunciare.
+      if (cercato === "") esito.textContent = "";
+      else if (trovati === 0) esito.textContent = "Nessun pilota trovato.";
+      else esito.textContent = `${trovati} ${trovati === 1 ? "pilota" : "piloti"} su ${indice.length}.`;
+    };
+
+    campo.addEventListener("input", filtra);
+    // Il campo può arrivare già compilato tornando indietro nella cronologia.
+    if (campo.value !== "") filtra();
+  }
+</script>
+
+<style>
+  .banner {
+    display: block;
+    width: 100%;
+    /* Il file è 1244×717 e a piena larghezza occuperebbe mezzo schermo. Qui ne
+       mostriamo 517 di altezza: il taglio toglie 200px di carbonio vuoto sopra
+       il casco, che è la sola parte dell'immagine senza niente dentro.
+       `object-position` in basso perché il taglio cada tutto sul bordo alto e
+       non tocchi scritta e logo, che stanno in fondo. */
+    aspect-ratio: 1244 / 517;
+    height: auto;
+    object-fit: cover;
+    object-position: 50% 100%;
+    border-radius: var(--raggio);
+  }
+
+  .tabella-scorrevole {
+    margin-top: clamp(1.5rem, 4vw, 2.25rem);
+    overflow-x: auto;
+  }
+
+  .aggiornata {
+    margin-top: clamp(1.5rem, 4vw, 2.25rem);
+    font-size: 0.85rem;
+    color: var(--testo-attenuato);
+  }
+
+  .aggiornata strong {
+    color: var(--color-ivory);
+  }
+
+  /* Lo stacco grande dal banner lo prende il primo blocco che compare; gli altri
+     due gli restano attaccati sotto, altrimenti sembrerebbero slegati fra loro. */
+  .aggiornata + .cerca {
+    margin-top: 0.9rem;
+  }
+
+  .aggiornata + .tabella-scorrevole,
+  .cerca + .tabella-scorrevole {
+    margin-top: 0.6rem;
+  }
+
+  .cerca {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem 0.9rem;
+    margin-top: clamp(1.5rem, 4vw, 2.25rem);
+  }
+
+  /* Il display:flex qui sopra vincerebbe sull'attributo hidden. */
+  .cerca[hidden] {
+    display: none;
+  }
+
+  .cerca__campo {
+    flex: 1 1 14rem;
+    max-width: 22rem;
+    padding: 0.5rem 0.75rem;
+    border: 2px solid var(--bordo);
+    border-radius: var(--raggio);
+    background-color: var(--surface);
+    color: var(--color-ivory);
+    font-family: inherit;
+    font-size: 0.95rem;
+  }
+
+  .cerca__campo::placeholder {
+    color: var(--testo-attenuato);
+  }
+
+  /* Il focus giallo di global.css è tarato su link e bottoni, che si toccano di
+     rado. Qui scatta anche al primo tap sulla tastiera del telefono e si mangia
+     la scena alla tabella: stesso segnale, ma in avorio smorzato e più stretto,
+     così resta chiaro dove sei senza gridarlo. */
+  .cerca__campo:focus-visible {
+    outline: 2px solid color-mix(in srgb, var(--color-ivory) 70%, transparent);
+    outline-offset: 1px;
+    border-color: color-mix(in srgb, var(--color-ivory) 45%, transparent);
+  }
+
+  .cerca__esito {
+    font-size: 0.85rem;
+    color: var(--testo-attenuato);
+  }
+
+  /* Filtrando, l'ultima riga rimasta prende il posto della `:last-child`. */
+  .tabella tbody tr.ultima-visibile th,
+  .tabella tbody tr.ultima-visibile td {
+    border-bottom: none;
+  }
+
+  .vuoto {
+    margin-top: clamp(1.5rem, 4vw, 2.25rem);
+  }
+
+  .tabella {
+    width: 100%;
+    /* Sotto questa soglia le quattro colonne si spezzano su più righe: meglio
+       far scorrere il contenitore. */
+    min-width: 26rem;
+    border-collapse: collapse;
+    border: 2px solid var(--bordo);
+    font-size: 0.95rem;
+  }
+
+  .tabella th,
+  .tabella td {
+    padding: 0.55rem 0.9rem;
+    text-align: left;
+    border-bottom: 1px solid var(--bordo);
+  }
+
+  .tabella thead th {
+    /* Lo stesso grigio delle card e delle testate di pagina. */
+    background-color: var(--surface);
+    /* L'avorio della palette, non un bianco puro: è il bianco del resto del sito. */
+    color: var(--color-ivory);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* Nome del pilota: è l'intestazione della riga, quindi la voce in evidenza. */
+  .tabella tbody th {
+    font-weight: 700;
+    color: var(--color-ivory);
+  }
+
+  .tabella tbody td {
+    color: var(--testo-attenuato);
+  }
+
+  .colonna-stretta {
+    width: 1%;
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .colonna-crediti {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .tabella tbody .colonna-crediti {
+    font-weight: 700;
+    color: var(--color-yellow);
+  }
+
+  .tabella tbody tr:last-child th,
+  .tabella tbody tr:last-child td {
+    border-bottom: none;
+  }
+</style>

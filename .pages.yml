@@ -33,10 +33,10 @@ media:
     output: /src/assets/staff
     extensions: [jpg, jpeg, png, webp, avif]
     rename: safe
-  - name: sponsor
-    label: Loghi degli sponsor
-    input: src/assets/sponsor
-    output: /src/assets/sponsor
+  - name: partners
+    label: Loghi dei partner
+    input: src/assets/partners
+    output: /src/assets/partners
     extensions: [svg, png, jpg, jpeg, webp]
     rename: safe
 
@@ -65,15 +65,15 @@ content:
             label: Descrizione
             type: text
 
-  # ---------- sponsor ----------
-  - name: sponsor
-    label: Sponsor
+  # ---------- partners ----------
+  - name: partners
+    label: Partners
     type: file
-    path: src/content/sponsor/sponsor.md
+    path: src/content/partners/partners.md
     format: yaml-frontmatter
     fields:
-      - name: sponsor
-        label: Sponsor
+      - name: partners
+        label: Partners
         type: object
         list: true
         fields:
@@ -81,12 +81,57 @@ content:
             label: Nome
             type: string
             required: true
+            description: Fa anche da testo alternativo del logo.
           - name: logo
             label: Logo
             type: image
             required: true
             options:
-              media: sponsor
+              media: partners
+          - name: sito
+            label: URL sito
+            type: string
+            description: >-
+              Facoltativo. Se c'è, il logo in homepage diventa cliccabile e si
+              apre in una nuova scheda; se manca, resta un'immagine e basta.
+
+  # ---------- carriera ----------
+  # Un file per gioco con dentro la lista dei piloti. In pagina la classifica si
+  # ordina da sola per crediti decrescenti e la posizione (1, 2, 3…) la calcola
+  # il sito: qui basta aggiornare il numero dei crediti, senza spostare righe né
+  # rinumerare nulla. L'ordine delle righe conta solo a parità di crediti.
+  - name: carriera-assetto-corsa
+    label: Carriera (Assetto Corsa)
+    type: file
+    path: src/content/carriera/carriera-passione-slalom-assetto-corsa.md
+    format: yaml-frontmatter
+    fields:
+      - name: aggiornato
+        label: Aggiornato al
+        type: string
+        description: >-
+          Fino a dove arrivano i conteggi, per esempio il nome dell'ultimo
+          campionato. Sopra la tabella compare come "Classifica aggiornata
+          al …", quindi qui va solo il seguito della frase. Vuoto: la riga
+          non viene mostrata.
+      - name: piloti
+        label: Piloti
+        type: object
+        list: true
+        fields:
+          - name: nome
+            label: Pilota
+            type: string
+            required: true
+          - name: auto
+            label: Auto
+            type: string
+            description: Facoltativa. Senza, in tabella compare un trattino.
+          - name: crediti
+            label: Crediti
+            type: number
+            required: true
+            description: Decide la posizione in classifica, dal più alto al più basso.
 
   # ---------- tracciati ----------
   # Qui un file per voce: sono tante e crescono, quindi l'elenco tabellare con

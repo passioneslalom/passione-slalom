@@ -29,7 +29,7 @@ const auto = defineCollection({
   schema: schemaContenutoGioco,
 });
 
-// Staff, galleria e sponsor sono un file solo con una lista dentro il frontmatter,
+// Staff, galleria e partners sono un file solo con una lista dentro il frontmatter,
 // non una voce per elemento: così in PagesCMS l'ordine si cambia trascinando le
 // righe, mentre con un file per voce servirebbe riscrivere a mano dei campi `ordine`.
 const staff = defineCollection({
@@ -62,17 +62,41 @@ const galleria = defineCollection({
     }),
 });
 
-const sponsor = defineCollection({
-  loader: glob({ pattern: "**/*.md", base: "./src/content/sponsor" }),
+const partners = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/partners" }),
   schema: ({ image }) =>
     z.object({
-      sponsor: z.array(
+      partners: z.array(
         z.object({
           nome: z.string(),
           logo: image(),
+          // Facoltativo: senza sito la cella in homepage non è cliccabile.
+          // La stringa vuota è ammessa perché è ciò che PagesCMS salva quando
+          // il campo viene lasciato in bianco.
+          sito: z.union([z.url(), z.literal("")]).optional(),
         }),
       ),
     }),
 });
 
-export const collections = { tracciati, auto, staff, galleria, sponsor };
+// Un file per gioco, con dentro la lista dei piloti. In pagina la classifica si
+// ordina da sé per crediti decrescenti (vedi lib/carriera.ts): qui dentro
+// l'ordine delle righe conta solo a parità di crediti.
+const carriera = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/carriera" }),
+  schema: z.object({
+    // Fino a dove arrivano i conteggi: sopra la tabella diventa "Classifica
+    // aggiornata al …". Senza, la riga non compare.
+    aggiornato: z.string().optional(),
+    piloti: z.array(
+      z.object({
+        nome: z.string(),
+        // Facoltativa: in tabella diventa un trattino finché non c'è.
+        auto: z.string().optional(),
+        crediti: z.number().default(0),
+      }),
+    ),
+  }),
+});
+
+export const collections = { tracciati, auto, staff, galleria, partners, carriera };

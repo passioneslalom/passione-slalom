@@ -18,4 +18,4 @@ export const NOME_SITO = "Passione Slalom";
 export const EMAIL_CONTATTO = "passioneslalom2021@gmail.com";
 /** Claim del sito: hero della homepage e meta description predefinita. */
 export const DESCRIZIONE_SITO =
-  "La community italiana di slalom. Tracciati, auto e campionati per Assetto Corsa, rFactor e TrackDay R.";
+  "Entra nel nostro Discord, scarica mod, tracciati e auto e partecipa ai campionati virtuali di Passione Slalom.";

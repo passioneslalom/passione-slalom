@@ -2,36 +2,34 @@
 import { Image } from "astro:assets";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import CheckeredDivider from "../components/CheckeredDivider.astro";
+import FasciaHero from "../components/FasciaHero.astro";
 import Logo from "../components/Logo.astro";
 import Bottone from "../components/Bottone.astro";
 import GrigliaFoto from "../components/GrigliaFoto.astro";
 import IconaSocial from "../components/IconaSocial.astro";
 import { PERCORSI_SOCIAL } from "../lib/social-icons";
 import { getFotoInEvidenza } from "../lib/galleria";
-import { getSponsor } from "../lib/sponsor";
+import { getPartners } from "../lib/partners";
 import { SOCIAL, DISCORD_URL, NOME_SITO, DESCRIZIONE_SITO } from "../lib/site";
 
 const fotoInEvidenza = await getFotoInEvidenza();
-const sponsor = await getSponsor();
+const partners = await getPartners();
 ---
 
 <BaseLayout titolo={NOME_SITO}>
   <!-- Hero -->
-  <section class="hero">
-    <div class="contenitore hero__contenuto">
-      <Logo variante="hero" />
-      <p class="hero__claim">{DESCRIZIONE_SITO}</p>
-      <Bottone href={DISCORD_URL} esterno grande>Entra nel nostro Discord</Bottone>
-    </div>
-  </section>
+  <FasciaHero claim={DESCRIZIONE_SITO}>
+    <Logo variante="hero" slot="marchio" />
+    <Bottone slot="azione" href={DISCORD_URL} esterno grande>Entra nel nostro Discord</Bottone>
+  </FasciaHero>
 
   <CheckeredDivider />
 
   <!-- Galleria -->
   <section class="sezione">
     <div class="contenitore">
-      <p class="occhiello">Dai nostri eventi</p>
-      <h2 class="titolo-sezione">In pista con noi</h2>
+      <p class="occhiello">Foto, video e interviste</p>
+      <h2 class="titolo-sezione">Le migliori foto</h2>
       <GrigliaFoto foto={fotoInEvidenza} ritmo />
       <p class="azione-sezione">
         <Bottone href="/galleria/">Esplora la galleria</Bottone>
@@ -63,27 +61,38 @@ const sponsor = await getSponsor();
 
   <CheckeredDivider />
 
-  <!-- Sponsor -->
+  <!-- Partners -->
   <section class="sezione">
     <div class="contenitore">
       <p class="occhiello">Con il supporto di</p>
-      <h2 class="titolo-sezione">Sponsor</h2>
-      <ul class="sponsor" role="list">
+      <h2 class="titolo-sezione">Partners</h2>
+      <ul class="partners" role="list">
         {
-          sponsor.map((s) => (
-            <li class="sponsor__cella">
-              <Image
-                src={s.logo}
-                alt={s.nome}
-                width={640}
-                widths={[320, 640]}
-                sizes="(min-width: 62rem) 320px, (min-width: 30rem) 25vw, 90vw"
-                quality={80}
-                loading="lazy"
-                decoding="async"
-              />
-            </li>
-          ))
+          partners.map((p) => {
+            // Il sito è facoltativo: senza, la cella resta un contenitore muto
+            // invece di un link vuoto che finirebbe comunque nella navigazione
+            // da tastiera.
+            const Cella = p.sito ? "a" : "div";
+            const attributi = p.sito
+              ? { href: p.sito, target: "_blank", rel: "noopener noreferrer" }
+              : {};
+            return (
+              <li>
+                <Cella class="partners__cella" {...attributi}>
+                  <Image
+                    src={p.logo}
+                    alt={p.nome}
+                    width={640}
+                    widths={[320, 640]}
+                    sizes="(min-width: 62rem) 320px, (min-width: 30rem) 25vw, 90vw"
+                    quality={80}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </Cella>
+              </li>
+            );
+          })
         }
       </ul>
     </div>
@@ -91,28 +100,7 @@ const sponsor = await getSponsor();
 </BaseLayout>
 
 <style>
-  /* ---------- hero ---------- */
-
-  .hero {
-    padding-block: clamp(2.5rem, 9vw, 5.5rem);
-    background-color: var(--surface);
-    background-image: var(--fascia-vignettata);
-    border-bottom: 1px solid var(--bordo);
-  }
-
-  .hero__contenuto {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.75rem;
-    text-align: center;
-  }
-
-  .hero__claim {
-    max-width: 44ch;
-    font-size: clamp(1rem, 2.6vw, 1.2rem);
-    color: var(--testo-attenuato);
-  }
+  /* La hero vive in FasciaHero.astro, condivisa con la pagina campionati. */
 
   /* ---------- galleria ---------- */
 
@@ -159,9 +147,9 @@ const sponsor = await getSponsor();
     color: var(--color-yellow);
   }
 
-  /* ---------- sponsor ---------- */
+  /* ---------- partners ---------- */
 
-  .sponsor {
+  .partners {
     display: grid;
     gap: 1rem;
     grid-template-columns: repeat(auto-fill, minmax(min(100%, 10rem), 1fr));
@@ -170,7 +158,7 @@ const sponsor = await getSponsor();
     padding: 0;
   }
 
-  .sponsor__cella {
+  .partners__cella {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -181,9 +169,21 @@ const sponsor = await getSponsor();
     border: 2px solid var(--bordo);
     border-radius: var(--raggio);
     background-color: var(--surface);
+    text-decoration: none;
   }
 
-  .sponsor__cella img {
+  /* Solo le celle con un sito sono link: il bordo che si accende è l'unico
+     segnale che quella è cliccabile e le altre no. */
+  a.partners__cella {
+    transition: border-color 0.16s ease;
+  }
+
+  a.partners__cella:hover,
+  a.partners__cella:focus-visible {
+    border-color: var(--color-red);
+  }
+
+  .partners__cella img {
     max-width: 100%;
     max-height: 100%;
     width: auto;
@@ -193,12 +193,12 @@ const sponsor = await getSponsor();
 
   /* Su desktop tre per riga invece di sei: i loghi raddoppiano abbondantemente. */
   @media (min-width: 62rem) {
-    .sponsor {
+    .partners {
       grid-template-columns: repeat(3, 1fr);
       gap: 1.5rem;
     }
 
-    .sponsor__cella {
+    .partners__cella {
       padding: 1.5rem;
     }
   }
