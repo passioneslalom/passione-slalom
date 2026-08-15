@@ -7,13 +7,20 @@
  */
 interface Props {
   claim: string;
+  /**
+   * Titolo della pagina quando la fascia apre il documento: il marchio è
+   * un'immagine, quindi senza questo la pagina resterebbe senza h1. Va nascosto
+   * alla vista perché il titolo, a schermo, è già il logo.
+   */
+  titoloNascosto?: string;
 }
 
-const { claim } = Astro.props;
+const { claim, titoloNascosto } = Astro.props;
 ---
 
 <section class="hero">
   <div class="contenitore hero__contenuto">
+    {titoloNascosto && <h1 class="visually-hidden">{titoloNascosto}</h1>}
     <slot name="marchio" />
     <p class="hero__claim">{claim}</p>
     <slot name="azione" />

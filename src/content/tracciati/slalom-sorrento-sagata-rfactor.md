@@ -1,7 +1,7 @@
 ---
 titolo: Slalom Sorrento S.Agata (Rfactor)
 foto: /src/assets/tracciati/slalom-sorrento-sagata-rfactor.webp
-video: https://www.youtube.com/watch?v=dQw4w9WgXcQ
+video: https://youtu.be/Rebwyq9ta9o?is=Xdag5dros3GxX3Zn
 gioco: rfactor
 ordine: 1
 ---

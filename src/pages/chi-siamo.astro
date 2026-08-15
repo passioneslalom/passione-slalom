@@ -1,84 +1,70 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import IntestazionePagina from "../components/IntestazionePagina.astro";
-import CheckeredDivider from "../components/CheckeredDivider.astro";
 import Bottone from "../components/Bottone.astro";
 import { DISCORD_URL } from "../lib/site";
 ---
 
 <BaseLayout
   titolo="Chi Siamo"
-  descrizione="Nascita, mission e obiettivi di Passione Slalom, la community italiana dello slalom virtuale."
+  descrizione="La storia di Passione Slalom: dalle foto e dai video sui campi di gara ai tracciati slalom virtuali, tra motorsport reale e sim racing."
 >
   <IntestazionePagina
     occhiello="Il progetto"
     titolo="Chi Siamo"
-    intro="Passione Slalom è una community italiana di appassionati di slalom su simulatore. Nessuna gara a pagamento, nessuna iscrizione: solo persone che corrono tra i birilli."
+    intro="Come è nato il progetto, cosa facciamo oggi e dove vogliamo arrivare."
   />
 
   <section class="sezione">
     <div class="contenitore testo-lungo">
-      <h3>Come è nato il progetto</h3>
+      <h2>Come è nato il progetto</h2>
       <p>
-        Passione Slalom nasce da un gruppo di piloti virtuali che condividevano tempi e assetti in
-        una chat privata. Lo slalom è una disciplina poco rappresentata nel simracing: pochi
-        tracciati pronti, poche gare organizzate e materiale sparso ovunque. Da lì l'idea di
-        mettere tutto in un posto solo.
+        Passione Slalom nasce dalla passione e dall'amicizia di un gruppo di persone unite da
+        un'unica <strong>grande passione</strong>: lo slalom e il mondo delle competizioni automobilistiche.
       </p>
       <p>
-        Il gruppo è cresciuto attorno al Discord, dove si organizzano le serate di gara e si
-        scambiano setup. Questo sito è la parte pubblica di quel lavoro: serve a trovare in fretta
-        un tracciato, capire come funziona un campionato o sapere a chi rivolgersi.
+        Il progetto nasce inizialmente sui campi di gara, attraverso la realizzazione di foto e
+        video, con l'obiettivo di raccontare le gare, i piloti e le emozioni che si vivono a bordo
+        strada e in pista.
       </p>
 
-      <h3>Mission</h3>
-      <ul>
-        <li>Raccogliamo e cataloghiamo tracciati slalom per Assetto Corsa, rFactor e TrackDay R.</li>
-        <li>Organizziamo campionati e serate di gara con un regolamento chiaro e condiviso.</li>
-        <li>Registriamo video onboard di riferimento per ogni percorso.</li>
-        <li>Diamo una mano a chi comincia, senza pretendere esperienza pregressa.</li>
-      </ul>
-
-      <h3>Obiettivi</h3>
+      <h2>L'incontro con il sim racing</h2>
       <p>
-        Vogliamo che chi cerca lo slalom virtuale in italiano trovi materiale ordinato e
-        aggiornato. Nel concreto: coprire tutti e tre i giochi con un catalogo completo di
-        tracciati e auto, mantenere un calendario di gare regolare e documentare i regolamenti in
-        modo che siano leggibili anche da chi arriva oggi.
+        Con il tempo, alla passione per le competizioni reali si è affiancato il mondo del sim
+        racing, dando vita alla <strong>creazione dei primi tracciati slalom virtuali</strong>. Un progetto che ha
+        contribuito a far conoscere Passione Slalom tra gli appassionati del motorsport virtuale e
+        che, ancora oggi, rappresenta uno dei punti di forza della nostra community.
       </p>
 
-      <h3>La community</h3>
+      <h2>Cosa facciamo oggi</h2>
       <p>
-        Tutto passa dal Discord: iscrizioni alle gare, risultati, assetti, richieste di aiuto. Si
-        entra liberamente, si guarda, si chiede. Le uniche regole sono il rispetto tra piloti e il
-        rispetto del regolamento in pista.
+        Oggi Passione Slalom è molto più di una semplice pagina dedicata alle gare. Realizziamo
+        servizi fotografici e video professionali, interviste, dirette e contenuti dedicati al
+        motorsport, affiancando a tutto questo un vero e proprio settore gaming con tracciati, auto,
+        mod e campionati virtuali.
       </p>
+
+      <h2>Obiettivi</h2>
+      <p>
+        Il nostro obiettivo è creare un <strong>punto di incontro</strong> tra il motorsport reale e quello virtuale:
+        un luogo dove i piloti possono allenarsi e confrontarsi anche online, dove gli appassionati
+        possono vivere le emozioni della competizione e dove la passione per le quattro ruote può
+        essere condivisa senza confini.
+      </p>
+
+      <p><i>Passione Slalom: dalla strada al simulatore, sempre con la stessa voglia di correre.</i></p>
     </div>
-  </section>
 
-  <CheckeredDivider />
-
-  <section class="sezione">
-    <div class="contenitore invito">
-      <p class="invito__testo">Il resto succede sul Discord.</p>
+    <div class="contenitore azione">
       <Bottone href={DISCORD_URL} esterno grande>Entra nel nostro Discord</Bottone>
     </div>
   </section>
 </BaseLayout>
 
 <style>
-  .invito {
+  .azione {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.25rem;
-    text-align: center;
-  }
-
-  .invito__testo {
-    font-family: var(--font-display);
-    font-size: clamp(1.5rem, 5vw, 2.25rem);
-    text-transform: uppercase;
-    color: var(--color-ivory);
+    justify-content: center;
+    margin-top: clamp(1.75rem, 5vw, 2.5rem);
   }
 </style>

@@ -1,12 +1,15 @@
 ---
 staff:
-  - nome: Da
-    ruolo: Fondatore
+  - nome: Daniel D'Esposito
+    ruolo: Admin
     foto: /src/assets/staff/da.webp
-  - nome: Mic
-    ruolo: Direzione gara
+  - nome: Michele Giordano
+    ruolo: Track Modder
     foto: /src/assets/staff/mic.webp
-  - nome: Duracc
-    ruolo: Gestione tracciati
+  - nome: Michele Duraccio
+    ruolo: Speaker
     foto: /src/assets/staff/duracc.webp
+  - nome: GD Modding
+    ruolo: Car Modder
+    foto: /src/assets/staff/gd-modding.webp
 ---

@@ -1,3 +1,13 @@
 [build]
   command = "npm run build"
   publish = "dist"
+
+# ⚠️ DA RIMUOVERE IL GIORNO IN CUI SI COLLEGA www.passioneslalom.it ⚠️
+# Finché il sito vive su *.netlify.app, i canonical delle pagine puntano già al
+# dominio definitivo: senza questo blocco Google potrebbe indicizzare l'indirizzo
+# Netlify come copia. L'intestazione vale per tutto il sito, dominio finale
+# compreso: se resta qui dopo il passaggio, il sito non verrà mai indicizzato.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Robots-Tag = "noindex"

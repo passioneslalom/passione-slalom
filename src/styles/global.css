@@ -156,14 +156,17 @@ h3 {
 
 .testo-lungo p + p,
 .testo-lungo p + ul,
-.testo-lungo ul + p,
-.testo-lungo h3 {
+.testo-lungo ul + p {
   margin-top: 1rem;
 }
 
-.testo-lungo h3 {
-  color: var(--color-ivory);
+/* I titoli interni a un testo lungo sono h2 (stanno sotto l'h1 di pagina, senza
+   saltare un livello) ma tengono la misura dell'h3: la gerarchia del documento
+   e la scala tipografica qui non coincidono. */
+.testo-lungo h2 {
   margin-top: 2rem;
+  font-size: clamp(1.15rem, 3.5vw, 1.5rem);
+  color: var(--color-ivory);
 }
 
 .testo-lungo ul {

@@ -11,14 +11,18 @@ import { PERCORSI_SOCIAL } from "../lib/social-icons";
 import { getFotoInEvidenza } from "../lib/galleria";
 import { getPartners } from "../lib/partners";
 import { SOCIAL, DISCORD_URL, NOME_SITO, DESCRIZIONE_SITO } from "../lib/site";
+import { schemaOrganizzazione } from "../lib/schema";
 
 const fotoInEvidenza = await getFotoInEvidenza();
 const partners = await getPartners();
 ---
 
-<BaseLayout titolo={NOME_SITO}>
+<BaseLayout titolo={NOME_SITO} schema={schemaOrganizzazione(new URL(Astro.site!))}>
   <!-- Hero -->
-  <FasciaHero claim={DESCRIZIONE_SITO}>
+  <FasciaHero
+    claim={DESCRIZIONE_SITO}
+    titoloNascosto={`${NOME_SITO} — slalom reale e virtuale`}
+  >
     <Logo variante="hero" slot="marchio" />
     <Bottone slot="azione" href={DISCORD_URL} esterno grande>Entra nel nostro Discord</Bottone>
   </FasciaHero>

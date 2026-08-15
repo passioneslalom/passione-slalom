@@ -16,7 +16,7 @@ const tracciati = await getTracciati(gioco.slug);
   <IntestazionePagina
     occhiello={gioco.nome}
     occhielloHref={gioco.href}
-    titolo="Tracciati"
+    titolo={`Tracciati ${gioco.nome}`}
     intro="Tracciati creati da zero dai nostri modders."
   />
 
