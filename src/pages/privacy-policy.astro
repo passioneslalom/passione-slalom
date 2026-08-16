@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import IntestazionePagina from "../components/IntestazionePagina.astro";
-import { NOME_SITO, EMAIL_CONTATTO } from "../lib/site";
+import { NOME_SITO, EMAIL_CONTATTO, NOME_CONTATTO } from "../lib/site";
 
 const AGGIORNAMENTO = "6 agosto 2026";
 ---
@@ -21,7 +21,7 @@ const AGGIORNAMENTO = "6 agosto 2026";
       <div class="testo-lungo">
         <h2>Titolare del trattamento</h2>
         <p>
-          Il titolare del trattamento è {NOME_SITO}, raggiungibile all'indirizzo <a
+          Il titolare del trattamento è {NOME_CONTATTO}, raggiungibile all'indirizzo <a
             href={`mailto:${EMAIL_CONTATTO}`}>{EMAIL_CONTATTO}</a
           > per qualsiasi richiesta relativa ai tuoi dati personali.
         </p>

@@ -15,6 +15,7 @@ export const SOCIAL: { social: Social; url: string }[] = [
 export const NOME_SITO = "Passione Slalom";
 
 /** Recapito pubblicato nelle informative legali. DA SOSTITUIRE con quello reale. */
+export const NOME_CONTATTO = "Daniel D'Esposito";
 export const EMAIL_CONTATTO = "passioneslalom2021@gmail.com";
 /** Claim del sito: hero della homepage e meta description predefinita. */
 export const DESCRIZIONE_SITO =
