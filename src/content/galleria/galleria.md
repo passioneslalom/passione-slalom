@@ -16,12 +16,13 @@ foto:
     descrizione: Autobianchi A112 numero 95 della C.C. Competition in uscita dal
       gruppo di birilli, con il pubblico dietro il nastro a bordo strada.
   - file: /src/assets/galleria/07072019-DSC_3505.jpg
-    descrizione: Vettura rossa numero 36 di Guida Motorsport in appoggio sull'anteriore
-      lungo il muretto in pietra, in mezzo al verde.
+    descrizione: Vettura rossa numero 36 di Guida Motorsport in appoggio
+      sull'anteriore lungo il muretto in pietra, in mezzo al verde.
   - file: /src/assets/galleria/_DSC0127.jpg
   - file: /src/assets/galleria/_DSC0426.jpg
   - file: /src/assets/galleria/_DSC0537.jpg
   - file: /src/assets/galleria/_DSC0631.jpg
+    descrizione: Renault 5 Turbo, Antonino Esposito
   - file: /src/assets/galleria/_DSC0898.jpg
   - file: /src/assets/galleria/_DSC0927.jpg
   - file: /src/assets/galleria/_DSC1104.jpg
