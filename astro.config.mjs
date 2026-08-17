@@ -4,8 +4,7 @@ import sitemap from "@astrojs/sitemap";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://daddi99.github.io",
-  base: "/passione-slalom",
+  site: "https://passioneslalom.it",
   output: "static",
   integrations: [
     // Gli indirizzi della sitemap nascono da `site`, non dall'host che serve il
