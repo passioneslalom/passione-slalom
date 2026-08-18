@@ -3,12 +3,27 @@ import { glob } from "astro/loaders";
 // In Astro 7 `z` non si importa più da "astro:content".
 import { z } from "astro/zod";
 
-// Tracciati e auto hanno gli stessi campi e la stessa card (SchedaMedia.astro):
-// lo schema sta in un posto solo così le due collection non divergono per sbaglio.
+// Tracciati e auto condividono quasi tutti i campi e la stessa card
+// (SchedaMedia.astro): la parte comune sta in un posto solo così le due
+// collection non divergono per sbaglio, e le auto ci aggiungono il resto.
 // `image()` risolve il percorso e restituisce un ImageMetadata: è ciò di cui
 // <Image> ha bisogno, e un percorso sbagliato ferma la build.
 // I percorsi partono dalla radice del progetto (/src/assets/...) perché è la forma
 // che PagesCMS scrive nel frontmatter: vedi `media` in .pages.yml.
+
+// I campi facoltativi scritti da PagesCMS arrivano come stringa vuota (campo
+// lasciato in bianco) o come `null` (chiave presente ma senza valore): qui
+// diventano `undefined`, così alla card basta controllare se il dato c'è.
+const testoFacoltativo = z
+  .string()
+  .nullish()
+  .transform((valore) => valore?.trim() || undefined);
+
+const numeroFacoltativo = z
+  .number()
+  .nullish()
+  .transform((valore) => valore ?? undefined);
+
 const schemaContenutoGioco = ({ image }: SchemaContext) =>
   z.object({
     titolo: z.string(),
@@ -16,6 +31,8 @@ const schemaContenutoGioco = ({ image }: SchemaContext) =>
     video: z.url(),
     gioco: z.enum(["assetto-corsa", "rfactor", "trackday-r"]),
     ordine: z.number().optional(),
+    // Chi ha creato la mod. Facoltativo: senza, la riga non compare sulla card.
+    modder: testoFacoltativo,
   });
 
 const tracciati = defineCollection({
@@ -24,9 +41,15 @@ const tracciati = defineCollection({
 });
 
 // Per ora solo Assetto Corsa ha delle auto, ma lo schema accetta tutti i giochi.
+// Rispetto ai tracciati le auto hanno due campi in più: il costo in crediti per
+// usarle nei campionati e il server dove sono disponibili.
 const auto = defineCollection({
   loader: glob({ pattern: "**/*.md", base: "./src/content/auto" }),
-  schema: schemaContenutoGioco,
+  schema: (context) =>
+    schemaContenutoGioco(context).extend({
+      crediti: numeroFacoltativo,
+      server: testoFacoltativo,
+    }),
 });
 
 // Staff, galleria e partners sono un file solo con una lista dentro il frontmatter,

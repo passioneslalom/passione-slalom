@@ -21,8 +21,21 @@ const PREFISSO_ALT = {
 } as const;
 
 const { voce, mostraGioco = false } = Astro.props;
-const { titolo, foto, video, gioco } = voce.data;
+const { titolo, foto, video, gioco, modder } = voce.data;
 const alt = `${PREFISSO_ALT[voce.collection]} ${titolo}`;
+
+// `crediti` e `server` esistono solo sulle auto: sui tracciati la scheda tecnica
+// resta la sola riga del modder.
+const { crediti, server } =
+  voce.collection === "auto" ? voce.data : { crediti: undefined, server: undefined };
+
+// Le righe senza valore non vengono stampate: così una voce a cui manca il
+// modder non lascia un'etichetta vuota in mezzo alla card.
+const DATI = [
+  { etichetta: "Crediti", valore: crediti, numerico: true },
+  { etichetta: "Server", valore: server, numerico: false },
+  { etichetta: "Modder", valore: modder, numerico: false },
+].filter(({ valore }) => valore !== undefined);
 
 // La card segue le colonne di `.griglia-card` (contenitore 72rem, padding 1.25rem,
 // gap 1.25rem, colonne da almeno 17rem): 3 colonne sopra 56rem, 2 sopra 38rem,
@@ -68,6 +81,21 @@ const SIZES = [
     }
 
     <h2 class="card__titolo">{titolo}</h2>
+
+    {
+      DATI.length > 0 && (
+        <dl class="card__dati">
+          {DATI.map(({ etichetta, valore, numerico }) => (
+            <div class="card__dato">
+              <dt class="card__etichetta">{etichetta}</dt>
+              <dd class:list={["card__valore", { "card__valore--numero": numerico }]}>
+                {valore}
+              </dd>
+            </div>
+          ))}
+        </dl>
+      )
+    }
 
     <a class="card__link" href={video} target="_blank" rel="noopener noreferrer">
       Guarda il video
@@ -121,6 +149,45 @@ const SIZES = [
   .card__titolo {
     font-size: 1.35rem;
     color: var(--color-ivory);
+  }
+
+  /* Scheda tecnica: etichetta a sinistra, valore a destra, una riga per dato.
+     Il bordo sopra la stacca dal titolo senza aggiungere un altro riquadro. */
+  .card__dati {
+    width: 100%;
+    display: grid;
+    gap: 0.4rem;
+    padding-top: 0.7rem;
+    border-top: 1px solid var(--bordo);
+  }
+
+  .card__dato {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.75rem;
+  }
+
+  .card__etichetta {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--testo-attenuato);
+  }
+
+  .card__valore {
+    margin: 0;
+    font-size: 0.9rem;
+    text-align: right;
+    color: var(--color-ivory);
+  }
+
+  /* Come la colonna dei crediti in classifica: stesso giallo, stesso peso. */
+  .card__valore--numero {
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    color: var(--color-yellow);
   }
 
   .card__link {

@@ -168,6 +168,9 @@ content:
         type: string
         required: true
         description: Link al video onboard, su YouTube o Facebook. Si apre in una nuova scheda.
+      - name: modder
+        label: Modder
+        type: string
       - name: gioco
         label: Gioco
         type: select
@@ -185,8 +188,9 @@ content:
           Le voci senza numero finiscono in fondo, in ordine alfabetico.
 
   # ---------- auto ----------
-  # Stessi campi dei tracciati: le due sezioni usano la stessa card sul sito e
-  # devono restare identiche a vedersi.
+  # Quasi gli stessi campi dei tracciati: le due sezioni usano la stessa card sul
+  # sito e devono restare identiche a vedersi. In più le auto hanno il costo in
+  # crediti e il server dove sono disponibili.
   - name: auto
     label: Auto
     type: collection
@@ -217,6 +221,15 @@ content:
         type: string
         required: true
         description: Link al video di riferimento della vettura. Si apre in una nuova scheda.
+      - name: crediti
+        label: Crediti
+        type: number
+      - name: server
+        label: Server
+        type: string
+      - name: modder
+        label: Modder
+        type: string
       - name: gioco
         label: Gioco
         type: select
