@@ -1,6 +1,6 @@
 ---
-titolo: "Fiat seicento e1 1150 "
-foto: /src/assets/auto/fiat-cinquecento-s3-assetto-corsa-1.jpg
+titolo: "Fiat Panda e1 1150 "
+foto: /src/assets/auto/panda-e1-1150-assetto-corsa.jpg
 video: https://www.youtube.com/watch?v=LSgUaOkfs0g
 crediti: 60000
 server: 4 pro
