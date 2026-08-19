@@ -6,5 +6,5 @@ crediti: 50000
 server: 3 silver
 modder: GD modding
 gioco: assetto-corsa
-ordine: 27
+ordine: 28
 ---
