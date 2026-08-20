@@ -5,6 +5,11 @@ on:
     branches: [main]
   workflow_dispatch:
 
+# Annulla automaticamente le esecuzioni precedenti in corso sullo stesso branch
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 permissions:
   contents: read
   pages: write
@@ -20,6 +25,7 @@ jobs:
         uses: withastro/action@v3
         with:
           node-version: 22
+
   deploy:
     needs: build
     runs-on: ubuntu-latest
