@@ -49,5 +49,4 @@ foto:
   - file: /src/assets/galleria/19052019-dsc2925.jpg
   - file: /src/assets/galleria/dan1246.jpg
   - file: /src/assets/galleria/dsc00086.jpg
-  - {}
 ---
