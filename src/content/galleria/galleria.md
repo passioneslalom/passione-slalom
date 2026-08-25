@@ -42,4 +42,12 @@ foto:
   - file: /src/assets/galleria/DSC07397.jpg
   - file: /src/assets/galleria/DSC09711.jpg
   - file: /src/assets/galleria/IMG_5759.jpg
+  - file: /src/assets/galleria/dsc5555.jpg
+  - file: /src/assets/galleria/dsc5632.jpg
+  - file: /src/assets/galleria/15122019-dsc4280.jpg
+  - file: /src/assets/galleria/16092018-dsc3001.jpg
+  - file: /src/assets/galleria/19052019-dsc2925.jpg
+  - file: /src/assets/galleria/dan1246.jpg
+  - file: /src/assets/galleria/dsc00086.jpg
+  - {}
 ---
