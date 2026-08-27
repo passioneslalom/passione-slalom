@@ -121,4 +121,57 @@ foto:
     descrizione: Mariano De Luca, A112, Slalom Coppa Primavera
   - file: /src/assets/galleria/dsc05961.jpg
     descrizione: Pietro Persico, Fiat Cinquecento, Slalom Coppa Primavera
+  - file: /src/assets/galleria/dsc06096.jpg
+    descrizione: Salvatore Di Leva, Fiat 126,Slalom Coppa Primavera
+  - file: /src/assets/galleria/dsc06104.jpg
+    descrizione: Cavaliere, Fiat 500, Slalom Coppa Primavera
+  - file: /src/assets/galleria/dsc06155.jpg
+    descrizione: Fabio Gargiulo, Kart Cross, Slalom Coppa Primavera
+  - file: /src/assets/galleria/dsc06169.jpg
+    descrizione: Giuseppe Esposito, Kart Cross, Slalom Coppa Primavera
+  - file: /src/assets/galleria/dsc06357.jpg
+    descrizione: Carlo Romano, Peugeot 106, Slalom Coppa Primavera
+  - file: /src/assets/galleria/dsc06358.jpg
+    descrizione: Alessandro Della Rocca, Citroen Saxo, Slalom Coppa Primavera
+  - file: /src/assets/galleria/dsc06430.jpg
+    descrizione: "Vincenzo Parlato, Peugeot 106 "
+  - file: /src/assets/galleria/dsc06518.jpg
+    descrizione: Cavaliere, Fiat 500, Slalom Coppa Primavera
+  - file: /src/assets/galleria/dsc06602.jpg
+    descrizione: "Fabio Gargiulo, Kart Cross, Slalom Coppa Primavera "
+  - file: /src/assets/galleria/dsc06629.jpg
+  - file: /src/assets/galleria/dsc06649.jpg
+  - file: /src/assets/galleria/dsc06837.jpg
+  - file: /src/assets/galleria/dsc06856.jpg
+  - file: /src/assets/galleria/dsc06967.jpg
+  - file: /src/assets/galleria/dsc07009.jpg
+  - file: /src/assets/galleria/dsc07021.jpg
+  - file: /src/assets/galleria/dsc07054.jpg
+  - file: /src/assets/galleria/dsc07345.jpg
+  - file: /src/assets/galleria/dsc07371.jpg
+  - file: /src/assets/galleria/dsc07406.jpg
+  - file: /src/assets/galleria/dsc07411.jpg
+  - file: /src/assets/galleria/dsc07426.jpg
+  - file: /src/assets/galleria/dsc07498.jpg
+  - file: /src/assets/galleria/dsc07500.jpg
+  - file: /src/assets/galleria/dsc07502.jpg
+  - file: /src/assets/galleria/dsc07507.jpg
+  - file: /src/assets/galleria/dsc07549.jpg
+  - file: /src/assets/galleria/dsc07562.jpg
+  - file: /src/assets/galleria/dsc07626.jpg
+  - file: /src/assets/galleria/dsc08054.jpg
+  - file: /src/assets/galleria/dsc09429.jpg
+  - file: /src/assets/galleria/dsc09486.jpg
+  - file: /src/assets/galleria/dsc09526.jpg
+  - file: /src/assets/galleria/dsc09544.jpg
+  - file: /src/assets/galleria/dsc09914.jpg
+  - {}
+  - file: /src/assets/galleria/img5742.jpg
+  - file: /src/assets/galleria/img5777.jpg
+  - file: /src/assets/galleria/img5802.jpg
+  - file: /src/assets/galleria/img5822.jpg
+  - file: /src/assets/galleria/img5825.jpg
+  - file: /src/assets/galleria/img5873.jpg
+  - {}
+  - file: /src/assets/galleria/img5877.jpg
 ---
