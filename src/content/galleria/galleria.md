@@ -26,6 +26,7 @@ foto:
     descrizione: Renault 5 Turbo, Antonino Esposito
   - file: /src/assets/galleria/_DSC0898.jpg
   - file: /src/assets/galleria/_DSC0927.jpg
+    descrizione: Ferdinando Terminiello, Peugeot 106, Slalom Sorrento S.Agata
   - file: /src/assets/galleria/_DSC1104.jpg
   - file: /src/assets/galleria/_DSC1167.jpg
   - file: /src/assets/galleria/_DSC5194.jpg
