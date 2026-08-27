@@ -113,8 +113,12 @@ foto:
     descrizione: Langella Motorsport, Citroen Saxo, Slalom Coppa Primavera
   - file: /src/assets/galleria/dsc05796.jpg
     descrizione: Mario Staiano, Citroen Saxo, Slalom Coppa Primavera
-  - {}
-  - {}
-  - {}
-  - {}
+  - file: /src/assets/galleria/dsc05824.jpg
+    descrizione: Raffaele Ranieri, Renault Clio Williams, Slalom Coppa Primavera
+  - file: /src/assets/galleria/dsc05889.jpg
+    descrizione: Francesco Mascolo, Fiat 500, Slalom Coppa Primavera
+  - file: /src/assets/galleria/dsc05956.jpg
+    descrizione: Mariano De Luca, A112, Slalom Coppa Primavera
+  - file: /src/assets/galleria/dsc05961.jpg
+    descrizione: Pietro Persico, Fiat Cinquecento, Slalom Coppa Primavera
 ---
