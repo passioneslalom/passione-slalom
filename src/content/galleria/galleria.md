@@ -6,6 +6,7 @@ foto:
     descrizione: Francesco De Falco, Peugeot 106, Slalom Massa Lubrense
   - file: /src/assets/galleria/dsc06967.jpg
   - file: /src/assets/galleria/dsc07345.jpg
+  - file: /src/assets/galleria/_DSC5332.jpg
   - file: /src/assets/galleria/_DSC0125.jpg
     descrizione: Peugeot 106 gialla di Guida Motorsport in uscita di curva, tra le
       frecce direzionali e la balla di fieno a bordo strada.
@@ -35,7 +36,6 @@ foto:
   - file: /src/assets/galleria/_DSC1167.jpg
   - file: /src/assets/galleria/_DSC5194.jpg
   - file: /src/assets/galleria/_DSC5252.jpg
-  - file: /src/assets/galleria/_DSC5332.jpg
   - file: /src/assets/galleria/_DSC5811.jpg
   - file: /src/assets/galleria/_DSC9862.jpg
   - file: /src/assets/galleria/07072019-DSC_3545.jpg
