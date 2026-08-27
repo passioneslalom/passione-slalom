@@ -105,4 +105,16 @@ foto:
     descrizione: "Francesco De Falco,  Peugeot 106, Slalom Salerno Croce di Cava "
   - file: /src/assets/galleria/dsc05552.jpg
     descrizione: "Mauro Rispoli, Renault Twingo,  Slalom Salerno Croce di Cava "
+  - file: /src/assets/galleria/dsc05721.jpg
+    descrizione: Angelo Cavaliere, Renault Clio Williams, Slalom Coppa Primavera
+  - file: /src/assets/galleria/dsc05757.jpg
+    descrizione: Vincenzo Parlato, Peugeot 106, Slalom Coppa Primavera
+  - file: /src/assets/galleria/dsc05764.jpg
+    descrizione: Langella Motorsport, Citroen Saxo, Slalom Coppa Primavera
+  - file: /src/assets/galleria/dsc05796.jpg
+    descrizione: Mario Staiano, Citroen Saxo, Slalom Coppa Primavera
+  - {}
+  - {}
+  - {}
+  - {}
 ---
