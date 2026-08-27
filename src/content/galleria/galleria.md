@@ -12,11 +12,11 @@ foto:
     descrizione: "Giuseppe Bocchetta, Fiat 127, Slalom Melfi "
   - file: /src/assets/galleria/21102018-DSC_5502.jpg
     descrizione: "Francesco Mascolo, Fiat 500, Slalom Tramonti "
+  - file: /src/assets/galleria/18112018-DSC_1229.jpg
+    descrizione: Giacomo Casd, A112, Slalom Sorrento S.Agata
   - file: /src/assets/galleria/_DSC0596.jpg
     descrizione: Fiat 127 numero 60 di Paolillo Racing che passa a filo dei birilli
       gialli e rossi allineati sull'asfalto.
-  - file: /src/assets/galleria/18112018-DSC_1229.jpg
-    descrizione: Giacomo Casd, A112, Slalom Sorrento S.Agata
   - file: /src/assets/galleria/07072019-DSC_3505.jpg
     descrizione: "Antonio Staiano, Peugeot 205 S4, Slalom del Mare "
   - file: /src/assets/galleria/_DSC0127.jpg
