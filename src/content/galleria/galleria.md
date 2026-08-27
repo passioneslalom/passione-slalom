@@ -49,4 +49,60 @@ foto:
   - file: /src/assets/galleria/19052019-dsc2925.jpg
   - file: /src/assets/galleria/dan1246.jpg
   - file: /src/assets/galleria/dsc00086.jpg
+  - file: /src/assets/galleria/dcs1-3-1.jpg
+    descrizione: Antonio Staiano, Peugeot 205 S4, Circuito internazionale Napoli
+  - file: /src/assets/galleria/dan1246-1.jpg
+    descrizione: Mattia Abate, Mini Cooper, Circuito del Sele
+  - file: /src/assets/galleria/dcs1-6.jpg
+    descrizione: Giuseppe Pollio, Slalom Sorrento S.Agata
+  - file: /src/assets/galleria/dcs1-8.jpg
+    descrizione: Circuito internazionale Napoli Sarno
+  - file: /src/assets/galleria/dcs1-9.jpg
+    descrizione: Circuito internazionale Napoli Sarno
+  - file: /src/assets/galleria/dsc00274.jpg
+    descrizione: "Mario Staiano, Radical Prosport, Slalom Coppa due Costiere "
+  - file: /src/assets/galleria/dsc00330.jpg
+    descrizione: Saverio Miglionico, Osella, Slalom Coppa due Costiere
+  - file: /src/assets/galleria/dsc01710.jpg
+    descrizione: Francesco De Falco, Peugeot 106, Slalom Massa Lubrense
+  - file: /src/assets/galleria/dsc01724.jpg
+    descrizione: "Raffaele Staiano, Peugeot 106, Slalom Massa Lubrense "
+  - file: /src/assets/galleria/dsc01746.jpg
+    descrizione: Andrea Mascolo, Citroen Saxo, Slalom Massa Lubrense
+  - file: /src/assets/galleria/dsc01904.jpg
+    descrizione: "Giuseppe Esposito, Kart Cross, Slalom Massa Lubrense "
+  - file: /src/assets/galleria/dsc01930.jpg
+    descrizione: "Pasquale Amatruda, Radical Prosport, Slalom Massa Lubrense "
+  - file: /src/assets/galleria/dsc02133.jpg
+    descrizione: Luca della Sala, Renault Clio, Circuito del Sele
+  - file: /src/assets/galleria/dsc02179.jpg
+    descrizione: Domenico Marano, Peugeot 106, Circuito del Sele
+  - file: /src/assets/galleria/dsc02400.jpg
+    descrizione: Pio Giuliano, Peugeot 106, Circuito del Sele
+  - file: /src/assets/galleria/dsc02431.jpg
+    descrizione: Pio Giuliano, Peugeot 106, Circuito del Sele
+  - file: /src/assets/galleria/dsc02481.jpg
+    descrizione: Carmine Urgo, Peugeot 106, Circuito del Sele
+  - file: /src/assets/galleria/dsc02487.jpg
+    descrizione: Peugeot 106, Circuito del Sele
+  - file: /src/assets/galleria/dsc02489.jpg
+    descrizione: Peugeot 106, Circuito del Sele
+  - file: /src/assets/galleria/dsc03083.jpg
+    descrizione: Antonino Sessa, Peugeot 106, Slalom Rocca d'Evandro
+  - file: /src/assets/galleria/dsc03112.jpg
+    descrizione: Francesco Russo, Peugeot 106, Slalom Rocca d'Evandro
+  - file: /src/assets/galleria/dsc03282.jpg
+    descrizione: Michele Sellitto, Fiat 126, Slalom Rocca d'Evandro
+  - file: /src/assets/galleria/dsc03288.jpg
+    descrizione: "Giovanni Cutro, Kart Cross, Slalom Rocca d'Evandro "
+  - file: /src/assets/galleria/dsc03624.jpg
+    descrizione: Slalom Santopadre
+  - file: /src/assets/galleria/dsc04045.jpg
+    descrizione: Antonino Fattorusso, Peugeot 106, Slalom Santopadre
+  - file: /src/assets/galleria/dsc04737.jpg
+    descrizione: "Francesco Russo, Peugeot 106, Slalom Salerno Croce di Cava "
+  - file: /src/assets/galleria/dsc05371.jpg
+    descrizione: "Francesco De Falco,  Peugeot 106, Slalom Salerno Croce di Cava "
+  - file: /src/assets/galleria/dsc05552.jpg
+    descrizione: "Mauro Rispoli, Renault Twingo,  Slalom Salerno Croce di Cava "
 ---
