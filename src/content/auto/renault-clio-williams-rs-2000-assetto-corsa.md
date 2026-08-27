@@ -1,7 +1,7 @@
 ---
 titolo: Renault Clio Williams RS 2000
 foto: /src/assets/auto/renault-clio-williams-rs-2000-assetto-corsa.jpg
-video: https://youtu.be/Rebwyq9ta9o?is=Xdag5dros3GxX3Zn
+video: "https://www.youtube.com/watch?v=4JLVD3rYipY "
 crediti: 8000
 server: 1 rookie
 modder: GD modding
