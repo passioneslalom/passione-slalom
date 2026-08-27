@@ -20,8 +20,11 @@ foto:
   - file: /src/assets/galleria/07072019-DSC_3505.jpg
     descrizione: "Antonio Staiano, Peugeot 205 S4, Slalom del Mare "
   - file: /src/assets/galleria/_DSC0127.jpg
+    descrizione: Antonio Staiano, Peugeot 106, Slalom Sorrento S.Agata
   - file: /src/assets/galleria/_DSC0426.jpg
+    descrizione: Carlo Romano, Peugeot 106, Slalom Massa Lubrense
   - file: /src/assets/galleria/_DSC0537.jpg
+    descrizione: "Samo Competition, Fiat 127, Slalom Sorrrento S.Agata "
   - file: /src/assets/galleria/_DSC0631.jpg
     descrizione: Renault 5 Turbo, Antonino Esposito
   - file: /src/assets/galleria/_DSC0898.jpg
