@@ -7,10 +7,8 @@ foto:
   - file: /src/assets/galleria/dsc06967.jpg
     descrizione: "Francesco Russo, Peugeot 106, Slalom Salerno Croce di Cava "
   - file: /src/assets/galleria/dsc07345.jpg
+    descrizione: Antonino Marciano, Peugeot 106, Slalom Sorrento S.Agata
   - file: /src/assets/galleria/_DSC5332.jpg
-  - file: /src/assets/galleria/_DSC0125.jpg
-    descrizione: Peugeot 106 gialla di Guida Motorsport in uscita di curva, tra le
-      frecce direzionali e la balla di fieno a bordo strada.
   - file: /src/assets/galleria/21102018-DSC_5502.jpg
     descrizione: Fiat 500 numero 52 con il motore a vista e l'adesivo Passione
       Slalom sul portellone, che sfiora il muretto di pietra in uscita di curva.
