@@ -9,15 +9,12 @@ foto:
   - file: /src/assets/galleria/dsc07345.jpg
     descrizione: Antonino Marciano, Peugeot 106, Slalom Sorrento S.Agata
   - file: /src/assets/galleria/_DSC5332.jpg
+    descrizione: "Giuseppe Bocchetta, Fiat 127, Slalom Melfi "
   - file: /src/assets/galleria/21102018-DSC_5502.jpg
-    descrizione: Fiat 500 numero 52 con il motore a vista e l'adesivo Passione
-      Slalom sul portellone, che sfiora il muretto di pietra in uscita di curva.
+    descrizione: "Francesco Mascolo, Fiat 500, Slalom Tramonti "
   - file: /src/assets/galleria/_DSC0596.jpg
     descrizione: Fiat 127 numero 60 di Paolillo Racing che passa a filo dei birilli
       gialli e rossi allineati sull'asfalto.
-  - file: /src/assets/galleria/_DSC4858.jpg
-    descrizione: Fiat 500 elaborata di D'Antuono Engineering in salita su una strada
-      di costiera, con il campanile del paese sullo sfondo.
   - file: /src/assets/galleria/18112018-DSC_1229.jpg
     descrizione: Autobianchi A112, Slalom Sorrento S.Agata
   - file: /src/assets/galleria/07072019-DSC_3505.jpg
@@ -51,7 +48,6 @@ foto:
   - file: /src/assets/galleria/15122019-dsc4280.jpg
   - file: /src/assets/galleria/16092018-dsc3001.jpg
   - file: /src/assets/galleria/19052019-dsc2925.jpg
-  - file: /src/assets/galleria/dan1246.jpg
   - file: /src/assets/galleria/dsc00086.jpg
   - file: /src/assets/galleria/dan1246-1.jpg
     descrizione: Mattia Abate, Mini Cooper, Circuito del Sele
@@ -77,8 +73,6 @@ foto:
     descrizione: Luca della Sala, Renault Clio, Circuito del Sele
   - file: /src/assets/galleria/dsc02179.jpg
     descrizione: Domenico Marano, Peugeot 106, Circuito del Sele
-  - file: /src/assets/galleria/dsc02400.jpg
-    descrizione: Pio Giuliano, Peugeot 106, Circuito del Sele
   - file: /src/assets/galleria/dsc02431.jpg
     descrizione: Pio Giuliano, Peugeot 106, Circuito del Sele
   - file: /src/assets/galleria/dsc02481.jpg
