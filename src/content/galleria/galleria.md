@@ -33,6 +33,7 @@ foto:
   - file: /src/assets/galleria/_DSC5252.jpg
   - file: /src/assets/galleria/_DSC5811.jpg
   - file: /src/assets/galleria/_DSC9862.jpg
+    descrizione: "Gennaro Durante, Fiat 126, Slalom Massa Lubrense "
   - file: /src/assets/galleria/07072019-DSC_3545.jpg
   - file: /src/assets/galleria/07072019-DSC_3584.jpg
   - file: /src/assets/galleria/18112018-DSC_1897.jpg
