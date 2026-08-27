@@ -16,10 +16,9 @@ foto:
     descrizione: Fiat 127 numero 60 di Paolillo Racing che passa a filo dei birilli
       gialli e rossi allineati sull'asfalto.
   - file: /src/assets/galleria/18112018-DSC_1229.jpg
-    descrizione: Autobianchi A112, Slalom Sorrento S.Agata
+    descrizione: Giacomo Casd, A112, Slalom Sorrento S.Agata
   - file: /src/assets/galleria/07072019-DSC_3505.jpg
-    descrizione: Vettura rossa numero 36 di Guida Motorsport in appoggio
-      sull'anteriore lungo il muretto in pietra, in mezzo al verde.
+    descrizione: "Antonio Staiano, Peugeot 205 S4, Slalom del Mare "
   - file: /src/assets/galleria/_DSC0127.jpg
   - file: /src/assets/galleria/_DSC0426.jpg
   - file: /src/assets/galleria/_DSC0537.jpg
