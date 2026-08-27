@@ -1,5 +1,11 @@
 ---
 foto:
+  - file: /src/assets/galleria/dcs1-3-1.jpg
+    descrizione: Antonio Staiano, Peugeot 205 S4, Circuito internazionale Napoli
+  - file: /src/assets/galleria/dsc01710.jpg
+    descrizione: Francesco De Falco, Peugeot 106, Slalom Massa Lubrense
+  - file: /src/assets/galleria/dsc06967.jpg
+  - file: /src/assets/galleria/dsc07345.jpg
   - file: /src/assets/galleria/_DSC0125.jpg
     descrizione: Peugeot 106 gialla di Guida Motorsport in uscita di curva, tra le
       frecce direzionali e la balla di fieno a bordo strada.
@@ -49,8 +55,6 @@ foto:
   - file: /src/assets/galleria/19052019-dsc2925.jpg
   - file: /src/assets/galleria/dan1246.jpg
   - file: /src/assets/galleria/dsc00086.jpg
-  - file: /src/assets/galleria/dcs1-3-1.jpg
-    descrizione: Antonio Staiano, Peugeot 205 S4, Circuito internazionale Napoli
   - file: /src/assets/galleria/dan1246-1.jpg
     descrizione: Mattia Abate, Mini Cooper, Circuito del Sele
   - file: /src/assets/galleria/dcs1-6.jpg
@@ -63,8 +67,6 @@ foto:
     descrizione: "Mario Staiano, Radical Prosport, Slalom Coppa due Costiere "
   - file: /src/assets/galleria/dsc00330.jpg
     descrizione: Saverio Miglionico, Osella, Slalom Coppa due Costiere
-  - file: /src/assets/galleria/dsc01710.jpg
-    descrizione: Francesco De Falco, Peugeot 106, Slalom Massa Lubrense
   - file: /src/assets/galleria/dsc01724.jpg
     descrizione: "Raffaele Staiano, Peugeot 106, Slalom Massa Lubrense "
   - file: /src/assets/galleria/dsc01746.jpg
@@ -143,11 +145,9 @@ foto:
   - file: /src/assets/galleria/dsc06649.jpg
   - file: /src/assets/galleria/dsc06837.jpg
   - file: /src/assets/galleria/dsc06856.jpg
-  - file: /src/assets/galleria/dsc06967.jpg
   - file: /src/assets/galleria/dsc07009.jpg
   - file: /src/assets/galleria/dsc07021.jpg
   - file: /src/assets/galleria/dsc07054.jpg
-  - file: /src/assets/galleria/dsc07345.jpg
   - file: /src/assets/galleria/dsc07371.jpg
   - file: /src/assets/galleria/dsc07406.jpg
   - file: /src/assets/galleria/dsc07411.jpg
