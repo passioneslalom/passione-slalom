@@ -5,6 +5,7 @@ foto:
   - file: /src/assets/galleria/dsc01710.jpg
     descrizione: Francesco De Falco, Peugeot 106, Slalom Massa Lubrense
   - file: /src/assets/galleria/dsc06967.jpg
+    descrizione: "Francesco Russo, Peugeot 106, Slalom Salerno Croce di Cava "
   - file: /src/assets/galleria/dsc07345.jpg
   - file: /src/assets/galleria/_DSC5332.jpg
   - file: /src/assets/galleria/_DSC0125.jpg
@@ -20,8 +21,7 @@ foto:
     descrizione: Fiat 500 elaborata di D'Antuono Engineering in salita su una strada
       di costiera, con il campanile del paese sullo sfondo.
   - file: /src/assets/galleria/18112018-DSC_1229.jpg
-    descrizione: Autobianchi A112 numero 95 della C.C. Competition in uscita dal
-      gruppo di birilli, con il pubblico dietro il nastro a bordo strada.
+    descrizione: Autobianchi A112, Slalom Sorrento S.Agata
   - file: /src/assets/galleria/07072019-DSC_3505.jpg
     descrizione: Vettura rossa numero 36 di Guida Motorsport in appoggio
       sull'anteriore lungo il muretto in pietra, in mezzo al verde.
