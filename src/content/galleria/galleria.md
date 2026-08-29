@@ -1,7 +1,7 @@
 ---
 foto:
   - file: /src/assets/galleria/dcs1-3-1.jpg
-    descrizione: Antonio Staiano, Peugeot 205 S4, Circuito internazionale Napoli
+    descrizione: "Antonio Staiano, Peugeot 205 S4, Circuito internazionale Napoli "
   - file: /src/assets/galleria/dsc01710.jpg
     descrizione: Francesco De Falco, Peugeot 106, Slalom Massa Lubrense
   - file: /src/assets/galleria/dsc06967.jpg
