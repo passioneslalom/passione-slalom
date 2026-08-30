@@ -1,5 +1,5 @@
 ---
-titolo: POlini a 112 01 evo
+titolo: Polini a 112 01 evo
 foto: /src/assets/auto/polini-01-a112-assetto-corsa.jpg
 video: "https://www.youtube.com/watch?v=nZd9QnkWEOg "
 crediti: 0
