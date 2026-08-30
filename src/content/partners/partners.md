@@ -16,4 +16,6 @@ partners:
   - nome: MGG Modding
     logo: /src/assets/partners/6-mgg-modding.webp
     sito: https://www.facebook.com/MicheleGerardoG87/
+  - nome: "Aequa Motorsport "
+    logo: /src/assets/partners/logo-aequa.png
 ---
