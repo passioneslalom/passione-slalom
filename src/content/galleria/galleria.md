@@ -168,4 +168,6 @@ foto:
   - file: /src/assets/galleria/img5825.jpg
   - file: /src/assets/galleria/img5873.jpg
   - file: /src/assets/galleria/img5877.jpg
+  - file: /src/assets/galleria/michele-giordano.jpg
+    descrizione: "Michele Giordano, Fiat Cinquecento, Slalom della Laura "
 ---
