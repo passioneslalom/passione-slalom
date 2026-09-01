@@ -201,7 +201,7 @@ piloti:
     crediti: 18000
   - nome: Antonino Ciampa
     auto: ps_peugeot_106_rs_1600
-    crediti: 14000
+    crediti: 17000
   - nome: Giacomo Viteritti
     auto: ps_peugeot_106_rs_1600
     crediti: 13000
