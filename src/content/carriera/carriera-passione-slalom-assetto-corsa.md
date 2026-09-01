@@ -226,4 +226,7 @@ piloti:
   - nome: Marco Morabito
     auto: da scegliere
     crediti: 5000
+  - nome: Giuseppe Ricciardi
+    auto: da scegliere
+    crediti: 2000
 ---
