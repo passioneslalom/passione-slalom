@@ -33,7 +33,7 @@ piloti:
     crediti: 14500
   - nome: Antonio Peditto
     auto: Peugeot 106 N1600
-    crediti: 36000
+    crediti: 40000
   - nome: Gennaro Durante
     auto: Citroen Saxo racing start 1600
     crediti: 10000
@@ -223,4 +223,7 @@ piloti:
   - nome: Emanuele Nardiello
     auto: ps_peugeot_106_rally_grn_1300
     crediti: 7000
+  - nome: Marco Morabito
+    auto: da scegliere
+    crediti: 5000
 ---
