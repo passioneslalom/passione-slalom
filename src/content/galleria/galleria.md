@@ -170,4 +170,6 @@ foto:
   - file: /src/assets/galleria/img5877.jpg
   - file: /src/assets/galleria/michele-giordano.jpg
     descrizione: "Michele Giordano, Fiat Cinquecento, Slalom della Laura "
+  - file: /src/assets/galleria/antonio-ruocco.jpg
+    descrizione: Antonio Ruocco, Radical sr4, Slalom Coppa due Costiere
 ---
