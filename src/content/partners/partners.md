@@ -18,4 +18,6 @@ partners:
     sito: https://www.facebook.com/MicheleGerardoG87/
   - nome: "Aequa Motorsport "
     logo: /src/assets/partners/logo-aequa.png
+  - nome: Italy Motorsport
+    logo: /src/assets/partners/italy-motorsport.jpg
 ---
