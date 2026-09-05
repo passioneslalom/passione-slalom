@@ -20,4 +20,6 @@ partners:
     logo: /src/assets/partners/logo-aequa.png
   - nome: Italy Motorsport
     logo: /src/assets/partners/italy-motorsport.jpg
+  - nome: D'Acunto Motorsport
+    logo: /src/assets/partners/photo2026-09-0419-33-39.jpg
 ---
