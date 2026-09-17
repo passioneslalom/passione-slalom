@@ -183,4 +183,35 @@ foto:
   - file: /src/assets/galleria/dsc06980.jpg
   - file: /src/assets/galleria/dsc06992.jpg
   - file: /src/assets/galleria/dsc06998.jpg
+  - file: /src/assets/galleria/dsc07005-1.jpg
+  - file: /src/assets/galleria/dsc07011.jpg
+  - file: /src/assets/galleria/dsc07018.jpg
+  - file: /src/assets/galleria/dsc07031.jpg
+  - file: /src/assets/galleria/dsc07049.jpg
+  - file: /src/assets/galleria/dsc07060.jpg
+  - file: /src/assets/galleria/dsc07061.jpg
+  - file: /src/assets/galleria/dsc07074.jpg
+  - file: /src/assets/galleria/dsc07075.jpg
+  - file: /src/assets/galleria/dsc07085.jpg
+  - file: /src/assets/galleria/dsc07098.jpg
+  - file: /src/assets/galleria/dsc07110.jpg
+  - file: /src/assets/galleria/dsc07111.jpg
+  - file: /src/assets/galleria/dsc07127.jpg
+  - file: /src/assets/galleria/dsc07147.jpg
+  - file: /src/assets/galleria/dsc07166.jpg
+  - file: /src/assets/galleria/dsc07189.jpg
+  - file: /src/assets/galleria/dsc07197.jpg
+  - file: /src/assets/galleria/dsc07199.jpg
+  - file: /src/assets/galleria/dsc07204.jpg
+  - file: /src/assets/galleria/dsc07219.jpg
+  - file: /src/assets/galleria/dsc07224.jpg
+  - file: /src/assets/galleria/dsc07227.jpg
+  - file: /src/assets/galleria/dsc07276.jpg
+  - file: /src/assets/galleria/dsc07308.jpg
+  - file: /src/assets/galleria/dsc07281.jpg
+  - file: /src/assets/galleria/dsc07296.jpg
+  - file: /src/assets/galleria/dsc07319.jpg
+  - file: /src/assets/galleria/dsc07328.jpg
+  - file: /src/assets/galleria/dsc07340.jpg
+  - file: /src/assets/galleria/dsc07359.jpg
 ---
