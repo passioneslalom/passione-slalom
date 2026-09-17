@@ -204,7 +204,9 @@ foto:
   - file: /src/assets/galleria/dsc07199.jpg
   - file: /src/assets/galleria/dsc07204.jpg
   - file: /src/assets/galleria/dsc07219.jpg
+    descrizione: Maria Grimaldi, Fiat Cinquecento, Slalom della Laura
   - file: /src/assets/galleria/dsc07224.jpg
+    descrizione: Maria Grimaldi, Fiat Cinquecento, Slalom della Laura
   - file: /src/assets/galleria/dsc07227.jpg
   - file: /src/assets/galleria/dsc07276.jpg
   - file: /src/assets/galleria/dsc07308.jpg
