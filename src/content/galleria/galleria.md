@@ -214,4 +214,5 @@ foto:
   - file: /src/assets/galleria/dsc07328.jpg
   - file: /src/assets/galleria/dsc07340.jpg
   - file: /src/assets/galleria/dsc07359.jpg
+    descrizione: Antonio Staiano, Radical Prosport, Slalom della Laura
 ---
