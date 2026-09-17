@@ -4,7 +4,7 @@ partners:
     logo: /src/assets/partners/1-central-parking-sorrento.webp
     sito: https://www.centralparkingsorrento.it/
   - nome: "Agenzia Cioffi "
-    logo: /src/assets/partners/logo-new-cioffi.png
+    logo: /src/assets/partners/logo-new-cioffi-2.png
     sito: https://www.facebook.com/lu.ce.35
   - nome: Aequa Tende
     logo: /src/assets/partners/2-aequa-tende.webp
