@@ -1,7 +1,7 @@
 ---
-titolo: Kartodromo Castelnuovo Berardenga - Siena WIP
-foto: /src/assets/tracciati/circuito-siena-assetto-corsa.jpg
-video: https://youtu.be/Rebwyq9ta9o?is=Xdag5dros3GxX3Zn
+titolo: "Kartodromo Castelnuovo Berardenga - Siena "
+foto: /src/assets/tracciati/screenshotregkartrotaxdd2krpscircuitosiena17-8-126-21-58-14.jpg
+video: https://www.youtube.com/watch?v=A_KeRmee7MQ
 modder: Daniel D'Esposito
 gioco: assetto-corsa
 ordine: 37
