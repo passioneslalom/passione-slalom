@@ -256,4 +256,7 @@ piloti:
   - nome: Carmine Mallamaci
     auto: da scegliere
     crediti: 3000
+  - nome: Enrico Giuseppe Interlandi
+    auto: da scegliere
+    crediti: 1000
 ---
