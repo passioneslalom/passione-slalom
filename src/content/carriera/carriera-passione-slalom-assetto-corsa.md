@@ -57,7 +57,7 @@ piloti:
     crediti: 24000
   - nome: Pasquale Marciano
     auto: Peugeot 106 plus1600
-    crediti: 10000
+    crediti: 14000
   - nome: Giuseppe Gentile
     auto: Kart Cross Speed Car
     crediti: 10000
@@ -236,6 +236,12 @@ piloti:
     auto: da scegliere
     crediti: 4000
   - nome: Ian Caffo
+    auto: da scegliere
+    crediti: 3000
+  - nome: Gaspare Coppola
+    auto: da scegliere
+    crediti: 5000
+  - nome: Giuseppe Nigro
     auto: da scegliere
     crediti: 3000
 ---
