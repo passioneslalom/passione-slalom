@@ -1,5 +1,5 @@
 ---
-aggiornato: Campionato Salita 2026
+aggiornato: "Campionato Salita 2026 "
 piloti:
   - nome: Andrea Sanna
     auto: Ford ka Trofeo
