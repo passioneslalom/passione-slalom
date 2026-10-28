@@ -153,7 +153,7 @@ piloti:
     crediti: 21000
   - nome: Giammarco Quirino
     auto: ps_peugeot106_rsplus1400
-    crediti: 17500
+    crediti: 23500
   - nome: Giovanni Aloi
     auto: ps_peugeot_106_plus_1400
     crediti: 18500
