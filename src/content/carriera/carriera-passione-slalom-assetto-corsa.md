@@ -33,7 +33,7 @@ piloti:
     crediti: 14500
   - nome: Antonio Peditto
     auto: Peugeot 106 N1600
-    crediti: 40000
+    crediti: 46000
   - nome: Gennaro Durante
     auto: Citroen Saxo racing start 1600
     crediti: 10000
@@ -177,7 +177,7 @@ piloti:
     crediti: 13000
   - nome: Antonino Briguglio
     auto: ps_clio_williams_rs_2000
-    crediti: 12000
+    crediti: 18000
   - nome: Manuel Romano
     auto: ps_peugeot_106_rally_grn_1300
     crediti: 16000
@@ -229,4 +229,13 @@ piloti:
   - nome: Giuseppe Ricciardi
     auto: da scegliere
     crediti: 2000
+  - nome: Andrea Di Caro
+    auto: da scegliere
+    crediti: 6000
+  - nome: Mattia Zordan
+    auto: da scegliere
+    crediti: 4000
+  - nome: Ian Caffo
+    auto: da scegliere
+    crediti: 3000
 ---
