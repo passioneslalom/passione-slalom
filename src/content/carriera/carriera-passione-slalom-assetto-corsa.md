@@ -126,7 +126,7 @@ piloti:
     crediti: 9000
   - nome: Vincenzo Savoni
     auto: ps_peugeot106_rsplus1400
-    crediti: 21000
+    crediti: 23000
   - nome: Luca Schepisi
     auto: Clio Williams racing start 2000
     crediti: 12000
@@ -201,7 +201,7 @@ piloti:
     crediti: 18000
   - nome: Antonino Ciampa
     auto: ps_peugeot_106_rs_1600
-    crediti: 17000
+    crediti: 21000
   - nome: Giacomo Viteritti
     auto: ps_peugeot_106_rs_1600
     crediti: 13000
@@ -242,6 +242,18 @@ piloti:
     auto: da scegliere
     crediti: 5000
   - nome: Giuseppe Nigro
+    auto: da scegliere
+    crediti: 3000
+  - nome: Gabriele Ciuffreda
+    auto: "da scegliere "
+    crediti: 4000
+  - nome: "Giuseppe Gulotta "
+    auto: da scegliere
+    crediti: 3000
+  - nome: Matteo Macciomei
+    auto: da scegliere
+    crediti: 2000
+  - nome: Carmine Mallamaci
     auto: da scegliere
     crediti: 3000
 ---
