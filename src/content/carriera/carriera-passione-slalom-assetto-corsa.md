@@ -231,7 +231,7 @@ piloti:
     crediti: 2000
   - nome: Andrea Di Caro
     auto: da scegliere
-    crediti: 6000
+    crediti: 8000
   - nome: Mattia Zordan
     auto: da scegliere
     crediti: 4000
@@ -240,7 +240,7 @@ piloti:
     crediti: 3000
   - nome: Gaspare Coppola
     auto: da scegliere
-    crediti: 5000
+    crediti: 7000
   - nome: Giuseppe Nigro
     auto: da scegliere
     crediti: 3000
