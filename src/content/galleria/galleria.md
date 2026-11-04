@@ -217,4 +217,6 @@ foto:
   - file: /src/assets/galleria/dsc07340.jpg
   - file: /src/assets/galleria/dsc07359.jpg
     descrizione: Antonio Staiano, Radical Prosport, Slalom della Laura
+  - file: /src/assets/galleria/ford-ka-circuito-del-sele.jpg
+    descrizione: Michele Duraccio, Ford Ka, Circuito del Sele
 ---
