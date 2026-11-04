@@ -215,6 +215,7 @@ foto:
   - file: /src/assets/galleria/dsc07319.jpg
   - file: /src/assets/galleria/dsc07328.jpg
   - file: /src/assets/galleria/dsc07340.jpg
+    descrizione: "Antonio Terminiello, Elia Avrio, Slalom della Laura "
   - file: /src/assets/galleria/dsc07359.jpg
     descrizione: Antonio Staiano, Radical Prosport, Slalom della Laura
   - file: /src/assets/galleria/ford-ka-circuito-del-sele.jpg
